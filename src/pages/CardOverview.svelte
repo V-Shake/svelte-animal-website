@@ -1,5 +1,20 @@
-<script></script>
+<script>
+  import data from "../assets/animaldata.js";
+  import Card from "../components/Card.svelte";
+</script>
 
-<h3>Quartettkarten machen uns reich!</h3>
+<div id="wrapper">
+    <header>
+        <h1>Tierquartett</h1>
+        <nav>
+        </nav>
+    </header>
+    <main>
+        {#each data as animal}
+            <Card animal={animal}/>
+        {/each}
+
+    </main>
+</div>
 
 <style></style>
