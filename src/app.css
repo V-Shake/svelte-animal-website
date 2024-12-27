@@ -1,36 +1,70 @@
 :root {
-  --card-background-color: #E5E4DB;
+  --card-background-color: #f4f3ed;
   --card-dark-color: #111;
-  --thick-line-strength: 3px;
+  --thick-line-strength: 1px;
 }
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
-  font-family: "Inter", sans-serif;
+  font-family: "Fira Sans", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
+
 
 body {
+  text-align: center;
+  background-color: var(--card-dark-color);
+  color: var(--card-background-color);
   margin: 0;
+}
+
+header {
+  grid-column: span 4;
+  grid-row: 1;
+}
+
+nav {
+  grid-row: 1;
+  background-color: var(--card-dark-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  padding: 0.6rem 6rem;
+}
+
+#logo {
+  text-align: left;
+  text-transform: uppercase;
+  margin-right: auto;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+ul {
+  list-style-type: none;
+  text-align: center;
   padding: 0;
-  background-color: var(--card-background-color);
-}
-
-#wrapper {
-  display: grid;
-  grid-template-rows: 150px auto 75px;
-  margin: auto;
-  max-width: 1200px;
-  margin: auto;
-}
-
-main {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
-  gap: 1em;
-  padding: 2em;
-  background-color: white;
+  align-items: center;
+  gap: 3em;
+  height: 4em;
+  margin: 0 auto;
+  flex-grow: 1;
+  font-size: 0.8rem;
 }
+
+nav ul li a {
+  text-decoration: none;
+  color: rgba(255, 255, 255);
+}
+
+
 
 footer {
   background-color: var(--card-dark-color);
