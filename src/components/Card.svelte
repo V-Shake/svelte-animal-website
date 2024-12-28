@@ -1,4 +1,5 @@
 <script>
+
     export let animal;
 
     let flipped = false;
@@ -6,6 +7,7 @@
     function toggleFlip() {
         flipped = !flipped;
     }
+    
 </script>
 
 <div class="card-wrapper {`group-${animal.group}`}" on:click={toggleFlip}>
@@ -515,33 +517,5 @@
         height: 60%;
     }
 
-    .active-link {
-        text-decoration: underline;
-        text-underline-offset: 0.5em;
-    }
-
-    /* Navigation Behavior */
-    .transparent-light {
-        background-color: rgba(16, 16, 16, 0.1);
-        transition: background-color 0.3s ease;
-    }
-
-    .transparent-dark {
-        background: rgba(16, 16, 16, 0.93);
-        box-shadow: 0 4px 30px rgba(3, 3, 3, 0.1);
-        backdrop-filter: blur(6.9px);
-        -webkit-backdrop-filter: blur(6.9px);
-        border: 1px solid rgba(27, 27, 27, 0.52);
-        transition: background-color 0.3s ease;
-    }
-
-    /* Font color for top of page */
-    .font-black {
-        color: var(--card-dark-color);
-    }
-
-    /* Font color for scrolled state */
-    .font-white {
-        color: var(--card-background-color);
-    }
+  
 </style>
