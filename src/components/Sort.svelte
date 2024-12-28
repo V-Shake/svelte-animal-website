@@ -23,7 +23,7 @@
 
 <div class="select">
     <div class="selected" tabindex="0">
-        <span>Sort by: {options.find(option => option.sortKey === activeButton)?.label}</span>
+        <span>Sort by</span>
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow">
             <path d="M6 9l6 6l6-6" />
         </svg>
@@ -75,10 +75,7 @@
     /* Options container (horizontal layout) */
     .options {
         display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
+        margin-top: 0.5rem; /* Adds space between the button and options */
         background-color: #060606;
         border-radius: 5px;
         overflow: hidden;
