@@ -17,8 +17,15 @@ const data = [
     "litter_size": 4,
     "continents": "Africa, Asia",
     "intelligence": 8,
-    "habitat": "Savannen, Halbwüsten, Trockenwälder",
+    "habitat": "Savannas, semi-deserts, dry woodlands",
     "fun_facts": [
+      "Lions are the most vocal of all big cats; their roar can be heard up to 8 kilometers away, making them the loudest cat.",
+      "Lions live in prides of up to 40 individuals, making them the most social of all big cats. A pride usually consists of females and their offspring, while only a few males protect the pride.",
+      "A male lion's mane indicates his age and health; the darker the mane, the older and healthier the lion.",
+      "Around 60% of lion cubs do not survive their first year, often due to attacks by other male lions."
+    ],
+    "habitat_german": "Savannen, Halbwüsten, Trockenwälder",
+    "fun_facts_german": [
       "Löwen sind die stimmgewaltigsten Großkatzen; Ihr Gebrüll kann bis zu 8 Kilometer weit gehört werden, was sie zur lautesten Katze macht.",
       "Löwen leben in Rudeln von bis zu 40 Tieren, was sie zu den geselligsten Raubkatzen macht. Ein Rudel besteht meist aus Weibchen und ihren Nachkommen, während nur wenige Männchen das Rudel beschützen.",
       "Die Mähne eines männlichen Löwen zeigt sein Alter und seine Gesundheit an; je dunkler die Mähne, desto älter und gesünder ist der Löwe.",
@@ -29,7 +36,7 @@ const data = [
     "id": 2,
     "name_german": "Gepard",
     "trivia_german": "Der Gepard kann nicht brüllen und seine Krallen nicht einziehen.",
-    "trivia": "",
+    "trivia": "The cheetah cannot roar and cannot retract its claws.",
     "group": "A",
     "groupname_german": "Raubtiere",
     "groupname": "Predators",
@@ -43,14 +50,21 @@ const data = [
     "litter_size": 5,
     "continents": "Africa, Asia",
     "intelligence": 5,
-    "habitat": "Grasländer, Savannen, Halbwüsten",
+    "habitat": "Grasslands, savannas, semi-deserts",
     "fun_facts": [
+      "Cheetahs can reach speeds of up to 120 km/h, making them the fastest land animals in the world.",
+      "Unlike many other predators, cheetahs are diurnal and primarily hunt during the early morning or late afternoon.",
+      "Their long tails help them balance while sprinting and change direction quickly.",
+      "Female cheetahs usually live alone with their cubs, while males often live in small groups called 'coalitions'.",
+      "Cheetahs have black tear marks that reflect sunlight and help them see better."
+    ],
+    "habitat_german": "Grasländer, Savannen, Halbwüsten",
+    "fun_facts_german": [
       "Geparde können Geschwindigkeiten von bis zu 120 km/h erreichen und sind damit die schnellsten Landtiere der Welt.",
       "Im Gegensatz zu vielen anderen Raubtieren sind Geparde tagaktiv und jagen hauptsächlich am frühen Morgen oder späten Nachmittag.",
       "Der lange Schwanz hilft ihnen, beim Sprinten das Gleichgewicht zu halten und schnell die Richtung zu wechseln",
       "Weibliche Geparde leben meist allein mit ihren Jungen, während Männchen oft in kleinen Gruppen, sogenannten „Brüdergruppen“, zusammenleben.",
       "Geparde haben schwarze Tränenstreifen, die das Sonnenlicht reflektieren und ihnen helfen, besser zu sehen.",
-
     ]
   },
   {
@@ -71,8 +85,16 @@ const data = [
     "litter_size": 4,
     "continents": "Asia",
     "intelligence": 7,
-    "habitat": "Tropische Regenwälder, Sumpfgebiete, Grasländer",
+    "habitat": "Tropical rainforests, swamps, grasslands",
     "fun_facts": [
+      "Tigers are the largest cats in the world.",
+      "Every tiger has a unique pattern of stripes, similar to human fingerprints. These stripes help them camouflage in their environment.",
+      "Tigers are solitary and mostly hunt alone, especially at night. They use their camouflage to sneak up on their prey.",
+      "A tiger's roar can be heard up to three kilometers away. It is so powerful that it can paralyze its prey.",
+      "Tigers can interbreed with lions, resulting in hybrids like ligers (tiger male and lioness) and tigons (tiger female and lion male)."
+    ],
+    "habitat_german": "Tropische Regenwälder, Sumpfgebiete, Grasländer",
+    "fun_facts_german": [
       "Tiger sind die größten Katzen der Welt.",
       "Jeder Tiger hat ein einzigartiges Muster aus Streifen, ähnlich wie Fingerabdrücke bei Menschen. Diese Streifen helfen ihnen, sich in ihrer Umgebung zu tarnen.",
       "Tiger sind Einzelgänger und jagen meist allein, vor allem nachts. Sie nutzen ihre Tarnung, um sich an ihre Beute heranzuschleichen.",
@@ -98,12 +120,19 @@ const data = [
     "litter_size": 3,
     "continents": "Africa, Asia",
     "intelligence": 7,
-    "habitat": "Savannen, Halbwüsten, Buschsteppen",
+    "habitat": "Savannas, semi-deserts, bush steppes",
     "fun_facts": [
+      "Spotted hyenas live in large groups called clans, which can consist of up to 80 individuals. These clans are usually made up of related females and a few males.",
+      "Hyenas have extremely strong jaws that allow them to crush and eat even large bones. They are also known to smell carrion from a distance of up to ten kilometers.",
+      "Hyenas mark their territories with a strong-smelling secretion from their anal glands.",
+      "While they often scavenge, spotted hyenas also actively hunt medium to large ungulates like zebras and gazelles. They are known to steal prey from lions when they are unable to defend it."
+    ],
+    "habitat_german": "Savannen, Halbwüsten, Buschsteppen",
+    "fun_facts_german": [
       "Tüpfelhyänen leben in großen Gruppen, sogenannten Clans, die aus bis zu 80 Tieren bestehen können. Diese Clans bestehen meist aus verwandten Weibchen und einigen Männchen.",
       "Hyänen haben extrem starke Kiefer, die es ihnen ermöglichen, selbst große Knochen zu zermahlen und zu fressen. Sie sind auch dafür bekannt, Aas aus einer Entfernung von bis zu zehn Kilometern zu riechen.",
       "Hyänen markieren ihre Reviere mit einem stark riechenden Sekret aus ihren Analdrüsen.",
-      "Während sie oft Aas fressen, jagen Tüpfelhyänen auch aktiv mittelgroße bis große Huftiere wie Zebras und Gazellen. Sie sind dafür bekannt, Beute von Löwen zu stehlen, wenn diese sich nicht wehren können.", 
+      "Während sie oft Aas fressen, jagen Tüpfelhyänen auch aktiv mittelgroße bis große Huftiere wie Zebras und Gazellen. Sie sind dafür bekannt, Beute von Löwen zu stehlen, wenn diese sich nicht wehren können.",
     ]
   },
   {
@@ -124,9 +153,17 @@ const data = [
     "litter_size": 1840,
     "continents": "Americas",
     "intelligence": 2,
-    "habitat": "Regenwälder, Bananenplantagen, Offene Flächen",
+    "habitat": "Rainforests, banana plantations, open areas",
     "fun_facts": [
-      "Die Brasilianische Wanderspinne gilt als eine der giftigsten Spinnen der Welt. Ihr Gift ist bis zu 20-mal tödlicher als das einer Schwarzen Witwe.", 
+      "The Brazilian wandering spider is considered one of the most venomous spiders in the world. Its venom is up to 20 times more deadly than that of a black widow.",
+      "Wandering spiders exhibit aggressive behavior when they feel threatened. They rear up and display their red fangs before biting.",
+      "Unlike many other spider species, the wandering spider does not build a web. It is a hunting spider that actively stalks prey such as insects, frogs, and even mice.",
+      "These spiders are very fast and can jump up to 50 centimeters, which helps them catch prey or protect themselves from threats.",
+      "Wandering spiders are very aggressive and will attack quickly when they feel threatened."
+    ],
+    "habitat_german": "Regenwälder, Bananenplantagen, Offene Flächen",
+    "fun_facts_german": [
+      "Die Brasilianische Wanderspinne gilt als eine der giftigsten Spinnen der Welt. Ihr Gift ist bis zu 20-mal tödlicher als das einer Schwarzen Witwe.",
       "Wanderspinnen zeigen ein aggressives Verhalten, wenn sie sich bedroht fühlen. Sie richten sich auf und zeigen ihre rötlichen Giftklauen, bevor sie beißen.",
       "Im Gegensatz zu vielen anderen Spinnenarten baut die Wanderspinne kein Netz. Sie ist eine Jagdspinne, die aktiv auf Beute wie Insekten, Frösche und sogar Mäuse lauert",
       "Diese Spinnen sind sehr schnell und können bis zu 50 Zentimeter weit springen, was ihnen hilft, ihre Beute zu fangen oder sich vor Bedrohungen zu schützen",
@@ -151,11 +188,20 @@ const data = [
     "litter_size": 50,
     "continents": "all",
     "intelligence": 2,
-    "habitat": "Wüsten, Tropen und Subtropen, Halbwüsten, Küstenregionen, Höhlen und Bäume, Savannen",
+    "habitat": "Deserts, tropics and subtropics, semi-deserts, coastal regions, caves and trees, savannas",
     "fun_facts": [
+      "Scorpions are nocturnal animals that sleep in caves, under stones, or in crevices during the day.",
+      "All scorpions have venom, but only about 50 species are potentially deadly to humans.",
+      "Scorpions are viviparous. After birth, the young scorpions are carried on the mother's back for some time until they become independent.",
+      "Some scorpion species can survive up to two years without food by slowing down their metabolism and minimizing their energy consumption.",
+      "Scorpions are very resilient animals that can live in extreme environments.",
+      "Most scorpions are solitary and only meet for reproduction, which is often accompanied by an elaborate \"mating dance\"."
+    ],
+    "habitat_german": "Wüsten, Tropen und Subtropen, Halbwüsten, Küstenregionen, Höhlen und Bäume, Savannen",
+    "fun_facts_german": [
       "Skorpione sind nachtaktive Tiere, die tagsüber in Höhlen, unter Steinen oder in Spalten schlafen.",
       "Alle Skorpione besitzen ein Gift, aber nur etwa 50 Arten sind für Menschen potenziell tödlich.",
-      "Skorpione sind lebendgebärend. Nach der Geburt tragen die kleinen Skorpione einige Zeit auf dem Rücken der Mutter, bis sie selbstständig werden.", 
+      "Skorpione sind lebendgebärend. Nach der Geburt tragen die kleinen Skorpione einige Zeit auf dem Rücken der Mutter, bis sie selbstständig werden.",
       "Einige Skorpionarten können bis zu zwei Jahre ohne Nahrung überleben, indem sie ihren Stoffwechsel verlangsamen und ihren Energieverbrauch minimieren.",
       "Skorpione sind sehr widerstandsfähige Tiere, die in extremen Umgebungen leben können.",
       "Die meisten Skorpione sind Einzelgänger und treffen sich nur zur Fortpflanzung, die oft mit einem aufwendigen „Hochzeitstanz“ verbunden ist."
@@ -179,11 +225,17 @@ const data = [
     "litter_size": 400,
     "continents": "all",
     "intelligence": 1,
-    "habitat": "Wassernähe, Feuchte Gebiete, Städtische Gebiete",
+    "habitat": "Near water, humid areas, urban areas",
     "fun_facts": [
+      "Only female mosquitoes bite to suck blood, which they need to develop their eggs. Male mosquitoes feed mainly on nectar and other sugars.",
+      "Mosquitoes are the deadliest animals in the world, as they transmit diseases such as malaria, dengue fever, Zika virus, and yellow fever.",
+      "Mosquitoes have a highly developed sense of smell and can smell humans from up to 30 meters away. They are attracted to body odors, carbon dioxide, and heat."
+    ],
+    "habitat_german": "Wassernähe, Feuchte Gebiete, Städtische Gebiete",
+    "fun_facts_german": [
       "Nur die weiblichen Moskitos stechen, um Blut zu saugen, das sie für die Entwicklung ihrer Eier benötigen. Männliche Moskitos ernähren sich hauptsächlich von Nektar und anderen Zuckern.",
       "Mücken sind die tödlichsten Tiere der Welt, da sie Krankheiten wie Malaria, Dengue-Fieber, Zika-Virus und Gelbfieber übertragen.",
-      "Moskitos haben einen ausgeprägten Geruchssinn und können Menschen aus bis zu 30 Metern Entfernung riechen. Sie werden von Körpergerüchen, Kohlendioxid und Wärme angezogen.",  
+      "Moskitos haben einen ausgeprägten Geruchssinn und können Menschen aus bis zu 30 Metern Entfernung riechen. Sie werden von Körpergerüchen, Kohlendioxid und Wärme angezogen.",
     ]
   },
   {
@@ -204,8 +256,17 @@ const data = [
     "litter_size": 35,
     "continents": "Americas",
     "intelligence": 2,
-    "habitat": "Regenwälder, Amazonasgebiet, Bromelien-Zonen",
+    "habitat": "Rainforests, Amazon basin, bromeliad zones",
     "fun_facts": [
+      "Poison dart frogs are known for their bright colors (red, yellow, blue, green) which signal to predators: \"I am poisonous!\".",
+      "The Golden Poison Frog is one of the most poisonous frogs in the world. Its poison can be deadly within minutes.",
+      "The poison comes from the insects they eat, such as ants and termites. In captivity, they lose their poison because they do not have the same food sources.",
+      "The Chocó indigenous people of Colombia use the poison of these frogs to coat their hunting arrows.",
+      "They are caring parents. They carry their tadpoles on their backs to safe water sources in the treetops to protect them from predators.",
+      "The gold-ringed snake is the only natural enemy of the poison dart frog and has developed a resistance to its poison."
+    ],
+    "habitat_german": "Regenwälder, Amazonasgebiet, Bromelien-Zonen",
+    "fun_facts_german": [
       "Pfeilgiftfrösche sind bekannt für ihre leuchtenden Farben (rot, gelb, blau, grün),  die Fressfeinden signalisieren: „Ich bin giftig!“.",
       "Der Schreckliche Pfeilgiftfrosch zählt zu den giftigsten Fröschen der Welt. Sein Gift kann innerhalb von Minuten tödlich sein und reicht aus, um bis zu 12 Menschen zu töten.",
       "Das Gift stammt von den Insekten, die sie fressen, wie Ameisen und Termiten. In Gefangenschaft verlieren sie ihr Gift, da sie nicht die gleichen Nahrungsquellen haben.",
@@ -213,13 +274,12 @@ const data = [
       "Sie sind fürsorgliche Eltern. Sie tragen ihre Kaulquappen auf dem Rücken zu sicheren Wasserstellen in den Baumkronen, um sie vor Fressfeinden zu schützen.",
       "Die Goldbauchnatter ist der einzige natürliche Feind des Pfeilgiftfrosches und hat eine Resistenz gegen sein Gift entwickelt."
     ]
-
   },
   {
     "id": 9,
     "name_german": "Krokodil",
     "trivia_german": "Haben die stärksten Kiefer im Tierreich, aber kaum Muskeln, um sie zu öffnen.",
-    "trivia": "Have the strongest jaws in the animal kingdom, but hardly any muscles to open them.",
+    "trivia": "Have the strongest jaws in the animal kingdom, but weak jaw openers.",
     "group": "C",
     "groupname_german": "Reptilien",
     "groupname": "Reptiles",
@@ -233,8 +293,18 @@ const data = [
     "litter_size": 80,
     "continents": "Africa, Asia, Americas, Oceania",
     "intelligence": 4,
-    "habitat": "Flüssen, Seen, Sümpfen, Bächen, Brackwasser",
+    "habitat": "Rivers, lakes, swamps, streams, brackish water",
     "fun_facts": [
+      "Crocodiles have existed for over 200 million years, coexisting with dinosaurs.",
+      "Saltwater crocodiles can survive up to a year without food, using fat reserves in their tail.",
+      "As ambush predators, they can snap out of the water with lightning speed to catch prey.",
+      "They swallow stones to increase their density and sink better, helping them remain unnoticed.",
+      "Crocodiles show social behavior, play, and communicate with different sounds.",
+      "They lay 20-80 eggs, and the nest temperature determines the sex; warmer nests usually lead to more males.",
+      "Their 60-70 teeth constantly grow, and if one is lost, it's quickly replaced."
+    ],
+    "habitat_german": "Flüssen, Seen, Sümpfen, Bächen, Brackwasser",
+    "fun_facts_german": [
       "Krokodile existieren seit über 200 Millionen Jahren und gelten als lebende Fossilien. Sie waren bereits zur Zeit der Dinosaurier auf der Erde.",
       "Sie sind Lauerjäger und können blitzschnell aus dem Wasser schnappen, um ihre Beute zu fangen.",
       "Sie fressen Steine, um ihre Dichte zu erhöhen und besser im Wasser zu sinken. Dies hilft ihnen, unbemerkt auf Beute zu lauern.",
@@ -262,8 +332,16 @@ const data = [
     "litter_size": 40,
     "continents": "Africa, Asia",
     "intelligence": 4,
-    "habitat": "Savannen, Wäldern, landwirtschaftlich genutzten Flächen, tropischen Regenwäldern, Mangrovensümpfen",
+    "habitat": "Savannas, forests, agricultural land, tropical rainforests, mangrove swamps",
     "fun_facts": [
+      "Cobras possess strong, neurotoxic venom that can be fatal if untreated.",
+      "They form a distinctive 'hood' when threatened to deter enemies.",
+      "King cobras are unusual among snakes because the female actively cares for the brood. She builds a nest out of leaves and guards it until the eggs hatch.",
+      "The belief that snake charmers can hypnotize cobras with music is a myth. Cobras are deaf and do not respond to music, but to the movements of the instrument.",
+      "Cobras are good swimmers and can hunt both on land and in water. They are often found near bodies of water."
+    ],
+    "habitat_german": "Savannen, Wäldern, landwirtschaftlich genutzten Flächen, tropischen Regenwäldern, Mangrovensümpfen",
+    "fun_facts_german": [
       "Kobras besitzen starkes, neurotoxisches Gift, das unbehandelt tödlich sein kann.",
       "Sie bilden bei Bedrohung eine auffällige „Kapuze“, um Feinde abzuschrecken.",
       "Königskobras sind ungewöhnlich unter den Schlangen, da das Weibchen sich aktiv um die Brut kümmert. Es baut ein Nest aus Blättern und bewacht es bis zum Schlüpfen der Eier.",
@@ -289,8 +367,16 @@ const data = [
     "litter_size": 30,
     "continents": "Asia",
     "intelligence": 3,
-    "habitat": "Savannen, Monsunwälder, Grasland, Küstengebiete, tropische Wälder, Mangrovensümpfe, felsige Ufer",
+    "habitat": "Savannas, monsoon forests, grasslands, coastal areas, tropical forests, mangrove swamps, rocky shores",
     "fun_facts": [
+      "Komodo dragons are the largest living lizards.",
+      "Komodo dragons are opportunistic hunters and feed on a variety of animals, including deer, wild boars, and even other Komodo dragons.",
+      "Komodo dragons have excellent vision and can spot prey from up to 300 meters away.",
+      "Komodo dragons are excellent swimmers and can cover large distances in the water to reach other islands.",
+      "After hatching, young Komodo dragons immediately climb trees to protect themselves from larger relatives that might eat them."
+    ],
+    "habitat_german": "Savannen, Monsunwälder, Grasland, Küstengebiete, tropische Wälder, Mangrovensümpfe, felsige Ufer",
+    "fun_facts_german": [
       "Komodowarane sind die größten lebenden Echsen.",
       "Komodowarane sind opportunistische Jäger und ernähren sich von einer Vielzahl von Tieren, einschließlich Hirschen, Wildschweinen, und sogar anderen Komodowaranen. ",
       "Komodowarane haben eine ausgezeichnete Sehkraft und können Beute aus bis zu 300 Metern Entfernung erkennen.",
@@ -346,7 +432,7 @@ const data = [
     "habitat": "Ozeane, Meere",
     "fun_facts": [
       "Der Schwertfisch besitzt ein schwertartiges Rostrum, das bis zu ein Drittel seiner Körperlänge ausmacht. Er nutzt dieses „Schwert“, um Beute zu betäuben oder in Schwärmen zu verletzen.",
-      "Schwertfische leben in der Regel als Einzelgänger, außer während der Fortpflanzungszeit. Sie sind sehr territorial und suchen oft tiefere Gewässer auf, um ihre Beute zu fangen.", 
+      "Schwertfische leben in der Regel als Einzelgänger, außer während der Fortpflanzungszeit. Sie sind sehr territorial und suchen oft tiefere Gewässer auf, um ihre Beute zu fangen.",
       " Schwertfische sind bekannt für ihre Schnelligkeit und Agilität im Wasser. Sie können Geschwindigkeiten von bis zu 97 km/h erreichen, was sie zu einem der schnellsten Fische im Ozean macht.",
     ]
   },
@@ -804,7 +890,7 @@ const data = [
     "intelligence": 6,
     "habitat": "Felsen, Klippen, hohe Gebäude, Baumhöhlen, Tundra, Halbwüsten",
     "fun_facts": [
-      "Wanderfalken sind die schnellsten Vögel der Welt.",  
+      "Wanderfalken sind die schnellsten Vögel der Welt.",
       "Ihr Sturzflug ist so stark, dass sie theoretisch die Wirbelsäule eines Menschen bei Kollision brechen könnten, was jedoch nie passiert ist.",
       "Sie sind sehr präzise Jäger und nutzen ihre Geschwindigkeit, um Beute in großen Höhen anzuspeisen und im Sturzflug zu betäuben.",
       "Wanderfalken verteidigen ihre Nester aggressiv gegen viele Raubtiere wie Füchse, große Eulen und Bären.",

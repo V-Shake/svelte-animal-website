@@ -15,13 +15,13 @@
             <img
                 class="card-image border-bottom"
                 src={`public/images/${animal.group}${animal.group_number}.png`}
-                alt={animal.name_german}
+                alt={animal.name}
             />
             <div class="card-number">{animal.group}{animal.group_number}</div>
-            <div class="card-title">{animal.name_german}</div>
-            <div class="card-trivia border-bottom">{animal.trivia_german}</div>
+            <div class="card-title">{animal.name}</div>
+            <div class="card-trivia border-bottom">{animal.trivia}</div>
             <div class="group-rectangle">{animal.group}</div>
-            <div class="groupname">{animal.groupname_german}</div>
+            <div class="groupname">{animal.groupname}</div>
             <div class="intelligence-box">
                 <div class="intelligence-icon">
                     <svg
@@ -96,7 +96,7 @@
         </div>
         <div class="card-back">
             <div class="card-back-header border-bottom"></div>
-            <div class="card-back-title">{animal.name_german}</div>
+            <div class="card-back-title">{animal.name}</div>
             <div class="card-back-number">
                 {animal.group}{animal.group_number}
             </div>
@@ -181,8 +181,8 @@
         margin: 0;
         cursor: pointer;
         position: relative;
-        width: 350px;
-        height: 500px;
+        width: 320px;
+        height: 470px;
     }
 
     .card {
@@ -310,7 +310,7 @@
     .funfact-text {
         flex: 1;
         line-height: 1.5;
-        font-size: 0.68rem;
+        font-size: 0.65rem;
         padding-left: 0.5rem;
     }
 
@@ -332,7 +332,7 @@
 
     .card-number {
         position: absolute;
-        top: 60%;
+        top: 59.3%;
         left: 1rem;
         transform: translateY(-50%);
         display: flex;
@@ -342,8 +342,8 @@
         font-weight: 700;
         font-size: 1.2rem;
         border-radius: 0.6em;
-        width: 2.5em;
-        height: 2.6em;
+        width: 2.1em;
+        height: 2.1em;
         background-color: var(--group-color);
         border: 1px solid var(--card-dark-color);
         box-shadow: 0 0 0 3px var(--card-background-color);
@@ -354,7 +354,7 @@
         grid-row: 8;
         display: flex;
         align-items: center;
-        padding-left: 4.8rem;
+        padding-left: 4rem;
         text-transform: uppercase;
         font-weight: 600;
         font-size: 1rem;
@@ -364,17 +364,17 @@
         grid-column: span 6;
         grid-row: 9;
         text-align: left;
-        padding-left: 4.8rem;
+        padding-left: 4rem;
         padding-right: 1rem;
         font-size: 0.68rem;
         line-height: 1.2;
         margin-top: -1rem;
-        margin-bottom: 0.4rem;
+        margin-bottom: 0.2rem;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
         align-items: flex-start;
-        height: 80%;
+        height: 85%;
     }
 
     .groupname {
