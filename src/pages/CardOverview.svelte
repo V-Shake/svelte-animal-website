@@ -4,22 +4,15 @@
     import Sort from "../components/Sort.svelte";
 
     let sortedData = data;
-    let highlight = "";
-    let activeButton = "sort-groups";
-
-    function setActiveButton(button) {
-        activeButton = button;
-    }
+    let activeButton = "group"; // Ensure this matches default key in Sort.svelte
 
     function handleSort(event) {
-        const sortBy = event.detail;
-        setActiveButton(sortBy); // Ensure active button state is set
-        highlight = sortBy;
+        activeButton = event.detail; // Update the active button state
         sortedData = [...data].sort((a, b) => {
-            if (sortBy === "group") return a.group.localeCompare(b.group);
-            if (sortBy === "intelligence")
+            if (activeButton === "group") return a.group.localeCompare(b.group);
+            if (activeButton === "intelligence")
                 return b.intelligence - a.intelligence;
-            return parseFloat(b[sortBy]) - parseFloat(a[sortBy]);
+            return parseFloat(b[activeButton]) - parseFloat(a[activeButton]);
         });
     }
 </script>
@@ -31,7 +24,7 @@
     <main>
         <Sort {activeButton} on:sort={handleSort} />
         {#each sortedData as animal}
-            <Card {animal} {highlight} />
+            <Card {animal} highlight={activeButton} />
         {/each}
     </main>
 </div>

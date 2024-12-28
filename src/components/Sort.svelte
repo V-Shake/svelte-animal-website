@@ -1,57 +1,36 @@
 <script>
     import { createEventDispatcher } from "svelte";
-    
-    const dispatch = createEventDispatcher();
-    export let activeButton; // Receive the activeButton prop
 
-    function setActiveButton(buttonId) {
-        activeButton = buttonId;
-    }
+    const dispatch = createEventDispatcher();
+    export let activeButton = "sort-groups"; // Default active button
 
     function handleSort(sortBy) {
-        setActiveButton(sortBy);
         dispatch("sort", sortBy);
     }
 </script>
 
 <div id="sorting-buttons">
     <span>Sortiere nach: </span>
-    <button
-        id="sort-groups"
-        class:active={activeButton === "sort-groups"}
-        on:click={() => handleSort("group")}>Gruppen</button>
-    <button
-        id="sort-max_weight"
-        class:active={activeButton === "sort-max_weight"}
-        on:click={() => handleSort("max_weight")}>Max Gewicht</button>
-    <button
-        id="sort-max_length"
-        class:active={activeButton === "sort-max_length"}
-        on:click={() => handleSort("max_length")}>Max Länge</button>
-    <button
-        id="sort-max_age"
-        class:active={activeButton === "sort-max_age"}
-        on:click={() => handleSort("max_age")}>Max Alter</button>
-    <button
-        id="sort-top_speed"
-        class:active={activeButton === "sort-top_speed"}
-        on:click={() => handleSort("top_speed")}>Max Geschwindigkeit</button>
-    <button
-        id="sort-litter_size"
-        class:active={activeButton === "sort-litter_size"}
-        on:click={() => handleSort("litter_size")}>Wurfgröße</button>
-    <button
-        id="sort-deaths"
-        class:active={activeButton === "sort-deaths"}
-        on:click={() => handleSort("deaths")}>Tödliche Vorfälle</button>
-    <button
-        id="sort-intelligence"
-        class:active={activeButton === "sort-intelligence"}
-        on:click={() => handleSort("intelligence")}>Intelligenz</button>
+    {#each [
+        { id: "sort-groups", label: "Gruppen", sortKey: "group" },
+        { id: "sort-max_weight", label: "Max Gewicht", sortKey: "max_weight" },
+        { id: "sort-max_length", label: "Max Länge", sortKey: "max_length" },
+        { id: "sort-max_age", label: "Max Alter", sortKey: "max_age" },
+        { id: "sort-top_speed", label: "Max Geschwindigkeit", sortKey: "top_speed" },
+        { id: "sort-litter_size", label: "Wurfgröße", sortKey: "litter_size" },
+        { id: "sort-deaths", label: "Tödliche Vorfälle", sortKey: "deaths" },
+        { id: "sort-intelligence", label: "Intelligenz", sortKey: "intelligence" }
+    ] as button}
+        <button
+            id={button.id}
+            class:active={activeButton === button.sortKey}
+            on:click={() => handleSort(button.sortKey)}>
+            {button.label}
+        </button>
+    {/each}
 </div>
 
 <style>
-    /* Sorting Buttons */
     #sorting-buttons span {
         font-size: 1rem;
         margin-right: 2rem;
