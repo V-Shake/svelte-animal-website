@@ -19,44 +19,37 @@
     <button
         id="sort-groups"
         class:active={activeButton === "sort-groups"}
-        on:click={() => handleSort("group")}>Gruppen</button
-    >
+        on:click={() => handleSort("group")}>Gruppen</button>
     <button
         id="sort-max_weight"
         class:active={activeButton === "sort-max_weight"}
-        on:click={() => handleSort("max_weight")}>Max Gewicht</button
-    >
+        on:click={() => handleSort("max_weight")}>Max Gewicht</button>
     <button
         id="sort-max_length"
         class:active={activeButton === "sort-max_length"}
-        on:click={() => handleSort("max_length")}>Max Länge</button
-    >
+        on:click={() => handleSort("max_length")}>Max Länge</button>
     <button
         id="sort-max_age"
         class:active={activeButton === "sort-max_age"}
-        on:click={() => handleSort("max_age")}>Max Alter</button
-    >
+        on:click={() => handleSort("max_age")}>Max Alter</button>
     <button
         id="sort-top_speed"
         class:active={activeButton === "sort-top_speed"}
-        on:click={() => handleSort("top_speed")}>Max Geschwindigkeit</button
-    >
+        on:click={() => handleSort("top_speed")}>Max Geschwindigkeit</button>
     <button
         id="sort-litter_size"
         class:active={activeButton === "sort-litter_size"}
-        on:click={() => handleSort("litter_size")}>Wurfgröße</button
-    >
+        on:click={() => handleSort("litter_size")}>Wurfgröße</button>
     <button
         id="sort-deaths"
         class:active={activeButton === "sort-deaths"}
-        on:click={() => handleSort("deaths")}>Tödliche Vorfälle</button
-    >
+        on:click={() => handleSort("deaths")}>Tödliche Vorfälle</button>
     <button
         id="sort-intelligence"
         class:active={activeButton === "sort-intelligence"}
-        on:click={() => handleSort("intelligence")}>Intelligenz</button
-    >
+        on:click={() => handleSort("intelligence")}>Intelligenz</button>
 </div>
+
 
 <style>
     /* Sorting Buttons*/
@@ -121,10 +114,6 @@
     #sorting-buttons button:disabled {
         pointer-events: none;
     }
-    
-    .highlight {
-    color: var(--group-color);
-    font-weight: bold;
-}
+
 
 </style>

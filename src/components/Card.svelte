@@ -1,19 +1,22 @@
 <script>
-
     export let animal;
+    export let highlight = '';
 
     let flipped = false;
 
     function toggleFlip() {
         flipped = !flipped;
     }
-    
 </script>
 
 <div class="card-wrapper {`group-${animal.group}`}" on:click={toggleFlip}>
     <div class="card {flipped ? 'flipped' : ''}">
         <div class="card-front {`group-${animal.group}`}">
-            <img class="card-image border-bottom" src={`public/images/${animal.group}${animal.group_number}.png`} alt={animal.name_german} />
+            <img
+                class="card-image border-bottom"
+                src={`public/images/${animal.group}${animal.group_number}.png`}
+                alt={animal.name_german}
+            />
             <div class="card-number">{animal.group}{animal.group_number}</div>
             <div class="card-title">{animal.name_german}</div>
             <div class="card-trivia border-bottom">{animal.trivia_german}</div>
@@ -21,10 +24,25 @@
             <div class="groupname">{animal.groupname_german}</div>
             <div class="intelligence-box">
                 <div class="intelligence-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-bulb">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="icon icon-tabler icons-tabler-outline icon-tabler-bulb"
+                    >
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <path d="M3 12h1m8 -9v1m8 8h1m-15.4 -6.4l.7 .7m12.1 -.7l-.7 .7" />
-                        <path d="M9 16a5 5 0 1 1 6 0a3.5 3.5 0 0 0 -1 3a2 2 0 0 1 -4 0a3.5 3.5 0 0 0 -1 -3" />
+                        <path
+                            d="M3 12h1m8 -9v1m8 8h1m-15.4 -6.4l.7 .7m12.1 -.7l-.7 .7"
+                        />
+                        <path
+                            d="M9 16a5 5 0 1 1 6 0a3.5 3.5 0 0 0 -1 3a2 2 0 0 1 -4 0a3.5 3.5 0 0 0 -1 -3"
+                        />
                         <path d="M9.7 17l4.6 0" />
                     </svg>
                 </div>
@@ -33,39 +51,45 @@
             <div class="stat-box">
                 <div class="stat-pair">
                     <div class="stat-icon">
-                        <img src="images/icons/weight.svg" alt="weight">
+                        <img src="images/icons/weight.svg" alt="weight" />
                     </div>
-                    <div class="stat-content">{animal.max_weight}</div>
+                    <div class="stat-content {highlight === 'max_weight' ? 'highlight' : ''}">{animal.max_weight}</div>
                 </div>
                 <div class="stat-pair">
                     <div class="stat-icon">
-                        <img src="images/icons/length.svg" alt="length">
+                        <img src="images/icons/length.svg" alt="length" />
                     </div>
-                    <div class="stat-content">{animal.max_length}</div>
+                    <div class="stat-content {highlight === 'max_length' ? 'highlight' : ''}">{animal.max_length}</div>
                 </div>
                 <div class="stat-pair">
                     <div class="stat-icon">
-                        <img src="images/icons/age.svg" alt="max age">
+                        <img src="images/icons/age.svg" alt="max age" />
                     </div>
-                    <div class="stat-content">{animal.max_age}</div>
+                    <div class="stat-content {highlight === 'max_age' ? 'highlight' : ''}">{animal.max_age}</div>
                 </div>
                 <div class="stat-pair">
                     <div class="stat-icon">
-                        <img src="images/icons/speed.svg" alt="max speed">
+                        <img src="images/icons/speed.svg" alt="max speed" />
                     </div>
-                    <div class="stat-content">{animal.top_speed}</div>
+                    <div class="stat-content {highlight === 'top_speed' ? 'highlight' : ''}">{animal.top_speed}</div>
                 </div>
                 <div class="stat-pair">
                     <div class="stat-icon">
-                        <img src="images/icons/offspring.svg" alt="offspring per cycle">
+                        <img
+                            src="images/icons/offspring.svg"
+                            alt="offspring per cycle"
+                        />
                     </div>
-                    <div class="stat-content">{animal.litter_size}</div>
+                    <div class="stat-content {highlight === 'litter_size' ? 'highlight' : ''}">{animal.litter_size}</div>
                 </div>
                 <div class="stat-pair">
                     <div class="stat-icon">
-                        <img src="images/icons/death.svg" alt="caused yearly human casualties">
+                        <img
+                            src="images/icons/death.svg"
+                            alt="caused yearly human casualties"
+                        />
                     </div>
-                    <div class="stat-content">{animal.deaths}</div>
+                    <div class="stat-content {highlight === 'deaths' ? 'highlight' : ''}">{animal.deaths}</div>
                 </div>
             </div>
             <div class="card-bottom">{animal.continents}</div>
@@ -73,7 +97,9 @@
         <div class="card-back">
             <div class="card-back-header border-bottom"></div>
             <div class="card-back-title">{animal.name_german}</div>
-            <div class="card-back-number">{animal.group}{animal.group_number}</div>
+            <div class="card-back-number">
+                {animal.group}{animal.group_number}
+            </div>
             <div class="card-back-content">
                 <ul class="funfact-list">
                     {#if animal.fun_facts && animal.fun_facts.length}
@@ -517,5 +543,8 @@
         height: 60%;
     }
 
-  
+    .highlight {
+        color: var(--group-color);
+        font-weight: bold;
+    }
 </style>

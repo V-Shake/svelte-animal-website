@@ -4,12 +4,15 @@
     import Sort from "../components/Sort.svelte";
 
     let sortedData = data;
+    let highlight = "";
 
     function handleSort(event) {
         const sortBy = event.detail;
+        highlight = sortBy;
         sortedData = [...data].sort((a, b) => {
-            if (sortBy === 'group') return a.group.localeCompare(b.group);
-            if (sortBy === 'intelligence') return b.intelligence - a.intelligence;
+            if (sortBy === "group") return a.group.localeCompare(b.group);
+            if (sortBy === "intelligence")
+                return b.intelligence - a.intelligence;
             return parseFloat(b[sortBy]) - parseFloat(a[sortBy]);
         });
     }
@@ -22,7 +25,7 @@
     <main>
         <Sort on:sort={handleSort} />
         {#each sortedData as animal}
-            <Card {animal} />
+            <Card {animal} {highlight} />
         {/each}
     </main>
 </div>
