@@ -5,9 +5,15 @@
 
     let sortedData = data;
     let highlight = "";
+    let activeButton = "sort-groups";
+
+    function setActiveButton(button) {
+        activeButton = button;
+    }
 
     function handleSort(event) {
         const sortBy = event.detail;
+        setActiveButton(sortBy); // Ensure active button state is set
         highlight = sortBy;
         sortedData = [...data].sort((a, b) => {
             if (sortBy === "group") return a.group.localeCompare(b.group);
@@ -23,7 +29,7 @@
         <nav></nav>
     </header>
     <main>
-        <Sort on:sort={handleSort} />
+        <Sort {activeButton} on:sort={handleSort} />
         {#each sortedData as animal}
             <Card {animal} {highlight} />
         {/each}

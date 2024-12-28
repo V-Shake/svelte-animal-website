@@ -1,8 +1,8 @@
 <script>
     import { createEventDispatcher } from "svelte";
-
+    
     const dispatch = createEventDispatcher();
-    let activeButton = "sort-groups";
+    export let activeButton; // Receive the activeButton prop
 
     function setActiveButton(buttonId) {
         activeButton = buttonId;
@@ -50,9 +50,8 @@
         on:click={() => handleSort("intelligence")}>Intelligenz</button>
 </div>
 
-
 <style>
-    /* Sorting Buttons*/
+    /* Sorting Buttons */
     #sorting-buttons span {
         font-size: 1rem;
         margin-right: 2rem;
@@ -114,6 +113,4 @@
     #sorting-buttons button:disabled {
         pointer-events: none;
     }
-
-
 </style>

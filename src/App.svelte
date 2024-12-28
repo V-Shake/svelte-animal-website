@@ -2,6 +2,7 @@
   import Router from "svelte-spa-router";
   import LandingPage from "./pages/LandingPage.svelte";
   import CardOverview from "./pages/CardOverview.svelte";
+  import "../public/fonts/stylesheet.css";
 
   const routes = {
     "/": LandingPage,
