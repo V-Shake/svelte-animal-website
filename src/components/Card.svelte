@@ -167,20 +167,6 @@
         --group-color: #2cc7db;
     }
 
-    #cards-container {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 1rem;
-        justify-content: center;
-        align-items: start;
-        justify-items: center;
-        width: 100%;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 1rem;
-        background-color: var(--card-dark-color);
-    }
-
     .card-wrapper {
         perspective: 1000px;
         background-color: var(--card-dark-color);

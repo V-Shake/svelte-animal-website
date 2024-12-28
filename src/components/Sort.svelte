@@ -2,16 +2,9 @@
     import { createEventDispatcher } from "svelte";
 
     const dispatch = createEventDispatcher();
-    export let activeButton = "sort-groups"; // Default active button
+    export let activeButton = "group"; // Default active sort option
 
-    function handleSort(sortBy) {
-        dispatch("sort", sortBy);
-    }
-</script>
-
-<div id="sorting-buttons">
-    <span>Sortiere nach: </span>
-    {#each [
+    const options = [
         { id: "sort-groups", label: "Gruppen", sortKey: "group" },
         { id: "sort-max_weight", label: "Max Gewicht", sortKey: "max_weight" },
         { id: "sort-max_length", label: "Max Länge", sortKey: "max_length" },
@@ -20,76 +13,115 @@
         { id: "sort-litter_size", label: "Wurfgröße", sortKey: "litter_size" },
         { id: "sort-deaths", label: "Tödliche Vorfälle", sortKey: "deaths" },
         { id: "sort-intelligence", label: "Intelligenz", sortKey: "intelligence" }
-    ] as button}
-        <button
-            id={button.id}
-            class:active={activeButton === button.sortKey}
-            on:click={() => handleSort(button.sortKey)}>
-            {button.label}
-        </button>
-    {/each}
+    ];
+
+    function handleSort(event) {
+        const sortBy = event.target.value;
+        dispatch("sort", sortBy);
+    }
+</script>
+
+<div class="select">
+    <div class="selected" tabindex="0">
+        <span>Sort by: {options.find(option => option.sortKey === activeButton)?.label}</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow">
+            <path d="M6 9l6 6l6-6" />
+        </svg>
+    </div>
+    <div class="options">
+        {#each options as option}
+            <div 
+                class="option {activeButton === option.sortKey ? 'active' : ''}" 
+                on:click={() => handleSort({ target: { value: option.sortKey } })}>
+                {option.label}
+            </div>
+        {/each}
+    </div>
 </div>
 
 <style>
-    #sorting-buttons span {
-        font-size: 1rem;
-        margin-right: 2rem;
+    /* Dropdown container */
+    .select {
+        position: relative;
         display: inline-block;
-        line-height: 2rem;
-        grid-column: span 1;
-        text-align: center;
+        font-family: Arial, sans-serif;
+        width: 100%; /* Allow to stretch horizontally */
     }
 
-    #sorting-buttons {
-        margin: 3rem;
-        display: grid;
-        grid-template-columns: repeat(9, 1fr);
-        gap: 0.5rem;
-        justify-content: center;
+    /* Selected button style */
+    .selected {
+        display: flex;
+        justify-content: space-between;
         align-items: center;
-        padding: 0.1rem;
+        background-color: #060606;
+        color: var(--card-background-color);
+        padding: 0.8rem 1rem;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        width: fit-content; /* To adjust width based on content */
+        margin: 0 auto; /* Center the selected item horizontally */
     }
 
-    #sorting-buttons button {
-        appearance: none;
+    .selected:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .arrow {
+        margin-left: 0.5rem;
+        transition: transform 0.3s ease;
+    }
+
+    /* Options container (horizontal layout) */
+    .options {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
         background-color: #060606;
-        border: #030303;
-        border-radius: 10px;
-        box-sizing: border-box;
+        border-radius: 5px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        z-index: 10;
+        white-space: nowrap; /* Prevent wrapping */
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+        width: 100%; /* Ensure the dropdown takes up the full width */
+        padding: 0.5rem 0; /* Add some padding for space between options */
+    }
+
+    /* Show options on hover */
+    .select:hover .options {
+        display: flex; /* Use flexbox to display options horizontally */
+        justify-content: center; /* Center the options */
+        gap: 1rem; /* Add gaps between the options */
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* Option item */
+    .option {
+        padding: 0.8rem 1rem;
         color: var(--card-background-color);
         cursor: pointer;
-        font-size: 0.7rem;
-        line-height: normal;
-        min-height: 20px;
-        padding: 8px 10px;
-        text-align: center;
-        text-decoration: none;
-        transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
-        user-select: none;
-        -webkit-user-select: none;
-        touch-action: manipulation;
-        width: 100%;
-        will-change: transform;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        display: inline-block;
+        white-space: nowrap; /* Prevent text from wrapping */
     }
 
-    /* Hover Effect */
-    #sorting-buttons button:hover {
-        box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
-        transform: translateY(-2px);
-    }
-
-    /* Active Button State */
-    #sorting-buttons button.active {
+    .option:hover {
         background-color: var(--card-background-color);
         color: var(--card-dark-color);
     }
 
-    #sorting-buttons button:active {
-        box-shadow: none;
-        transform: translateY(0);
+    /* Active state for the selected option */
+    .option.active {
+        background-color: var(--card-background-color);
+        color: var(--card-dark-color);
     }
 
-    #sorting-buttons button:disabled {
-        pointer-events: none;
+    /* Arrow rotation when options are visible */
+    .select:hover .arrow {
+        transform: rotate(180deg);
     }
 </style>
