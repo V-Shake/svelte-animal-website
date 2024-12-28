@@ -15,28 +15,39 @@
         { id: "sort-intelligence", label: "Intelligenz", sortKey: "intelligence" }
     ];
 
+    let dropdownVisible = false; // Controls visibility of the dropdown
+
     function handleSort(event) {
-        const sortBy = event.target.value;
+        const sortBy = event.target.dataset.sortkey; // Use dataset for sortKey
+        activeButton = sortBy;
         dispatch("sort", sortBy);
+    }
+
+    function toggleDropdown() {
+        dropdownVisible = !dropdownVisible; // Toggle dropdown visibility on button click
     }
 </script>
 
 <div class="select">
-    <div class="selected" tabindex="0">
+    <div class="selected" tabindex="0" on:click={toggleDropdown}>
         <span>Sort by</span>
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow" class:rotate={dropdownVisible}>
             <path d="M6 9l6 6l6-6" />
         </svg>
     </div>
-    <div class="options">
-        {#each options as option}
-            <div 
-                class="option {activeButton === option.sortKey ? 'active' : ''}" 
-                on:click={() => handleSort({ target: { value: option.sortKey } })}>
-                {option.label}
-            </div>
-        {/each}
-    </div>
+    
+    {#if dropdownVisible}
+        <div class="options">
+            {#each options as option}
+                <div 
+                    class="option {activeButton === option.sortKey ? 'active' : ''}" 
+                    on:click={handleSort}
+                    data-sortkey={option.sortKey}>
+                    {option.label}
+                </div>
+            {/each}
+        </div>
+    {/if}
 </div>
 
 <style>
@@ -46,6 +57,7 @@
         display: inline-block;
         font-family: Arial, sans-serif;
         width: 100%; /* Allow to stretch horizontally */
+        margin: 1rem; 
     }
 
     /* Selected button style */
@@ -60,7 +72,6 @@
         cursor: pointer;
         transition: all 0.3s ease;
         width: fit-content; /* To adjust width based on content */
-        margin: 0 auto; /* Center the selected item horizontally */
     }
 
     .selected:hover {
@@ -72,53 +83,46 @@
         transition: transform 0.3s ease;
     }
 
+    /* Rotate the arrow when dropdown is visible */
+    .rotate {
+        transform: rotate(180deg); /* Rotate arrow when dropdown is visible */
+    }
+
     /* Options container (horizontal layout) */
     .options {
-        display: none;
+        display: flex;
+        justify-content: left; /* Center the options */
+        gap: 1rem; /* Add gaps between the options */
         margin-top: 0.5rem; /* Adds space between the button and options */
         background-color: #060606;
         border-radius: 5px;
         overflow: hidden;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        z-index: 10;
+        font-size: 0.8rem;
         white-space: nowrap; /* Prevent wrapping */
-        transition: opacity 0.3s ease, visibility 0.3s ease;
         width: 100%; /* Ensure the dropdown takes up the full width */
-        padding: 0.5rem 0; /* Add some padding for space between options */
-    }
-
-    /* Show options on hover */
-    .select:hover .options {
-        display: flex; /* Use flexbox to display options horizontally */
-        justify-content: center; /* Center the options */
-        gap: 1rem; /* Add gaps between the options */
-        opacity: 1;
-        visibility: visible;
     }
 
     /* Option item */
     .option {
-        padding: 0.8rem 1rem;
+        padding: 0.5rem 2rem;
         color: var(--card-background-color);
         cursor: pointer;
         transition: background-color 0.3s ease, color 0.3s ease;
         display: inline-block;
         white-space: nowrap; /* Prevent text from wrapping */
+        margin: 0.5rem;
     }
 
     .option:hover {
         background-color: var(--card-background-color);
         color: var(--card-dark-color);
+        border-radius: 5px;
     }
 
     /* Active state for the selected option */
     .option.active {
         background-color: var(--card-background-color);
         color: var(--card-dark-color);
-    }
-
-    /* Arrow rotation when options are visible */
-    .select:hover .arrow {
-        transform: rotate(180deg);
+        border-radius: 5px;
     }
 </style>
