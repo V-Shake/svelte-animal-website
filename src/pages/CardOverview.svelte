@@ -2,6 +2,7 @@
     import data from "../assets/animaldata.js";
     import Card from "../components/Card.svelte";
     import Filter from "../components/Filter.svelte";
+    import BackToTop from "../components/BackToTop.svelte";
 
     let sortedData = data;
     let filteredData = data;
@@ -51,6 +52,7 @@
                 <Card {animal} {highlight} />
             {/each}
         </div>
+        <BackToTop /> 
     </main>
 </div>
 

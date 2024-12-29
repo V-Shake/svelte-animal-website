@@ -109,7 +109,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background-color: #060606;
+        background-color: #090909;
         color: var(--card-background-color);
         padding: 0.8rem 1rem;
         border-radius: 5px;
@@ -141,7 +141,7 @@
         justify-content: left; /* Center the options */
         padding: 0.5rem 1.5rem;
         margin-top: 0.5rem; /* Adds space between the button and options */
-        background-color: #060606;
+        background-color: #090909;
         border-radius: 5px;
         overflow: hidden;
         font-size: 0.7rem;
