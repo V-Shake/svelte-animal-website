@@ -69,8 +69,7 @@
         </svg>
         </div>
 
-        {#if dropdownVisible}
-        <div class="options">
+        <div class="options {dropdownVisible ? 'visible' : ''}">
             <div class="sort-by">Sort by</div>
             <div class="option-container">
                 {#each sortOptions as option}
@@ -94,8 +93,7 @@
                 {/each}
             </div>
         </div>
-        {/if}
-</div>
+    </div>
 
 <style>
     /* Dropdown container */
@@ -149,6 +147,16 @@
         font-size: 0.7rem;
         white-space: nowrap; /* Prevent wrapping */
         width: 100%; /* Ensure the dropdown takes up the full width */
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: all 0.3s ease;
+        max-height: 0;
+    }
+
+    .options.visible {
+        opacity: 1;
+        transform: translateY(0);
+        max-height: 500px; /* Adjust as needed */
     }
 
     .sort-by, .filter-by {
