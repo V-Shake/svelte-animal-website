@@ -17,7 +17,7 @@ const data = [
     "litter_size": 4,
     "continents": "Africa, Asia",
     "intelligence": 8,
-    "habitat": "Savannas, semi-deserts, dry woodlands",
+    "habitat": "savannas, semi-deserts, dry woodlands",
     "fun_facts": [
       "Lions are the most vocal of all big cats; their roar can be heard up to 8 kilometers away, making them the loudest cat.",
       "Lions live in prides of up to 40 individuals, making them the most social of all big cats. A pride usually consists of females and their offspring, while only a few males protect the pride.",
@@ -50,7 +50,7 @@ const data = [
     "litter_size": 5,
     "continents": "Africa, Asia",
     "intelligence": 5,
-    "habitat": "Grasslands, savannas, semi-deserts",
+    "habitat": "grasslands, savannas, semi-deserts",
     "fun_facts": [
       "Cheetahs can reach speeds of up to 120 km/h, making them the fastest land animals in the world.",
       "Unlike many other predators, cheetahs are diurnal and primarily hunt during the early morning or late afternoon.",
@@ -85,7 +85,7 @@ const data = [
     "litter_size": 4,
     "continents": "Asia",
     "intelligence": 7,
-    "habitat": "Tropical rainforests, swamps, grasslands",
+    "habitat": "tropical rainforests, swamps, grasslands",
     "fun_facts": [
       "Tigers are the largest cats in the world.",
       "Every tiger has a unique pattern of stripes, similar to human fingerprints. These stripes help them camouflage in their environment.",
@@ -120,7 +120,7 @@ const data = [
     "litter_size": 3,
     "continents": "Africa, Asia",
     "intelligence": 7,
-    "habitat": "Savannas, semi-deserts, bush steppes",
+    "habitat": "savannas, semi-deserts, bush steppes",
     "fun_facts": [
       "Spotted hyenas live in large groups called clans, which can consist of up to 80 individuals. These clans are usually made up of related females and a few males.",
       "Hyenas have extremely strong jaws that allow them to crush and eat even large bones. They are also known to smell carrion from a distance of up to ten kilometers.",
@@ -153,7 +153,7 @@ const data = [
     "litter_size": 1840,
     "continents": "Americas",
     "intelligence": 2,
-    "habitat": "Rainforests, banana plantations, open areas",
+    "habitat": "rainforests, banana plantations, open areas",
     "fun_facts": [
       "The Brazilian wandering spider is considered one of the most venomous spiders in the world. Its venom is up to 20 times more deadly than that of a black widow.",
       "Wandering spiders exhibit aggressive behavior when they feel threatened. They rear up and display their red fangs before biting.",
@@ -188,7 +188,7 @@ const data = [
     "litter_size": 50,
     "continents": "all",
     "intelligence": 2,
-    "habitat": "Deserts, tropics and subtropics, semi-deserts, coastal regions, caves and trees, savannas",
+    "habitat": "deserts, tropics and subtropics, semi-deserts, coastal regions, caves and trees, savannas",
     "fun_facts": [
       "Scorpions are nocturnal animals that sleep in caves, under stones, or in crevices during the day.",
       "All scorpions have venom, but only about 50 species are potentially deadly to humans.",
@@ -225,7 +225,7 @@ const data = [
     "litter_size": 400,
     "continents": "all",
     "intelligence": 1,
-    "habitat": "Near water, humid areas, urban areas",
+    "habitat": "near water, humid areas, urban areas",
     "fun_facts": [
       "Only female mosquitoes bite to suck blood, which they need to develop their eggs. Male mosquitoes feed mainly on nectar and other sugars.",
       "Mosquitoes are the deadliest animals in the world, as they transmit diseases such as malaria, dengue fever, Zika virus, and yellow fever.",
@@ -256,7 +256,7 @@ const data = [
     "litter_size": 35,
     "continents": "Americas",
     "intelligence": 2,
-    "habitat": "Rainforests, Amazon basin, bromeliad zones",
+    "habitat": "rainforests, Amazon basin, bromeliad zones",
     "fun_facts": [
       "Poison dart frogs are known for their bright colors (red, yellow, blue, green) which signal to predators: \"I am poisonous!\".",
       "The Golden Poison Frog is one of the most poisonous frogs in the world. Its poison can be deadly within minutes.",
@@ -293,7 +293,7 @@ const data = [
     "litter_size": 80,
     "continents": "Africa, Asia, Americas, Oceania",
     "intelligence": 4,
-    "habitat": "Rivers, lakes, swamps, streams, brackish water",
+    "habitat": "rivers, lakes, swamps, streams, brackish water",
     "fun_facts": [
       "Crocodiles have existed for over 200 million years, coexisting with dinosaurs.",
       "Saltwater crocodiles can survive up to a year without food, using fat reserves in their tail.",
@@ -332,7 +332,7 @@ const data = [
     "litter_size": 40,
     "continents": "Africa, Asia",
     "intelligence": 4,
-    "habitat": "Savannas, forests, agricultural land, tropical rainforests, mangrove swamps",
+    "habitat": "savannas, forests, agricultural land, tropical rainforests, mangrove swamps",
     "fun_facts": [
       "Cobras possess strong, neurotoxic venom that can be fatal if untreated.",
       "They form a distinctive 'hood' when threatened to deter enemies.",
@@ -367,7 +367,7 @@ const data = [
     "litter_size": 30,
     "continents": "Asia",
     "intelligence": 3,
-    "habitat": "Savannas, monsoon forests, grasslands, coastal areas, tropical forests, mangrove swamps, rocky shores",
+    "habitat": "savannas, monsoon forests, grasslands, coastal areas, tropical forests, mangrove swamps, rocky shores",
     "fun_facts": [
       "Komodo dragons are the largest living lizards.",
       "Komodo dragons are opportunistic hunters and feed on a variety of animals, including deer, wild boars, and even other Komodo dragons.",
@@ -402,8 +402,16 @@ const data = [
     "litter_size": 14,
     "continents": "Americas",
     "intelligence": 3,
-    "habitat": "Wäldern, Wüsten, Savannen, Sümpfen, Seen, Flüssen",
+    "habitat": "forests, deserts, savannas, swamps, lakes, rivers",
     "fun_facts": [
+      "Turtles have existed for over 220 million years and are among the oldest reptiles on Earth.",
+      "Many turtle species undergo summer or winter dormancy during extreme weather conditions, helping them survive in hot or cold climates.",
+      "Turtles have four different color receptors and can perceive infrared and ultraviolet light, giving them better vision than humans.",
+      "Some turtle species, like the Greek tortoise, can store sperm from multiple males for years and lay fertilized eggs.",
+      "Turtles communicate with each other to synchronize the hatching of their eggs, ensuring the young emerge at the same time."
+    ],
+    "habitat_german": "Wäldern, Wüsten, Savannen, Sümpfen, Seen, Flüssen",
+    "fun_facts_german": [
       "Schildkröten existieren seit über 220 Millionen Jahren und gehören zu den ältesten Reptilien der Erde. ",
       "Viele Schildkrötenarten halten während extremer Wetterbedingungen eine Sommer- oder Winterstarre. Dies hilft ihnen, in heißen oder kalten Klimazonen zu überleben.",
       "Schildkröten haben vier verschiedene Farbrezeptoren und können infrarotes und ultraviolettes Licht wahrnehmen, was ihnen eine bessere Sicht als Menschen ermöglicht.",
@@ -429,8 +437,14 @@ const data = [
     "litter_size": 15000000,
     "continents": "Americas, Europe,  Oceania",
     "intelligence": 4,
-    "habitat": "Ozeane, Meere",
+    "habitat": "oceans, seas",
     "fun_facts": [
+      "The swordfish has a sword-like rostrum that makes up to one-third of its body length. It uses this 'sword' to stun or injure prey in schools.",
+      "Swordfish are typically solitary, except during the breeding season. They are highly territorial and often dive into deeper waters to hunt their prey.",
+      "Swordfish are known for their speed and agility in the water. They can reach speeds of up to 97 km/h, making them one of the fastest fish in the ocean."
+    ],
+    "habitat_german": "Ozeane, Meere",
+    "fun_facts_german": [
       "Der Schwertfisch besitzt ein schwertartiges Rostrum, das bis zu ein Drittel seiner Körperlänge ausmacht. Er nutzt dieses „Schwert“, um Beute zu betäuben oder in Schwärmen zu verletzen.",
       "Schwertfische leben in der Regel als Einzelgänger, außer während der Fortpflanzungszeit. Sie sind sehr territorial und suchen oft tiefere Gewässer auf, um ihre Beute zu fangen.",
       " Schwertfische sind bekannt für ihre Schnelligkeit und Agilität im Wasser. Sie können Geschwindigkeiten von bis zu 97 km/h erreichen, was sie zu einem der schnellsten Fische im Ozean macht.",
@@ -454,13 +468,20 @@ const data = [
     "litter_size": 20,
     "continents": "North America, Europe, Asia, Africa",
     "intelligence": 1,
-    "habitat": "Meeren, Süßwasser, feuchten Wäldern, Weinbergen, Wiesen, Gewässerrändern, trockene Gebieten",
+    "habitat": "seas, freshwater, damp forests, vineyards, meadows, water edges, dry areas",
     "fun_facts": [
+      "There are over 110,000 species of snails worldwide.",
+      "Snails are hermaphrodites and can self-fertilize, but they prefer to mate with a partner.",
+      "Snails have a soft body without a skeleton, which may be protected by a shell.",
+      "When crawling, snails leave a slime trail that helps them move and retain body moisture."
+    ],
+    "habitat_german": "Meeren, Süßwasser, feuchten Wäldern, Weinbergen, Wiesen, Gewässerrändern, trockene Gebieten",
+    "fun_facts_german": [
       "Es gibt weltweit über 110.000 Arten von Schnecken.",
       "Schnecken sind Zwitter und können sich selbst befruchten, aber sie bevorzugen die Paarung mit einem Partner.",
       "Schnecken haben einen weichen Körper ohne Skelett, der von einer schützenden Schale umgeben sein kann. ",
       "Beim Kriechen hinterlassen Schnecken eine Schleimspur, die ihnen hilft, sich fortzubewegen und gleichzeitig ihre Körperfeuchtigkeit zu bewahren."
-    ]
+    ],
   },
   {
     "id": 15,
@@ -480,8 +501,14 @@ const data = [
     "litter_size": 10000000,
     "continents": "South America, Africa, Oceania",
     "intelligence": 6,
-    "habitat": "Ozeane, Meere",
+    "habitat": "oceans, seas",
     "fun_facts": [
+      "Colossal squids are not the most ferocious fish in the sea, as they are hunted by 17 species of birds, whales, and fish. Sperm whales, which can grow over 20 meters long, frequently feed on them.",
+      "The eyes of colossal squids are as large as a basketball, with a diameter of 27 cm. They are not primarily used for hunting in the dark but for detecting sperm whales in deep waters.",
+      "Colossal squids are cannibals, which might be why they lay their eggs in shallower waters to avoid cannibalism by adult squids. Adult squids often contain remnants of other squids."
+    ],
+    "habitat_german": "Ozeane, Meere",
+    "fun_facts_german": [
       "Koloss-Kalmare sind nicht der bösartigste Fisch im Meer, da sie von 17 Arten von Vögeln, Walen und Fischen gejagt werden. Besonders Pottwale, die über 20 m lang werden, ernähren sich häufig von ihnen.",
       "Die Augen von Koloss-Kalmaren sind so groß wie ein Basketball mit einem Durchmesser von 27 cm und dienen nicht primär der Nahrungssuche im Dunkeln, sondern dem Erkennen von Pottwalen in der Tiefe.",
       "Koloss-Kalmare sind Kannibalen, weshalb sie ihre Eier möglicherweise in seichteren Gewässern ablegen, um dem Kannibalismus durch erwachsene Artgenossen zu entgehen. Erwachsene Kalmare enthalten oft Überreste anderer Tintenfische.",
@@ -505,8 +532,16 @@ const data = [
     "litter_size": 1,
     "continents": "Americas, Europe, Asia",
     "intelligence": 6,
-    "habitat": "Treibereis, Eisschollen, flache Küstenregionen",
+    "habitat": "drift ice, ice floes, shallow coastal regions",
     "fun_facts": [
+      "Walruses live in large herds that can consist of hundreds to thousands of animals. These herds are often separated by gender, and during the mating season, males fight for the right to mate with females.",
+      "Female walruses give birth to a calf after a gestation period of about 11 to 16 months. The calf weighs around 60 kg at birth, and the mother nurses it for up to a year.",
+      "Walruses can stay awake for up to 84 hours before sleeping briefly. They often rest on ice floes and huddle together to share warmth.",
+      "These animals are excellent divers, capable of reaching depths of 500 to 600 meters and staying underwater for up to 30 minutes.",
+      "Walruses communicate using a variety of sounds, such as grunts and bellows, which can be heard up to 1.5 kilometers away."
+    ],
+    "habitat_german": "Treibereis, Eisschollen, flache Küstenregionen",
+    "fun_facts_german": [
       "Walrosse leben in großen Herden, die aus Hunderten bis Tausenden von Tieren bestehen können. Diese Herden sind oft nach Geschlechtern getrennt, und während der Paarungszeit kämpfen Männchen um das Recht, sich mit Weibchen zu paaren.",
       "Weibliche Walrosse bringen nach einer Tragzeit von etwa 11 bis 16 Monaten ein Kalb zur Welt, das bereits bei der Geburt etwa 60 kg wiegt. Die Mutter säugt ihr Kalb bis zu einem Jahr lang.",
       "Walrosse können bis zu 84 Stunden wach bleiben, bevor sie für kurze Zeit schlafen. Sie ruhen sich oft auf Eisschollen aus und können in dieser Zeit auch kuscheln, um Wärme zu teilen.",
@@ -532,8 +567,14 @@ const data = [
     "litter_size": 300,
     "continents": "Americas, Africa, Oceania",
     "intelligence": 4,
-    "habitat": "tropischen und subtropischen Gewässern, Ozeane, Atlantiks",
+    "habitat": "tropical and subtropical waters, oceans, Atlantic",
     "fun_facts": [
+      "Despite its size, it is completely harmless to humans.",
+      "Unlike many other sharks, whale sharks do not swim solely with their tail fin but move their entire body from side to side, traveling at speeds of up to 5 km/h.",
+      "These animals are migratory and cover vast distances. A female whale shark tracked by satellite traveled over 20,000 kilometers across the Pacific."
+    ],
+    "habitat_german": "tropischen und subtropischen Gewässern, Ozeane, Atlantiks",
+    "fun_facts_german": [
       "Trotz seiner Größe ist er für den Menschen völlig ungefährlich.",
       "Im Gegensatz zu vielen anderen Haien schwimmen Walhaie nicht nur mit ihrer Schwanzflosse, sondern neigen ihren gesamten Körper von Seite zu Seite, während sie sich mit einer Geschwindigkeit von bis zu 5 km/h fortbewegen.",
       "Diese Tiere sind Wanderer und legen große Strecken zurück. Ein weiblicher Walhai wurde per Satellitentracker verfolgt und legte über 20.000 Kilometer im Pazifik zurück."
@@ -557,8 +598,15 @@ const data = [
     "litter_size": 14,
     "continents": "Americas, Africa, Oceania",
     "intelligence": 5,
-    "habitat": "Ozeane, gemäßigten und subtropischen Gewässern, Küstennähe",
+    "habitat": "oceans, temperate and subtropical waters, coastal areas",
     "fun_facts": [
+      "The distinctive coloration of the great white shark – a light gray back and a white belly – provides excellent camouflage in the water. This helps them hide from both prey and predators.",
+      "Great white sharks have exceptional senses. They can detect a single drop of blood in a swimming pool and perceive electrical fields generated by the movement of their prey.",
+      "Their teeth are known as a 'revolving set' because they have multiple rows of teeth. When one falls out, a new one immediately grows in its place. A great white shark has between 23 and 28 teeth in its upper jaw and up to 26 in its lower jaw.",
+      "A remarkable phenomenon in great white sharks is that embryos can eat each other in the womb, a process called intrauterine cannibalism. This ensures only the strongest offspring survive."
+    ],
+    "habitat_german": "Ozeane, gemäßigten und subtropischen Gewässern, Küstennähe",
+    "fun_facts_german": [
       "Die auffällige Färbung des Weißen Hais – ein hellgrauer Rücken und ein weißer Bauch – ermöglicht eine hervorragende Tarnung im Wasser. Diese Färbung hilft ihnen, sich sowohl vor Beute als auch vor Fressfeinden zu verstecken.",
       "Weiße Haie besitzen außergewöhnliche Sinne. Sie können selbst einen Tropfen Blut in einem Schwimmbecken riechen und haben die Fähigkeit, elektrische Felder wahrzunehmen, die von der Bewegung ihrer Beute erzeugt werden.",
       "Ihr Gebiss ist als „Revolvergebiss“ bekannt, da sie mehrere Reihen von Zähnen haben. Wenn ein Zahn ausfällt, wächst sofort ein neuer nach. Ein Weißer Hai hat zwischen 23 und 28 Zähnen im Oberkiefer und bis zu 26 im Unterkiefer.",
@@ -583,8 +631,14 @@ const data = [
     "litter_size": 1,
     "continents": "North America, Europe, Oceania, Antarctica",
     "intelligence": 8,
-    "habitat": "alle Weltmeeren",
+    "habitat": "all the world's oceans",
     "fun_facts": [
+      "The blue whale is the largest animal to have ever lived on Earth.",
+      "The heart of a blue whale weighs about 400 kilograms, roughly the weight of a small car. It beats only about 6 times per minute but pumps several thousand liters of blood through its body.",
+      "These giants primarily feed on krill, small crustaceans, and can consume up to 4 tons of krill daily. They use their baleen plates to filter water and trap their prey."
+    ],
+    "habitat_german": "alle Weltmeeren",
+    "fun_facts_german": [
       "Der Blauwal ist das größte Tier, das jemals auf der Erde gelebt hat.",
       "Das Herz eines Blauwals wiegt etwa 400 Kilogramm, was ungefähr dem Gewicht eines Kleinwagens entspricht. Es schlägt nur etwa 6 Mal pro Minute, pumpt dabei jedoch mehrere Tausend Liter Blut durch den Körper.",
       "Diese Riesen ernähren sich hauptsächlich von Krill, kleinen Krebstieren, und können täglich bis zu 4 Tonnen Krill fressen. Sie nutzen ihre Barten, um Wasser zu filtern und die Beute einzufangen.",
@@ -608,11 +662,18 @@ const data = [
     "litter_size": 1,
     "continents": "North America, Europe, Oceania, Antarctica",
     "intelligence": 10,
-    "habitat": "alle Ozeanen",
+    "habitat": "all oceans",
     "fun_facts": [
+      "Orcas are known for their high intelligence. They hunt in groups, called pods, and use complex hunting techniques to capture prey such as fish, seals, and other whales.",
+      "Orcas live in matriarchal groups that pass down knowledge and language across generations. Females usually stay in their birth group, while males often leave. Each family has its own dialect and passes down behaviors – a trait previously only known in humans.",
+      "Orcas communicate with clicks, whistles, and other sounds, which are important for social interaction and hunting coordination.",
+      "Killer whales sleep with one eye open by shutting down one hemisphere of their brain while the other stays active – a sleep pattern known as unihemispheric sleep. Since they must also remember to breathe while sleeping, one half of the brain remains active and one eye stays open."
+    ],
+    "habitat_german": "alle Ozeanen",
+    "fun_facts_german": [
       "Orcas sind für ihre hohe Intelligenz bekannt. Sie jagen in Gruppen, sogenannten Schulen, und nutzen komplexe Jagdtechniken, um Beute wie Fische, Robben und andere Wale zu fangen.",
       "Orcas leben in matriarchalen Gruppen, die Wissen und Sprache über Generationen weitergeben. Weibchen bleiben meist in ihrer Geburtsgruppe, Männchen wandern teils ab. Jede Familie hat einen eigenen Dialekt und vererbt Verhaltensweisen – eine Fähigkeit, die bisher nur beim Menschen bekannt war.",
-      " Orcas kommunizieren mit Klicks, Pfeifen und anderen Lauten, die für soziale Interaktion und Jagdkoordination wichtig sind. ",
+      "Orcas kommunizieren mit Klicks, Pfeifen und anderen Lauten, die für soziale Interaktion und Jagdkoordination wichtig sind. ",
       "Schwertwale schlafen mit einem Auge offen, indem sie eine Gehirnhälfte abschalten, während die andere wach bleibt – ein Schlafmuster, das als unihemisphärischer Schlaf bekannt ist. Da sie auch im Schlaf an das Atmen denken müssen, bleibt eine Gehirnhälfte aktiv und ein Auge geöffnet."
     ]
   },
@@ -634,8 +695,18 @@ const data = [
     "litter_size": 1,
     "continents": "Africa, Asia",
     "intelligence": 10,
-    "habitat": "Savannen, Wäldern, Grasländern, Feuchtgebieten, tropische Regenwäldern, Bergen",
+    "habitat": "savannas, forests, grasslands, wetlands, tropical rainforests, mountains",
     "fun_facts": [
+      "Elephants are the largest land mammals, with a shoulder height of up to 4 meters, weighing 4-7 tons, and experiencing lifelong growth.",
+      "They eat for over 17 hours daily, digest only 40-50% of their food, and drink over 100 liters of water daily when possible.",
+      "Elephants migrate 5-70 km per day and sleep only about 4 hours.",
+      "At 22 months, they have the longest gestation period. Calves weigh 100 kg at birth and are immediately mobile.",
+      "Elephants are highly intelligent, show grief, recognize themselves in mirrors, use tools, and care for injured herd members.",
+      "Matriarchal herds consist of up to 10 individuals, while males usually live solitary lives.",
+      "Communication occurs through vocalizations, infrasound, and body language."
+    ],
+    "habitat_german": "Savannen, Wäldern, Grasländern, Feuchtgebieten, tropische Regenwäldern, Bergen",
+    "fun_facts_german": [
       "Elefanten sind die größten Landsäugetiere mit bis zu 4 m Schulterhöhe, 4–7 Tonnen Gewicht und einem lebenslangen Wachstum.",
       "Sie fressen über 17 Stunden täglich, verwerten nur 40–50 % der Nahrung und trinken, wenn möglich, über 100 Liter Wasser täglich.",
       "Elefanten wandern 5–70 km pro Tag und schlafen nur etwa 4 Stunden.",
@@ -663,8 +734,17 @@ const data = [
     "litter_size": 1,
     "continents": "Africa, Asia, Americas",
     "intelligence": 5,
-    "habitat": "offene Savannen, dichte Regenwäldern, Schilfdickichten, lichte Wäldern, Feuchtgebieten, Bergen",
+    "habitat": "open savannas, dense rainforests, reed thickets, open woodlands, wetlands, mountains",
     "fun_facts": [
+      "Buffaloes have excellent memories and remember past attacks, confronting former attackers and are considered dangerous when protecting their herd.",
+      "Their thick, shaggy fur protects them from cold and extreme weather conditions.",
+      "Buffaloes are gentle, work together in large herds, and protect their calves by collectively caring for and defending them.",
+      "Mud baths help regulate body temperature, protect from the sun, promote group cohesion, and allow males to demonstrate strength.",
+      "Female buffaloes democratically decide the direction of the herd by looking in their desired direction during rest periods.",
+      "Female buffaloes give birth during the rainy season, and calves stay with their mothers for a year, while young males join bachelor herds."
+    ],
+    "habitat_german": "offene Savannen, dichte Regenwäldern, Schilfdickichten, lichte Wäldern, Feuchtgebieten, Bergen",
+    "fun_facts_german": [
       "Büffel haben ein ausgezeichnetes Gedächtnis und erinnern sich an erlittene Angriffe, konfrontieren frühere Angreifer und gelten als gefährlich, wenn es um den Schutz ihrer Herde geht.",
       "Ihr dickes, zotteliges Fell schützt sie vor Kälte und extremen Wetterbedingungen.",
       "Büffel sind sanftmütig, arbeiten in großen Herden zusammen und schützen ihre Kälber durch gemeinsames Umsorgen und Verteidigen.",
@@ -691,8 +771,16 @@ const data = [
     "litter_size": 2,
     "continents": "Americas, Europe, Asia",
     "intelligence": 7,
-    "habitat": "Arktis, Packeis, Küsten",
+    "habitat": "Arctic, pack ice, coasts",
     "fun_facts": [
+      "Polar bear cubs leave the den after four to five months and stay with their mother for about two years to learn survival techniques in the Arctic.",
+      "Polar bears have an extraordinary sense of smell, which they use to track their main prey, seals.",
+      "They can swim continuously for days. The record for the longest swim by a polar bear is 687 km in 9 days.",
+      "Less than 2% of polar bear hunts are successful.",
+      "Grizzly-polar bear hybrids, also called 'grolar' or 'pizzly' bears, exist and resemble both species outwardly, often behaving like polar bears since they are typically raised by polar bear mothers."
+    ],
+    "habitat_german": "Arktis, Packeis, Küsten",
+    "fun_facts_german": [
       "Eisbärenjungen verlassen nach vier bis fünf Monaten den Bau und bleiben etwa zwei Jahre bei der Mutter, um Überlebenstechniken in der Arktis zu lernen.",
       "Eisbären haben einen außergewöhnlichen Geruchssinn, den sie nutzen, um ihre Hauptbeute, Robben, aufzuspüren.",
       "Sie können tagelang ununterbrochen schwimmen. Der Rekord für die längste Schwimmstrecke eines Eisbären liegt bei 687 km in 9 Tagen.",
@@ -718,8 +806,17 @@ const data = [
     "litter_size": 1,
     "continents": "Africa",
     "intelligence": 5,
-    "habitat": "langsam fließende Gewässern, Seen, Flüssen, Sumpfgebieten",
+    "habitat": "slow-flowing waters, lakes, rivers, swamp areas",
     "fun_facts": [
+      "Hippos can hold their breath for up to 5 minutes to walk on lake or riverbeds, which has earned them the nickname 'river horse.'",
+      "As herbivores, they consume an average of 36 kg of grass per night.",
+      "Hippos' skin must remain moist, as it cracks when exposed to prolonged sunlight; a red, oily fluid from subcutaneous glands acts as sunscreen, antibiotic, and insect repellent.",
+      "They recognize friends or foes by the smell of feces, which they deposit in 'middens' and use for communication.",
+      "Female hippos give birth to one calf every two years and nurse for up to 18 months, with a strong bond to their calf and aggressive behavior when threatened.",
+      "Hippos communicate with grunts, growls, moans, and loud roars, with most sounds being made underwater."
+    ],
+    "habitat_german": "langsam fließende Gewässern, Seen, Flüssen, Sumpfgebieten",
+    "fun_facts_german": [
       "Nilpferde können bis zu 5 Minuten die Luft anhalten, um auf See- oder Flussböden zu laufen, was ihnen den Spitznamen „Flusspferd“ eingebracht hat.",
       "Als Pflanzenfresser ernähren sie sich von durchschnittlich 36 kg Gras pro Nacht.",
       "Die Haut von Nilpferden muss feucht bleiben, da sie bei längerer Sonneneinstrahlung aufreißt; eine rote, ölige Flüssigkeit aus Unterhaardrüsen dient als Sonnenschutz, Antibiotikum und Insektenschutzmittel.",
@@ -746,8 +843,19 @@ const data = [
     "litter_size": 1,
     "continents": "Africa",
     "intelligence": 9,
-    "habitat": "Tropische Regenwälder, Auenwälder, Sekundärwälder, Bergregionen, Sumpfgebieten",
+    "habitat": "tropical rainforests, floodplain forests, secondary forests, mountain regions, swamp areas",
     "fun_facts": [
+      "Gorillas share 98% of their DNA with humans, making them vulnerable to human diseases due to lack of immunity.",
+      "Mountain gorillas spend about a quarter of the day eating plants.",
+      "At night, gorilla groups sleep in nests, with infants staying with their mothers.",
+      "Gorillas have 16 calls, including barks and chest drumming to impress rivals.",
+      "Mountain gorillas live in family groups with a dominant male; older ones switch groups to avoid inbreeding.",
+      "Gorillas have unique nose and fingerprints for ID.",
+      "Gorillas cannot swim, avoid deep water, and use sticks to test it.",
+      "Gorillas prefer small friend groups with limited bonds."
+    ],
+    "habitat_german": "Tropische Regenwälder, Auenwälder, Sekundärwälder, Bergregionen, Sumpfgebieten",
+    "fun_facts_german": [
       "Gorillas teilen etwa 98 % ihres Erbguts mit Menschen und sind daher anfällig für menschliche Krankheiten, da ihnen entsprechende Immunitäten fehlen.",
       "Berggorillas verbringen etwa ein Viertel des Tages mit Pflanzenfressen.",
       "Nachts schlafen Gorillagruppen in Nestern, Jungtiere bleiben bei der Mutter.",
@@ -776,8 +884,15 @@ const data = [
     "litter_size": 3,
     "continents": "Americas, Europe, Asia",
     "intelligence": 7,
-    "habitat": "Wälder, Gebirgen, Tundra, Küstenregionen, Feuchtgebieten",
+    "habitat": "forests, mountains, tundra, coastal regions, wetlands",
     "fun_facts": [
+      "Grizzly bears are omnivores but prefer plant-based foods like berries, grasses, herbs, and nuts, occasionally eating fish or larger animals.",
+      "Grizzlies have one of the strongest bites in the world, with a bite force of nearly 85 kg per square centimeter.",
+      "Grizzly bears do not hibernate but enter a winter dormancy with slightly lowered body temperature, occasionally waking up and moving. Depending on the length of winter, they can spend up to seven months in their dens without leaving to use the toilet.",
+      "Grizzly bears rub their bodies against trees to scratch and to signal their presence to other bears."
+    ],
+    "habitat_german": "Wälder, Gebirgen, Tundra, Küstenregionen, Feuchtgebieten",
+    "fun_facts_german": [
       "Grizzlybären sind Allesfresser, bevorzugen aber pflanzliche Nahrung wie Beeren, Gräser, Kräuter und Nüsse, essen gelegentlich auch Fisch oder größere Tiere.",
       "Grizzlys haben eines der stärksten Gebisse der Welt mit einer Bisskraft von fast 85 Kilo pro Quadratzentimeter.",
       "Grizzlybären halten keine echte Winterruhe, sondern eine Winterruhe mit leicht gesenkter Körpertemperatur, wobei sie gelegentlich aufwachen und sich bewegen. Je nach Länge des Winters können Grizzlybären bis zu sieben Monate in ihren Höhlen verbringen, ohne während dieser Zeit auf die Toilette zu gehen.",
@@ -802,8 +917,18 @@ const data = [
     "litter_size": 1,
     "continents": "Africa",
     "intelligence": 4,
-    "habitat": "Savannen, Waldlandschaften, Graslandschaften, Steppen",
+    "habitat": "savannas, woodlands, grasslands, steppes",
     "fun_facts": [
+      "Giraffes are the tallest land animals, reaching up to 5.7 meters, and newborns are as tall as an average human.",
+      "Giraffes eat up to 45 kg of leaves and twigs daily, using their long necks and legs to reach high branches.",
+      "They drink little, getting most of their water from food; their long necks make bending down difficult, so they drink only every few days.",
+      "Their dark blue tongues protect them from sunburn and can grab leaves from thorns.",
+      "Male giraffes fight in 'necking' battles to establish dominance.",
+      "Giraffes don’t have true horns, but ossicones, which are thicker in males and fluffier in females.",
+      "Giraffe calves fall from about two meters at birth and stay with their mothers for 1.5 years."
+    ],
+    "habitat_german": "Savannen, Waldlandschaften, Graslandschaften, Steppen",
+    "fun_facts_german": [
       "Giraffen sind die größten Landtiere, bis zu 5,7 Meter hoch, und Neugeborene sind so groß wie ein durchschnittlicher Mensch.",
       "Giraffen fressen täglich bis zu 45 kg Blätter und Zweige und erreichen hohe Äste mit ihren langen Hälse und Beinen.",
       "Sie trinken wenig, da sie die meiste Flüssigkeit aus ihrer Nahrung aufnehmen; ihr langer Hals macht es schwer, sich zu bücken und Wasser zu trinken, weshalb sie nur alle paar Tage trinken müssen.",
@@ -831,8 +956,18 @@ const data = [
     "litter_size": 6,
     "continents": "Americas, Europe, Asia",
     "intelligence": 9,
-    "habitat": "Wälder, Grasländer, Tundren, Wüsten, Hochgebirgen, Feuchtgebieten",
+    "habitat": "forests, grasslands, tundras, deserts, mountains, wetlands",
     "fun_facts": [
+      "Wolves don’t howl at the moon, but to communicate with their pack or ward off other wolves.",
+      "Wolves mate for life.",
+      "The term 'Alpha wolf' is outdated, as pack leaders are simply the parents, not those who fight for dominance.",
+      "Wolves don’t hibernate and can be seen year-round.",
+      "Adult gray wolves can survive alone but often seek a mate to form a new pack.",
+      "Wolf pups are blind, deaf, and dependent on their mother but are cared for by other pack members.",
+      "Wolves are very intelligent, with complex social structures and abilities, such as caring for injured pack members and raising their young."
+    ],
+    "habitat_german": "Wälder, Grasländer, Tundren, Wüsten, Hochgebirgen, Feuchtgebieten",
+    "fun_facts_german": [
       "Wölfe heulen nicht wegen des Mondes, sondern zur Kommunikation mit dem Rudel oder zur Abwehr anderer Wölfe.",
       "Wölfe paaren sich ein Leben lang.",
       "Der Begriff „Alpha-Wolf“ ist veraltet, da die Rudelführer einfach die Eltern sind, nicht durch Kämpfe an die Spitze kommen.",
@@ -860,8 +995,17 @@ const data = [
     "litter_size": 16,
     "continents": "Africa",
     "intelligence": 4,
-    "habitat": "Savannen, Halbwüsten, Wüsten, Steppen, Graslandschaften",
+    "habitat": "savannas, semi-deserts, deserts, steppes, grasslands",
     "fun_facts": [
+      "Ostriches are the largest birds in the world, with their neck accounting for almost half of their height.",
+      "Ostriches do not bury their heads in the sand but are often observed eating or turning their eggs, which gives this impression.",
+      "Their long, thick eyelashes protect their eyes from sandstorms, which are common in their habitat.",
+      "Due to their flat chest and small wings, ostriches are flightless. However, they can use their wings to maintain balance while running and defending against predators.",
+      "Ostriches can go up to two weeks without water, as they get moisture from their food and can limit water loss.",
+      "Ostriches can kill a person with a single kick, as their strong legs have great striking power."
+    ],
+    "habitat_german": "Savannen, Halbwüsten, Wüsten, Steppen, Graslandschaften",
+    "fun_facts_german": [
       "Strauße sind die größten Vögel der Welt, wobei ihr Hals fast die Hälfte ihrer Höhe ausmacht.",
       "Strauße vergraben ihren Kopf nicht im Sand, sondern sind häufig beim Fressen oder Wenden ihrer Eier beobachtet worden, was diesen Eindruck erweckt.",
       "Ihre langen, dicken Wimpern schützen die Augen vor Sandstürmen, die in ihrem Lebensraum häufig sind.",
@@ -888,8 +1032,17 @@ const data = [
     "litter_size": 5,
     "continents": "all",
     "intelligence": 6,
-    "habitat": "Felsen, Klippen, hohe Gebäude, Baumhöhlen, Tundra, Halbwüsten",
+    "habitat": "rocks, cliffs, tall buildings, tree cavities, tundra, semi-deserts",
     "fun_facts": [
+      "Peregrine falcons are the fastest birds in the world.",
+      "Their dive is so powerful that they could theoretically break a human's spine on impact, although this has never happened.",
+      "They are precise hunters, using their speed to strike prey at great heights and stun them in a dive.",
+      "Peregrine falcons aggressively defend their nests against many predators, such as foxes, large owls, and bears.",
+      "Peregrine falcons migrate up to 25,000 km annually, though not all individuals migrate; some stay year-round in one location.",
+      "Their nests are minimalist, usually consisting of a depression in sand, gravel, or on rocks, often in urban environments like skyscrapers."
+    ],
+    "habitat_german": "Felsen, Klippen, hohe Gebäude, Baumhöhlen, Tundra, Halbwüsten",
+    "fun_facts_german": [
       "Wanderfalken sind die schnellsten Vögel der Welt.",
       "Ihr Sturzflug ist so stark, dass sie theoretisch die Wirbelsäule eines Menschen bei Kollision brechen könnten, was jedoch nie passiert ist.",
       "Sie sind sehr präzise Jäger und nutzen ihre Geschwindigkeit, um Beute in großen Höhen anzuspeisen und im Sturzflug zu betäuben.",
@@ -916,8 +1069,18 @@ const data = [
     "litter_size": 1,
     "continents": "all",
     "intelligence": 4,
-    "habitat": "Meere, Ozeane, Küstenregionen, Inseln",
+    "habitat": "seas, oceans, coastal regions, islands",
     "fun_facts": [
+      "Albatrosses choose their mate through a ritual dance and often stay together for up to 50 years, though they are not strictly monogamous. The Laysan albatross courtship involves up to 25 dances.",
+      "Taking off from the ground is difficult as they need wind and speed to lift off.",
+      "Albatrosses can sleep while flying and travel long distances without flapping their wings.",
+      "They build a nest together and take turns incubating one egg every two years.",
+      "The black-footed albatross returns after three years, spends two years courting and building a nest, and starts breeding after seven years.",
+      "When food is scarce, the parents sacrifice their chicks to survive.",
+      "The chicks stay in the nest for four to five months while the parents search for food."
+    ],
+    "habitat_german": "Meere, Ozeane, Küstenregionen, Inseln",
+    "fun_facts_german": [
       "Albatrosse wählen ihren Partner durch einen rituellen Tanz und bleiben oft bis zu 50 Jahre zusammen, sind jedoch nicht strikt monogam. Die Balz des Laysan-Albatros umfasst bis zu 25 Tänze.",
       "Der Start vom Boden ist schwierig, da sie Wind und Geschwindigkeit brauchen, um abzuheben.",
       "Albatrosse können im Flug schlafen und fliegen weite Strecken ohne Flügelschlag.",
@@ -945,8 +1108,18 @@ const data = [
     "litter_size": 12,
     "continents": "Asia, Africa",
     "intelligence": 3,
-    "habitat": "hügeliges Gelände im Dschungel, Wasserquellen, Wälder, Feldern",
+    "habitat": "hilly terrain in jungles, water sources, forests, fields",
     "fun_facts": [
+      "Only male peacocks have the striking colors and magnificent tail. Female peacocks are more subdued in gray and brown tones.",
+      "Female peacocks assess males by their tail, its size, and the color play. Vibrations and dance movements also play a role.",
+      "Both sexes have a crest that acts as a sensor during courtship.",
+      "Peacock males shed their feathers after each breeding season, growing more magnificent feathers the following year.",
+      "Older female peacocks can develop male characteristics, such as feather displays and male calls.",
+      "Peacocks can fly short distances despite their heavy tail to escape danger.",
+      "Their feathers are covered with microscopic crystals that create the shimmering colors."
+    ],
+    "habitat_german": "hügeliges Gelände im Dschungel, Wasserquellen, Wälder, Feldern",
+    "fun_facts_german": [
       "Nur männliche Pfauen haben die auffälligen Farben und den prächtigen Schwanz. Weibliche Pfauen sind schlichter in grauen und braunen Tönen.",
       "Weibliche Pfauen beurteilen Männchen anhand ihres Schwanzes, seiner Größe und des Farbenspiels. Auch Vibrationen und Tanzbewegungen spielen eine Rolle.",
       "Beide Geschlechter haben einen Haarschopf, der beim Balzen als Sensor fungiert.",
