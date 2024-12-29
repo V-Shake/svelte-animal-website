@@ -9,11 +9,11 @@
     };
 
     // Variable to track the current active route
-    let currentRoute = window.location.hash;
+    let currentRoute = window.location.hash || "#/";
 
     // Watch for changes in URL
     const updateActiveRoute = () => {
-        currentRoute = window.location.hash;
+        currentRoute = window.location.hash || "#/";
     };
 
     onMount(() => {
@@ -29,16 +29,21 @@
 </script>
 
 <nav class={isScrolled ? "scrolled" : ""}>
-    <div id="logo" class="font-white">My Logo</div>
+    <div id="logo">My Logo</div>
     <ul>
         <li>
-            <a href="#/" class="font-white" class:active-link={currentRoute === '#/'}>
+            <a href="#/" class:active-link={currentRoute === '#/'}>
                 Home
             </a>
         </li>
         <li>
-            <a href="#/cards" class="font-white" class:active-link={currentRoute === '#/cards'}>
+            <a href="#/cards" class:active-link={currentRoute === '#/cards'}>
                 Card Gallery
+            </a>
+        </li>
+        <li>
+            <a href="#/quartet" class:active-link={currentRoute === '#/quartet'}>
+                Quartet Game
             </a>
         </li>
     </ul>
@@ -54,9 +59,10 @@
         position: fixed;
         top: 0;
         z-index: 1000;
-        padding: 0.6rem 6rem;
+        padding: 0.6rem 6.5rem;
         transition: background-color 0.3s ease;
-        height: 4em; /* Set height for the navbar */
+        height: 5em; /* Set height for the navbar */
+        color: var(--card-background-color);
     }
 
     #logo {
@@ -73,11 +79,11 @@
         text-align: center;
         padding: 0;
         display: flex;
-        justify-content: center;
+        justify-content: flex-end; /* Align items to the right */
         align-items: center;
         gap: 3em;
         height: 4em;
-        margin: 0 auto;
+        margin: 0;
         flex-grow: 1;
         font-size: 0.8rem;
     }
@@ -86,10 +92,6 @@
         text-decoration: none;
         color: var(--card-background-color);
         position: relative;
-    }
-
-    .font-white {
-        color: var(--card-background-color);
     }
 
     .scrolled {

@@ -2,12 +2,14 @@
   import Router from "svelte-spa-router";
   import LandingPage from "./pages/LandingPage.svelte";
   import CardOverview from "./pages/CardOverview.svelte";
-  import Navbar from "./components/Navbar.svelte"; // Import the Nav component
+  import QuartetGame from "./pages/QuartetGame.svelte";
+  import Navbar from "./components/Navbar.svelte";
   import "../public/fonts/stylesheet.css";
 
   const routes = {
     "/": LandingPage,
     "/cards": CardOverview,
+    "/quartet": QuartetGame,
   };
 </script>
 

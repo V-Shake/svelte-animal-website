@@ -111,7 +111,7 @@
         background-color: #090909;
         color: var(--card-background-color);
         padding: 0.8rem 1rem;
-        border-radius: 5px;
+        border-radius: 10px;
         cursor: pointer;
         transition: all 0.3s ease;
         width: fit-content; /* To adjust width based on content */
@@ -140,7 +140,7 @@
         justify-content: left; /* Center the options */
         margin-top: 0.5rem; /* Adds space between the button and options */
         background-color: #090909;
-        border-radius: 5px;
+        border-radius: 10px;
         overflow: hidden;
         font-size: 0.7rem;
         white-space: nowrap; /* Prevent wrapping */
