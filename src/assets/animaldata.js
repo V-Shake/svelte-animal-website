@@ -702,7 +702,7 @@ const data = [
       "Elephants migrate 5-70 km per day and sleep only about 4 hours.",
       "At 22 months, they have the longest gestation period. Calves weigh 100 kg at birth and are immediately mobile.",
       "Elephants are highly intelligent, show grief, recognize themselves in mirrors, use tools, and care for injured herd members.",
-      "Matriarchal herds consist of up to 10 individuals, while males usually live solitary lives.",
+      "Matriarchal herds consist of up to 10 individuals, males usually live solitary lives.",
       "Communication occurs through vocalizations, infrasound, and body language."
     ],
     "habitat_german": "Savannen, Wäldern, Grasländern, Feuchtgebieten, tropische Regenwäldern, Bergen",

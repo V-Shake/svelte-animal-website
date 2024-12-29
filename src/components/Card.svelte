@@ -276,6 +276,8 @@
         align-items: start;
         padding: 1rem;
         height: 90%;
+        margin-left: -2.5rem;
+        margin-top: -2.5rem;
     }
 
     .funfact-list {
