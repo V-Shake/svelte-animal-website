@@ -1,22 +1,37 @@
 <script>
     import data from "../assets/animaldata.js";
     import Card from "../components/Card.svelte";
-    import Sort from "../components/Sort.svelte";
+    import Filter from "../components/Filter.svelte";
 
     let sortedData = data;
+    let filteredData = data;
     let highlight = "";
     let activeButton = "group"; // Initialize with default
+    let activeFilter = "all"; // Initialize with no filter
 
     function handleSort(event) {
         const sortBy = event.detail;
         activeButton = sortBy; // Update active button
         highlight = sortBy;
-        sortedData = [...data].sort((a, b) => {
+        sortedData = [...filteredData].sort((a, b) => {
             if (sortBy === "group") return a.group.localeCompare(b.group);
             if (sortBy === "intelligence")
                 return b.intelligence - a.intelligence;
             return parseFloat(b[sortBy]) - parseFloat(a[sortBy]);
         });
+    }
+
+    function handleFilter(event) {
+        const filterBy = event.detail;
+        activeFilter = filterBy; // Update active filter
+        if (filterBy === "all") {
+            filteredData = data;
+        } else {
+            filteredData = data.filter(
+                (animal) => animal.groupname === filterBy,
+            );
+        }
+        handleSort({ detail: activeButton }); // Reapply sorting on filtered data
     }
 </script>
 
@@ -25,7 +40,12 @@
         <nav></nav>
     </header>
     <main>
-        <Sort {activeButton} on:sort={handleSort} />
+        <Filter
+            {activeButton}
+            {activeFilter}
+            on:sort={handleSort}
+            on:filter={handleFilter}
+        />
         <div id="cards-container">
             {#each sortedData as animal}
                 <Card {animal} {highlight} />
@@ -36,8 +56,9 @@
 
 <style>
     #wrapper {
-        display: grid;
-        grid-template-rows: auto auto 1fr;
+        min-width: 100vh;
+        min-height: 100vh;
+        box-sizing: border-box;
         margin: auto;
     }
 
@@ -57,7 +78,7 @@
         width: 100%;
     }
 
-/* 
+    /* 
     #cards-container {
         display: grid;
         grid-template-columns: repeat(4, 1fr);

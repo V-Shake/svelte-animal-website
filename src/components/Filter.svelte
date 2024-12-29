@@ -4,25 +4,31 @@
 
     const dispatch = createEventDispatcher();
     export let activeButton = "group"; // Default active sort option
+    export let activeFilter = "all"; 
 
-    const options = [
+    const sortOptions = [
         { id: "sort-groups", label: "Gruppen", sortKey: "group" },
         { id: "sort-max_weight", label: "Max Gewicht", sortKey: "max_weight" },
         { id: "sort-max_length", label: "Max Länge", sortKey: "max_length" },
         { id: "sort-max_age", label: "Max Alter", sortKey: "max_age" },
-        {
-            id: "sort-top_speed",
-            label: "Max Geschwindigkeit",
-            sortKey: "top_speed",
-        },
+        { id: "sort-top_speed", label: "Max Geschwindigkeit", sortKey: "top_speed" },
         { id: "sort-litter_size", label: "Wurfgröße", sortKey: "litter_size" },
         { id: "sort-deaths", label: "Tödliche Vorfälle", sortKey: "deaths" },
-        {
-            id: "sort-intelligence",
-            label: "Intelligenz",
-            sortKey: "intelligence",
-        },
+        { id: "sort-intelligence", label: "Intelligenz", sortKey: "intelligence" }
     ];
+
+    const filterOptions = [
+        { id: "filter-all", label: "All", filterKey: "all" },
+        { id: "filter-predators", label: "Predators", filterKey: "Predators" },
+        { id: "filter-poisonous", label: "Poisonous and Infectious", filterKey: "Poisonous and Infectious" },
+        { id: "filter-reptiles", label: "Reptiles", filterKey: "Reptiles" },
+        { id: "filter-sea_creatures", label: "Sea Creatures", filterKey: "Sea Creatures" },
+        { id: "filter-marine_giants", label: "Marine Giants", filterKey: "Marine Giants" },
+        { id: "filter-large_mammals", label: "Large Mammals", filterKey: "Large Mammals" },
+        { id: "filter-land_mammals", label: "Land Mammals", filterKey: "Land Mammals" },
+        { id: "filter-birds", label: "Birds", filterKey: "Birds" }
+    ];
+
 
     let dropdownVisible = false; // Controls visibility of the dropdown
 
@@ -30,6 +36,12 @@
         const sortBy = event.target.dataset.sortkey; // Use dataset for sortKey
         activeButton = sortBy;
         dispatch("sort", sortBy);
+    }
+
+    function handleFilter(event) {
+        const filterBy = event.target.dataset.filterkey; // Use dataset for filterKey
+        activeFilter = filterBy;
+        dispatch("filter", filterBy);
     }
 
     function toggleDropdown() {
@@ -57,11 +69,11 @@
         </svg>
         </div>
 
-    {#if dropdownVisible}
+        {#if dropdownVisible}
         <div class="options">
             <div class="sort-by">Sort by</div>
             <div class="option-container">
-                {#each options as option}
+                {#each sortOptions as option}
                     <div 
                         class="option {activeButton === option.sortKey ? 'active' : ''}" 
                         on:click={handleSort}
@@ -70,8 +82,19 @@
                     </div>
                 {/each}
             </div>
+            <div class="filter-by">Filter by</div>
+            <div class="option-container">
+                {#each filterOptions as option}
+                    <div 
+                        class="option {activeFilter === option.filterKey ? 'active' : ''}" 
+                        on:click={handleFilter}
+                        data-filterkey={option.filterKey}>
+                        {option.label}
+                    </div>
+                {/each}
+            </div>
         </div>
-    {/if}
+        {/if}
 </div>
 
 <style>
@@ -79,7 +102,7 @@
     .select {
         position: relative;
         display: inline-block;
-        width: 100%; /* Allow to stretch horizontally */
+        width: 90%; /* Allow to stretch horizontally */
         margin-bottom: 1rem;
     }
 
@@ -104,7 +127,7 @@
     }
 
     .arrow {
-        margin-left: 0.5rem;
+        margin-left: 0.6rem;
         transition: transform 0.3s ease;
     }
 
@@ -123,12 +146,12 @@
         background-color: #060606;
         border-radius: 5px;
         overflow: hidden;
-        font-size: 0.8rem;
+        font-size: 0.7rem;
         white-space: nowrap; /* Prevent wrapping */
         width: 100%; /* Ensure the dropdown takes up the full width */
     }
 
-    .sort-by {
+    .sort-by, .filter-by {
         display: flex;
         align-items: left;
         margin-top: 0.5rem;
@@ -143,11 +166,12 @@
         flex-wrap: wrap; /* Allow options to wrap to the next line if needed */
         gap: 0.5rem; /* Add gaps between the options */
         margin-top: 0.5rem;
+        margin-bottom: 1rem;
     }
 
     /* Option item */
     .option {
-        padding: 0.5rem 1.5rem;
+        padding: 0.4rem 1.1rem;
         color: var(--card-background-color);
         background-color: var(--card-dark-color);
         cursor: pointer;
