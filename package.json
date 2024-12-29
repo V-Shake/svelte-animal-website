@@ -14,6 +14,7 @@
     "vite": "^6.0.5"
   },
   "dependencies": {
+    "@sveltejs/kit": "^2.15.1",
     "@tabler/icons-svelte": "^3.26.0",
     "fullpage.js": "^4.0.31",
     "svelte-spa-router": "^4.0.1"
