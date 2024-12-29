@@ -7,14 +7,14 @@
     export let activeFilter = "all"; 
 
     const sortOptions = [
-        { id: "sort-groups", label: "Gruppen", sortKey: "group" },
-        { id: "sort-max_weight", label: "Max Gewicht", sortKey: "max_weight" },
-        { id: "sort-max_length", label: "Max Länge", sortKey: "max_length" },
-        { id: "sort-max_age", label: "Max Alter", sortKey: "max_age" },
-        { id: "sort-top_speed", label: "Max Geschwindigkeit", sortKey: "top_speed" },
-        { id: "sort-litter_size", label: "Wurfgröße", sortKey: "litter_size" },
-        { id: "sort-deaths", label: "Tödliche Vorfälle", sortKey: "deaths" },
-        { id: "sort-intelligence", label: "Intelligenz", sortKey: "intelligence" }
+        { "id": "sort-groups", "label": "Groups", "sortKey": "group" },
+        { "id": "sort-max_weight", "label": "Max Weight", "sortKey": "max_weight" },
+        { "id": "sort-max_length", "label": "Max Length", "sortKey": "max_length" },
+        { "id": "sort-max_age", "label": "Max Age", "sortKey": "max_age" },
+        { "id": "sort-top_speed", "label": "Max Speed", "sortKey": "top_speed" },
+        { "id": "sort-litter_size", "label": "Litter Size", "sortKey": "litter_size" },
+        { "id": "sort-deaths", "label": "Fatal Incidents", "sortKey": "deaths" },
+        { "id": "sort-intelligence", "label": "Intelligence", "sortKey": "intelligence" }
     ];
 
     const filterOptions = [
@@ -101,7 +101,6 @@
         position: relative;
         display: inline-block;
         width: 90%; /* Allow to stretch horizontally */
-        margin-bottom: 1rem;
     }
 
     /* Selected button style */
@@ -139,7 +138,6 @@
         display: flex;
         flex-direction: column;
         justify-content: left; /* Center the options */
-        padding: 0.5rem 1.5rem;
         margin-top: 0.5rem; /* Adds space between the button and options */
         background-color: #090909;
         border-radius: 5px;
@@ -160,6 +158,7 @@
     }
 
     .sort-by, .filter-by {
+        padding: 0 1.5rem;
         display: flex;
         align-items: left;
         margin-top: 0.5rem;
@@ -173,6 +172,7 @@
         align-items: left;
         flex-wrap: wrap; /* Allow options to wrap to the next line if needed */
         gap: 0.5rem; /* Add gaps between the options */
+        padding: 0 1.5rem;
         margin-top: 0.5rem;
         margin-bottom: 1rem;
     }

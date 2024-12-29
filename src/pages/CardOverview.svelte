@@ -38,7 +38,8 @@
 
 <div id="wrapper">
     <header>
-        <nav></nav>
+        <nav>
+        </nav>
     </header>
     <main>
         <Filter

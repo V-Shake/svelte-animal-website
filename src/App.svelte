@@ -2,6 +2,7 @@
   import Router from "svelte-spa-router";
   import LandingPage from "./pages/LandingPage.svelte";
   import CardOverview from "./pages/CardOverview.svelte";
+  import Navbar from "./components/Navbar.svelte"; // Import the Nav component
   import "../public/fonts/stylesheet.css";
 
   const routes = {
@@ -10,22 +11,16 @@
   };
 </script>
 
-<header>
-  <h1>wildlife</h1>
-  <nav>
-    <ul>
-      <li><a href="#/">Home</a></li>
-      <li><a href="#/cards">Quartet Cards</a></li>
-    </ul>
-  </nav>
-</header>
+<Navbar />
 
 <main>
-  <Router {routes} />
+  <div class="content-wrapper">
+    <Router {routes} />
+    <!-- The Router will render the appropriate component based on the URL -->
+  </div>
 </main>
 
 <footer></footer>
 
 <style>
-
 </style>
