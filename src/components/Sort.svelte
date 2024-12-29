@@ -1,5 +1,6 @@
 <script>
     import { createEventDispatcher } from "svelte";
+    import { IconAdjustmentsHorizontal } from "@tabler/icons-svelte";
 
     const dispatch = createEventDispatcher();
     export let activeButton = "group"; // Default active sort option
@@ -9,10 +10,18 @@
         { id: "sort-max_weight", label: "Max Gewicht", sortKey: "max_weight" },
         { id: "sort-max_length", label: "Max Länge", sortKey: "max_length" },
         { id: "sort-max_age", label: "Max Alter", sortKey: "max_age" },
-        { id: "sort-top_speed", label: "Max Geschwindigkeit", sortKey: "top_speed" },
+        {
+            id: "sort-top_speed",
+            label: "Max Geschwindigkeit",
+            sortKey: "top_speed",
+        },
         { id: "sort-litter_size", label: "Wurfgröße", sortKey: "litter_size" },
         { id: "sort-deaths", label: "Tödliche Vorfälle", sortKey: "deaths" },
-        { id: "sort-intelligence", label: "Intelligenz", sortKey: "intelligence" }
+        {
+            id: "sort-intelligence",
+            label: "Intelligenz",
+            sortKey: "intelligence",
+        },
     ];
 
     let dropdownVisible = false; // Controls visibility of the dropdown
@@ -30,22 +39,37 @@
 
 <div class="select">
     <div class="selected" tabindex="0" on:click={toggleDropdown}>
-        <span>Sort by</span>
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow" class:rotate={dropdownVisible}>
+        <IconAdjustmentsHorizontal stroke={1.5} style="margin-right: 0.3rem; width: 20px; height: 20px;" />
+        <span>filter</span>
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="arrow"
+            class:rotate={dropdownVisible}
+        >
             <path d="M6 9l6 6l6-6" />
         </svg>
-    </div>
-    
+        </div>
+
     {#if dropdownVisible}
         <div class="options">
-            {#each options as option}
-                <div 
-                    class="option {activeButton === option.sortKey ? 'active' : ''}" 
-                    on:click={handleSort}
-                    data-sortkey={option.sortKey}>
-                    {option.label}
-                </div>
-            {/each}
+            <div class="sort-by">Sort by</div>
+            <div class="option-container">
+                {#each options as option}
+                    <div 
+                        class="option {activeButton === option.sortKey ? 'active' : ''}" 
+                        on:click={handleSort}
+                        data-sortkey={option.sortKey}>
+                        {option.label}
+                    </div>
+                {/each}
+            </div>
         </div>
     {/if}
 </div>
@@ -55,9 +79,8 @@
     .select {
         position: relative;
         display: inline-block;
-        font-family: Arial, sans-serif;
         width: 100%; /* Allow to stretch horizontally */
-        margin: 1rem; 
+        margin-bottom: 1rem;
     }
 
     /* Selected button style */
@@ -72,10 +95,12 @@
         cursor: pointer;
         transition: all 0.3s ease;
         width: fit-content; /* To adjust width based on content */
+        font-size: 0.8rem;
+        line-height: 1.2;
     }
 
     .selected:hover {
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        color: var(--website-green-color);
     }
 
     .arrow {
@@ -91,8 +116,9 @@
     /* Options container (horizontal layout) */
     .options {
         display: flex;
+        flex-direction: column;
         justify-content: left; /* Center the options */
-        gap: 1rem; /* Add gaps between the options */
+        padding: 0.5rem 1.5rem;
         margin-top: 0.5rem; /* Adds space between the button and options */
         background-color: #060606;
         border-radius: 5px;
@@ -102,27 +128,47 @@
         width: 100%; /* Ensure the dropdown takes up the full width */
     }
 
+    .sort-by {
+        display: flex;
+        align-items: left;
+        margin-top: 0.5rem;
+        color: var(--card-background-color);
+        width: 100%;
+    }
+
+    /* Option container for horizontal layout */
+    .option-container {
+        display: flex;
+        align-items: left;
+        flex-wrap: wrap; /* Allow options to wrap to the next line if needed */
+        gap: 0.5rem; /* Add gaps between the options */
+        margin-top: 0.5rem;
+    }
+
     /* Option item */
     .option {
-        padding: 0.5rem 2rem;
+        padding: 0.5rem 1.5rem;
         color: var(--card-background-color);
+        background-color: var(--card-dark-color);
         cursor: pointer;
-        transition: background-color 0.3s ease, color 0.3s ease;
+        transition:
+            background-color 0.3s ease,
+            color 0.3s ease;
         display: inline-block;
         white-space: nowrap; /* Prevent text from wrapping */
-        margin: 0.5rem;
+        border-radius: 5px;
     }
 
     .option:hover {
-        background-color: var(--card-background-color);
-        color: var(--card-dark-color);
+        background-color:rgba(255, 255, 255, 0.05);
+        color: var(--website-green-color);
         border-radius: 5px;
     }
 
     /* Active state for the selected option */
     .option.active {
-        background-color: var(--card-background-color);
-        color: var(--card-dark-color);
+        background-color: var(--website-dark-green-color);      
+        color: var(--website-green-color);
         border-radius: 5px;
     }
 </style>

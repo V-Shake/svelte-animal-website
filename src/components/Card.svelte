@@ -211,6 +211,7 @@
         grid-template-columns: repeat(6, 1fr);
         grid-template-rows: repeat(12, 1fr);
         background-color: var(--card-background-color);
+        border: 1px solid var(--card-dark-color); /* Ensure no border is visible */
     }
 
     .card-front {
@@ -493,20 +494,23 @@
         grid-row: 2;
     }
 
-    .stat-icon,
+    .stat-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 2.5em;
+        height: 2.5em;
+        background-color: #e8e8e3;
+        border-radius: 0.6em;
+    }
+
     .stat-content {
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: 0.8em;
+        font-size: 0.77em;
         font-weight: 500;
-        width: 3.2em;
-        height: 3.2em;
-    }
-
-    .stat-icon {
-        background-color: #e8e8e3;
-        border-radius: 0.6em;
+        z-index: 10;
     }
 
     .stat-icon img {
