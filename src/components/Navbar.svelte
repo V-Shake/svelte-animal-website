@@ -1,5 +1,6 @@
 <script>
     import { onMount } from "svelte";
+    
 
     // Scroll listener to detect scroll position
     let isScrolled = false;
@@ -29,7 +30,9 @@
 </script>
 
 <nav class={isScrolled ? "scrolled" : ""}>
-    <div id="logo">My Logo</div>
+    <div id="logo">
+        <img src="/images/logo.svg" alt="My Logo" />
+    </div>
     <ul>
         <li>
             <a href="#/" class:active-link={currentRoute === '#/'}>
@@ -66,12 +69,9 @@
     }
 
     #logo {
-        text-align: left;
-        text-transform: uppercase;
-        margin-right: auto;
-        font-weight: 600;
-        font-size: 1rem;
-        color: var(--card-background-color);
+        display: flex;
+        align-items: left;
+        width: 5em;
     }
 
     ul {
