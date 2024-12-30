@@ -1,10 +1,13 @@
 <script>
     import PlayOptionOne from "../components/PlayOptionOne.svelte";
+    import PlayOptionTwo from "../components/PlayOptionTwo.svelte";
     import { IconCardsFilled } from "@tabler/icons-svelte";
 </script>
 
-<main>
+<main class="main-container">
     <PlayOptionOne />
+    
+    <!-- Centered container between PlayOptionOne and PlayOptionTwo -->
     <div class="centered-container">
         <div class="circle-background"></div>
         <div class="border-circle-background"></div>
@@ -12,7 +15,6 @@
             <IconCardsFilled stroke={1} size={120} />
         </div>
         <div class="game-rules-container">
-            
             <div class="game-rules">
                 <p>Play Quartet Game</p>
             </div>
@@ -32,23 +34,28 @@
             </div>
         </div>
     </div>
+    
+    <PlayOptionTwo />
 </main>
 
 <style>
-    main {
-        position: relative; /* Needed for positioning child elements absolutely */
+    .main-container {
+        display: flex;
+        justify-content: space-between; /* Distribute the play options evenly */
+        align-items: center; /* Align vertically in the center */
+        height: 90vh; /* Full height */
+        padding: 0 8rem; /* Add padding on both sides */
     }
 
+    /* Centered container */
     .centered-container {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        text-align: center;
         display: flex;
-        flex-direction: column; /* Ensures vertical stacking of children */
-        align-items: center; /* Centers content horizontally */
-        gap: 0.5rem; /* Adds space between elements */
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        flex: 1;
+        text-align: center;
     }
 
     .icon-cards-container {
@@ -65,7 +72,7 @@
         height: auto;
         padding: 1rem;
         position: relative;
-        z-index: 1; /* Ensure the content stays on top */
+        z-index: 1;
         box-shadow: 0 4px 30px rgba(3, 3, 3, 0.1);
         backdrop-filter: blur(6.9px);
         -webkit-backdrop-filter: blur(6.9px);
@@ -79,25 +86,25 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        width: 300px; /* Size of the circle */
-        height: 300px; /* Size of the circle */
+        width: 300px;
+        height: 300px;
         background-color: var(--website-dark-green-color);
         border-radius: 50%;
-        z-index: -10; /* Ensure the circle is behind the content */
-        backdrop-filter: blur(5px); /* Apply blur for glassmorphism effect */
+        z-index: -10;
+        backdrop-filter: blur(5px);
     }
 
-    .border-circle-background{
+    .border-circle-background {
         position: absolute;
-        top: 17%;
-        left: 50%;
+        top: 15%;
+        left: 43%;
         transform: translate(-50%, -50%);
-        width: 180px; /* Size of the circle */
-        height: 180px; /* Size of the circle */
+        width: 120px;
+        height: 120px;
         border: 1px solid var(--website-green-color);
         opacity: 0.2;
         border-radius: 50%;
-        z-index: -11; /* Ensure the circle is behind the content */
+        z-index: -11;
     }
 
     .game-rules {
@@ -114,6 +121,6 @@
         width: 90%;
         height: var(--thick-line-strength);
         background-color: rgba(255, 255, 255, 0.4);
-        margin: 1rem auto; /* Center the thick line */
+        margin: 1rem auto;
     }
 </style>
