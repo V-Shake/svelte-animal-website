@@ -1,49 +1,69 @@
 <script>
-    import { IconArrowLeft } from "@tabler/icons-svelte";
+    import { IconLogout2, IconHelp } from "@tabler/icons-svelte";
 </script>
 
-<main class="main-container">
+<div class="nav-container">
     <a href="#/quartet" class="back-button">
-        <IconArrowLeft stroke={1} size={24} />
-        Back to Overview
+        <div class="icon-container">
+            <IconLogout2 stroke={1} size={24} />
+        </div>
+        <span>quit</span>
     </a>
-    <div class="content">
-        <!-- Add your QuartetGame content here -->
-        <h1>Quartet Game</h1>
-        <p>Welcome to the Quartet Game page!</p>
+    <div class="help-button">
+        <div class="icon-container">
+            <IconHelp stroke={1} size={24} />
+        </div>
+        <span>help</span>
     </div>
-</main>
+</div>
+
 
 <style>
-    .main-container {
+    .nav-container {
         display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: flex-start;
         height: 100vh;
-        padding: 2rem;
+        padding: 1rem 6.5rem;
+        gap: 2rem;
     }
 
     .back-button {
         display: flex;
         align-items: center;
-        background-color: var(--website-green-color); /* Ensure the background color is set */
-        color: var(--card-background-color); /* Ensure the text color contrasts with the background */
-        border: none;
-        padding: 0.5rem 1rem;
-        border-radius: 5px;
+        color: var(--card-background-color);
         cursor: pointer;
-        transition: background-color 0.3s ease;
+        transition: all 0.3s ease;
         margin-bottom: 2rem;
-        text-decoration: none; /* Remove underline from link */
+        text-decoration: none;
+        font-size: 0.8rem;
     }
 
     .back-button:hover {
-        background-color: var(--website-dark-green-color); /* Change background color on hover */
+        color: var(
+            --website-green-color
+        ); /* Change background color on hover */
     }
 
-
-    .content {
-        text-align: center;
+    .icon-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 0.3rem; /* Space between icon and text */
     }
+
+    .help-button {
+        display: flex;
+        align-items: center;
+        color: var(--card-background-color);
+        transition: all 0.3s ease;
+        margin-bottom: 2rem;
+        font-size: 0.8rem;
+    }
+
+    .help-button:hover {
+        color: var(--website-green-color); /* Change background color on hover */
+    }
+
 </style>
