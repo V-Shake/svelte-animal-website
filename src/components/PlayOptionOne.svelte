@@ -47,11 +47,7 @@
         padding: 1rem;
         box-sizing: border-box;
         border-radius: 15px;
-        transition: border 0.3s ease;
-    }
-
-    .rectangle:hover {
-        border: 1px solid var(--website-green-color);
+        transition: all 0.3s ease;
     }
 
     .icon-lock-container {

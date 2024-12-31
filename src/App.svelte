@@ -2,6 +2,7 @@
   import Router from "svelte-spa-router";
   import LandingPage from "./pages/LandingPage.svelte";
   import CardOverview from "./pages/CardOverview.svelte";
+  import QuartetGameOverview from "./pages/QuartetGameOverview.svelte";
   import QuartetGame from "./pages/QuartetGame.svelte";
   import Navbar from "./components/Navbar.svelte";
   import "../public/fonts/stylesheet.css";
@@ -9,7 +10,8 @@
   const routes = {
     "/": LandingPage,
     "/cards": CardOverview,
-    "/quartet": QuartetGame,
+    "/quartet": QuartetGameOverview,
+    "/quartet-game": QuartetGame,
   };
 </script>
 

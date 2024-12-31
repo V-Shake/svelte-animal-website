@@ -78,4 +78,6 @@
         text-align: center;
         color: var(--card-dark-color);
     }
+
+    
 </style>
