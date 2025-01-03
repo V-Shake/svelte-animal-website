@@ -17,7 +17,7 @@
       0.1,
       1000
     );
-    camera.position.set(0, 20, 100);
+    camera.position.set(0, 60, 170);
 
     // Renderer erstellen
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -26,22 +26,26 @@
     container.appendChild(renderer.domElement);
 
     // Lichtquellen hinzufügen
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.3); // Weiches Umgebungslicht
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.8); // Weiches Umgebungslicht
     scene.add(ambientLight);
 
-    const spotLight = new THREE.SpotLight(0xffffff, 1.2); // Fokuslicht von oben
-    spotLight.position.set(0, 50, 30); // Über dem Tiger positioniert
+    const spotLight = new THREE.SpotLight(0xffffff, 1.5); // Fokuslicht
+    spotLight.position.set(0, 40, 80); // Position leicht vor dem Tiger und oberhalb
+    spotLight.target.position.set(0, 0, 0); // Ziel auf den Tiger ausgerichtet
     spotLight.castShadow = true; // Schatten aktivieren
-    spotLight.shadow.mapSize.width = 1024; // Schattenqualität
-    spotLight.shadow.mapSize.height = 1024;
+    spotLight.shadow.mapSize.width = 2048; // Schattenqualität verbessern
+    spotLight.shadow.mapSize.height = 2048;
     scene.add(spotLight);
+    scene.add(spotLight.target);
 
-    const pointLight = new THREE.PointLight(0xffaa00, 0.6, 100); // Warmes Licht für Highlights
-    pointLight.position.set(-10, 20, 40); // Position leicht seitlich
+    const pointLight = new THREE.PointLight(0xffffff, 0.6, 100); // Warmes Licht für Highlights
+    pointLight.position.set(0, 90, 150); // Position leicht seitlich und vor dem Tiger
     scene.add(pointLight);
+    // Adjust the intensity of the point light
+    pointLight.intensity = 300.0; // Set the intensity to 1.0 (default is 1.0)
 
     const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444, 0.4); // Neutraler Himmel und Boden
-    hemiLight.position.set(0, 50, 0); // Licht von oben
+    hemiLight.position.set(0, 0, 0); // Licht von oben
     scene.add(hemiLight);
 
     // GLTFLoader verwenden, um das Modell zu laden
@@ -50,7 +54,7 @@
 
     loader.load("src/assets/models/tiger.glb", (gltf) => {
       const model = gltf.scene;
-      model.scale.set(0.5, 0.5, 0.5);
+      model.scale.set(1, 1, 1);
       model.position.y = -10; // Modell auf dem Boden positionieren
       model.castShadow = true; // Schatten werfen
       model.receiveShadow = true; // Schatten empfangen
