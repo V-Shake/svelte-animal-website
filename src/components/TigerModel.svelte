@@ -44,7 +44,7 @@
     pointLight.position.set(0, 100, 160);
     pointLight.castShadow = true;
     pointLight.rotation.set(-Math.PI / 2, 0, 0);
-    pointLight.intensity = 2000.0;
+    pointLight.intensity = 500.0;
     scene.add(pointLight);
 
     // Hemisphere light
@@ -58,7 +58,7 @@
     topSpotLight.castShadow = true;
     topSpotLight.shadow.mapSize.width = 2048;
     topSpotLight.shadow.mapSize.height = 2048;
-    topSpotLight.intensity = 100.0;
+    topSpotLight.intensity = 10.0;
     scene.add(topSpotLight);
 
     // Hover spotlight
