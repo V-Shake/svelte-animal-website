@@ -69,4 +69,7 @@
     pointer-events: none;
     z-index: 1; /* Ensure sections are above the model */
   }
+  #section-1{
+    pointer-events: auto;
+  }
 </style>

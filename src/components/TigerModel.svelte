@@ -10,6 +10,7 @@
   let hoverSpotLight, hoverSpotLightHelper;
   let targetAngle = null;
   let camera;
+  let spotLight;
 
   // Function to rotate the model with gsap
   function rotateTo(angle) {
@@ -23,6 +24,8 @@
     rotateTo(0); // Rotate to front view
     if (model) {
       gsap.to(model.scale, { x: 1, y: 1, z: 1, duration: 1, ease: "power2.inOut" });
+      gsap.to(model.position, { x: 0, y: -10, duration: 1, ease: "power2.inOut" }); // Reset position
+      gsap.to(spotLight.position, { z: 80, duration: 1, ease: "power2.inOut" }); // Reset light position
     }
   }
 
@@ -30,6 +33,8 @@
     rotateTo(Math.PI / 2); // Rotate to side view
     if (model) {
       gsap.to(model.scale, { x: 2, y: 2, z: 2, duration: 1, ease: "power2.inOut" });
+      gsap.to(model.position, { x: -150, y: -95, duration: 1, ease: "power2.inOut" }); // Move to left and down
+      gsap.to(spotLight.position, { z: 80, duration: 1, ease: "power2.inOut" }); // Move light position
     }
   }
 
@@ -63,7 +68,7 @@
     const ambientLight = new THREE.AmbientLight(0x404040, 1);
     scene.add(ambientLight);
 
-    const spotLight = new THREE.SpotLight(0xffffff, 1.5);
+    spotLight = new THREE.SpotLight(0xffffff, 1.5);
     spotLight.position.set(0, 40, 80);
     spotLight.target.position.set(0, 0, 0);
     spotLight.castShadow = true;
