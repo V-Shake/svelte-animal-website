@@ -2,43 +2,34 @@
   import { onMount } from "svelte";
   import * as THREE from "three";
   import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+  import { gsap } from "gsap";
 
   let container;
   let model;
   let mixer;
   let hoverSpotLight, hoverSpotLightHelper;
-  let rotationActive = false;
   let targetAngle = null;
 
-  // Function to rotate the model with damping effect
+  // Function to rotate the model with gsap
   function rotateTo(angle) {
-    if (model && (!rotationActive || targetAngle !== angle)) {
-      rotationActive = true;
+    if (model && targetAngle !== angle) {
       targetAngle = angle;
-      const step = 0.07; // Smaller step size for smoother rotation
-      const threshold = 0.01; // Minimum difference to consider rotation complete
-
-      function animateRotation() {
-        const delta = angle - model.rotation.y;
-        if (Math.abs(delta) > threshold) {
-          model.rotation.y += Math.sign(delta) * Math.min(Math.abs(delta), step); // Move directly towards the target
-          requestAnimationFrame(animateRotation);
-        } else {
-          model.rotation.y = angle; // Snap to the target angle
-          rotationActive = false;
-        }
-      }
-
-      animateRotation();
+      gsap.to(model.rotation, { y: angle, duration: 1, ease: "power2.inOut" });
     }
   }
 
   function rotateToFrontView() {
     rotateTo(0); // Rotate to front view
+    if (model) {
+      gsap.to(model.scale, { x: 1, y: 1, z: 1, duration: 1, ease: "power2.inOut" });
+    }
   }
 
   function rotateToSideView() {
     rotateTo(Math.PI / 2); // Rotate to side view
+    if (model) {
+      gsap.to(model.scale, { x: 2, y: 2, z: 2, duration: 1, ease: "power2.inOut" });
+    }
   }
 
   onMount(() => {
@@ -53,7 +44,7 @@
       0.1,
       1000
     );
-    camera.position.set(0, 65, 170);
+    camera.position.set(0, 45, 180);
 
     // Renderer setup
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });

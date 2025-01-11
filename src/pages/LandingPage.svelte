@@ -20,7 +20,7 @@
           document.dispatchEvent(new Event('rotateToSideView'));
         }
       }
-    }, 100); // Adjust the timeout duration as needed
+    }, 50); // Reduced timeout duration for quicker response
   }
 
   onMount(() => {
@@ -44,12 +44,14 @@
     height: 100vh;
     width: 100vw;
     overflow: hidden;
+    scroll-snap-type: y mandatory; /* Enable scroll snapping */
   }
   .section {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    scroll-snap-align: start;
+    height: 100vh; /* Each section takes up the full viewport height */
+    scroll-snap-align: start; /* Snap to the start of each section */
+    overflow: hidden; /* Hide overflow content */
   }
 </style>
