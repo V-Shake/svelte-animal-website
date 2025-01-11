@@ -1,5 +1,6 @@
 <script>
   import TigerModel from "../components/TigerModel.svelte";
+  import SectionNavigation from "../components/SectionNavigation.svelte";
   import { onMount } from "svelte";
 
   let activeSection = 0;
@@ -37,6 +38,7 @@
     <TigerModel />
     <h1>Side View</h1>
   </div>
+  <SectionNavigation {activeSection} />
 </div>
 
 <style>

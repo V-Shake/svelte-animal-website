@@ -109,7 +109,7 @@
     height: 2px; /* Adjust thickness as needed */
     background-color: var(--website-green-color);
     transform: translateX(-20%); /* Shift to the left */
-    animation: underline 0.5s ease forwards;
+    animation: underline 1s ease forwards;
   }
 
   @keyframes underline {
