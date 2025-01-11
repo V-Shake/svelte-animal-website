@@ -10,7 +10,7 @@
   <style>
     .navigation {
       position: fixed;
-      right: 1em;
+      right: 6.5rem;
       top: 50%;
       transform: translateY(-50%);
       display: flex;
