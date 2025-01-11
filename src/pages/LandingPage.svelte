@@ -41,7 +41,7 @@
 
 <style>
   #fullpage {
-    height: 100vh;
+    height: calc(100vh - 5em); /* Subtract the height of the navbar */
     width: 100vw;
     overflow: hidden;
     scroll-snap-type: y mandatory; /* Enable scroll snapping */
@@ -50,7 +50,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Each section takes up the full viewport height */
+    height: calc(100vh - 5em); /* Subtract the height of the navbar */
     scroll-snap-align: start; /* Snap to the start of each section */
     overflow: hidden; /* Hide overflow content */
   }

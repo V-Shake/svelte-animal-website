@@ -44,7 +44,7 @@
       0.1,
       1000
     );
-    camera.position.set(0, 45, 180);
+    camera.position.set(0, 58, 175);
 
     // Renderer setup
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
