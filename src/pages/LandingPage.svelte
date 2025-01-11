@@ -56,7 +56,7 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    pointer-events: none; /* Allow interactions to pass through */
+    pointer-events: auto; /* Allow interactions */
   }
   .section {
     display: flex;
@@ -66,6 +66,7 @@
     scroll-snap-align: start; /* Snap to the start of each section */
     overflow: hidden; /* Hide overflow content */
     position: relative;
+    pointer-events: none;
     z-index: 1; /* Ensure sections are above the model */
   }
 </style>

@@ -169,7 +169,7 @@
 
     .card-wrapper {
         perspective: 1000px;
-        background-color: var(--card-dark-color);
+        background-color: var(--website-background-color);
         padding: 0.5rem;
         border-radius: 1rem;
         display: flex;

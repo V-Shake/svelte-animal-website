@@ -53,7 +53,7 @@
 
 <style>
   nav {
-    background-color: rgba(16, 16, 16, 0.93);
+    background-color: rgba(14, 14, 14, 0.93);
     display: flex;
     justify-content: space-between;
     align-items: center;

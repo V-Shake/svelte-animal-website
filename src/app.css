@@ -5,6 +5,7 @@
   --website-dark-green-color: rgba(0, 132, 127, 0.1); ; 
   --thick-line-strength: 1px;
   --dark-color:#090909;
+  --website-background-color: rgb(14, 14, 14);
 }
 
 *,
@@ -16,7 +17,7 @@
 
 body {
   text-align: center;
-  background-color: var(--card-dark-color);
+  background-color: var(--website-background-color);
   color: var(--card-background-color);
   margin: 0;
 }

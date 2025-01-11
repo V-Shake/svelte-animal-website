@@ -42,7 +42,7 @@
   onMount(() => {
     // Scene setup
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x0b0b0b);
+    // scene.background = new THREE.Color(0x090909);
 
     // Camera setup
     camera = new THREE.PerspectiveCamera(
@@ -51,7 +51,7 @@
       0.1,
       1000
     );
-    camera.position.set(0, 65, 175);
+    camera.position.set(0, 75, 155);
 
     // Renderer setup
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -152,6 +152,7 @@
 
       hoverSpotLight.visible = true;
       hoverSpotLightHelper.update();
+      
     });
 
     // Window resize handler
