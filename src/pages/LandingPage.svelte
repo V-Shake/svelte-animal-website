@@ -30,12 +30,13 @@
 </script>
 
 <div id="fullpage">
-  <div id="section-0" class="section">
+  <div id="model-container">
     <TigerModel />
+  </div>
+  <div id="section-0" class="section">
     <h1>Front View</h1>
   </div>
   <div id="section-1" class="section">
-    <TigerModel />
     <h1>Side View</h1>
   </div>
   <SectionNavigation {activeSection} />
@@ -47,6 +48,15 @@
     width: 100vw;
     overflow: hidden;
     scroll-snap-type: y mandatory; /* Enable scroll snapping */
+    position: relative;
+  }
+  #model-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none; /* Allow interactions to pass through */
   }
   .section {
     display: flex;
@@ -55,5 +65,7 @@
     height: calc(100vh - 5em); /* Subtract the height of the navbar */
     scroll-snap-align: start; /* Snap to the start of each section */
     overflow: hidden; /* Hide overflow content */
+    position: relative;
+    z-index: 1; /* Ensure sections are above the model */
   }
 </style>

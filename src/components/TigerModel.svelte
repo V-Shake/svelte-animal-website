@@ -9,6 +9,7 @@
   let mixer;
   let hoverSpotLight, hoverSpotLightHelper;
   let targetAngle = null;
+  let camera;
 
   // Function to rotate the model with gsap
   function rotateTo(angle) {
@@ -32,13 +33,19 @@
     }
   }
 
+  function moveCameraTo(y) {
+    if (camera) {
+      gsap.to(camera.position, { y: y, duration: 1, ease: "power2.inOut" });
+    }
+  }
+
   onMount(() => {
     // Scene setup
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0x0b0b0b);
 
     // Camera setup
-    const camera = new THREE.PerspectiveCamera(
+    camera = new THREE.PerspectiveCamera(
       75,
       window.innerWidth / window.innerHeight,
       0.1,
@@ -157,6 +164,7 @@
     // Listen for external rotation events
     document.addEventListener("rotateToFrontView", rotateToFrontView);
     document.addEventListener("rotateToSideView", rotateToSideView);
+    document.addEventListener("moveCameraTo", (event) => moveCameraTo(event.detail.y));
   });
 </script>
 

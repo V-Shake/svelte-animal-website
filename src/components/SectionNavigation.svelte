@@ -40,7 +40,7 @@
       bottom: 0;
       right: 0;
       width: 0;
-      height: 100%;
+      height: 2px;
       background-color: var(--website-green-color);
       animation: underline 0.5s ease forwards;
       transform-origin: right; /* Ensure the animation starts from the right */
