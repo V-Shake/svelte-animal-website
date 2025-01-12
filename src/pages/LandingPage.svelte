@@ -30,10 +30,20 @@
   onMount(() => {
     document.addEventListener('wheel', handleScroll);
 
-    // Animate the letters with GSAP
-    gsap.fromTo(".fade-in span", 
+    // Create a GSAP timeline
+    const tl = gsap.timeline();
+
+    // Animate the letters of "Wildlife" first
+    tl.fromTo(".wildlife span", 
       { opacity: 0, y: 20 }, 
       { opacity: 1, y: 0, duration: 1, stagger: 0.1, ease: "power2.out" }
+    );
+
+    // Animate the letters of "Exploration" immediately after "Wildlife" animation is finished
+    tl.fromTo(".exploration span", 
+      { opacity: 0, y: 20 }, 
+      { opacity: 1, y: 0, duration: 1, stagger: 0.1, ease: "power2.out" },
+      "-=0.8" // Overlap the animations by 0.5 seconds
     );
   });
 </script>
@@ -43,12 +53,12 @@
     <TigerModel />
   </div>
   <div id="section-0" class="section">
-    <h1 class="left fade-in">
+    <h1 class="left fade-in wildlife">
       {#each 'Wildlife'.split('') as letter, index}
         <span style="--index: {index}">{letter}</span>
       {/each}
     </h1>
-    <h1 class="right fade-in">
+    <h1 class="right fade-in exploration">
       {#each 'Exploration'.split('') as letter, index}
         <span style="--index: {index}">{letter}</span>
       {/each}

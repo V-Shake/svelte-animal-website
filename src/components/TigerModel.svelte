@@ -156,7 +156,7 @@
       hoverSpotLight.target.updateMatrixWorld();
 
       hoverSpotLight.visible = true;
-      hoverSpotLightHelper.update();
+      // hoverSpotLightHelper.update();
       
     });
 
