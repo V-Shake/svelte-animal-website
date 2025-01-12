@@ -20,7 +20,7 @@
     }
   
     .line {
-      width: 30px; /* Initial width */
+      width: 20px; /* Initial width */
       height: 2px;
       background-color: white;
       position: relative;
@@ -31,7 +31,7 @@
   
     .line.active {
       background-color: transparent; /* Hide the original white line */
-      width: 45px; /* Make the activated line longer */
+      width: 35px; /* Make the activated line longer */
     }
   
     .line.active::after {

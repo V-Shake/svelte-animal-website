@@ -2,6 +2,7 @@
   import TigerModel from "../components/TigerModel.svelte";
   import SectionNavigation from "../components/SectionNavigation.svelte";
   import { onMount } from "svelte";
+  import { gsap } from "gsap";
 
   let activeSection = 0;
   let scrollTimeout;
@@ -13,12 +14,14 @@
       const newSection = Math.max(0, Math.min(1, activeSection + delta));
       if (newSection !== activeSection) {
         activeSection = newSection;
-        document.getElementById(`section-${activeSection}`)?.scrollIntoView({ behavior: "smooth" });
+        document
+          .getElementById(`section-${activeSection}`)
+          ?.scrollIntoView({ behavior: "smooth" });
 
         if (activeSection === 0) {
-          document.dispatchEvent(new Event('rotateToFrontView'));
+          document.dispatchEvent(new Event("rotateToFrontView"));
         } else if (activeSection === 1) {
-          document.dispatchEvent(new Event('rotateToSideView'));
+          document.dispatchEvent(new Event("rotateToSideView"));
         }
       }
     }, 50); // Reduced timeout duration for quicker response
@@ -26,6 +29,12 @@
 
   onMount(() => {
     document.addEventListener('wheel', handleScroll);
+
+    // Animate the letters with GSAP
+    gsap.fromTo(".fade-in span", 
+      { opacity: 0, y: 20 }, 
+      { opacity: 1, y: 0, duration: 1, stagger: 0.1, ease: "power2.out" }
+    );
   });
 </script>
 
@@ -34,10 +43,23 @@
     <TigerModel />
   </div>
   <div id="section-0" class="section">
-    <h1>Front View</h1>
+    <h1 class="left fade-in">
+      {#each 'Wildlife'.split('') as letter, index}
+        <span style="--index: {index}">{letter}</span>
+      {/each}
+    </h1>
+    <h1 class="right fade-in">
+      {#each 'Exploration'.split('') as letter, index}
+        <span style="--index: {index}">{letter}</span>
+      {/each}
+    </h1>
   </div>
   <div id="section-1" class="section">
-    <h1>Side View</h1>
+    <h1 class="fade-in">
+      {#each 'Side View'.split('') as letter, index}
+        <span style="--index: {index}">{letter}</span>
+      {/each}
+    </h1>
   </div>
   <SectionNavigation {activeSection} />
 </div>
@@ -67,9 +89,40 @@
     overflow: hidden; /* Hide overflow content */
     position: relative;
     pointer-events: none;
-    z-index: 1; /* Ensure sections are above the model */
   }
-  #section-1{
+  #section-1 {
     pointer-events: auto;
+  }
+  h1 {
+    font-size: 6em;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.8);
+    z-index: -1;
+    display: inline-block;
+  }
+  h1.left {
+    position: absolute;
+    left: 6.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 8em;
+  }
+  h1.right {
+    position: absolute;
+    right: 6.5rem;
+    top: 55%;
+    transform: translateY(-50%);
+  }
+  .fade-in span {
+    display: inline-block;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 </style>
