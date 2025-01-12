@@ -48,6 +48,11 @@
         Quartet Game
       </a>
     </li>
+    <li>
+      <a href="#/quiz" class:active-link={currentRoute === '#/quiz'}>
+        Quiz
+      </a>
+    </li>
   </ul>
 </nav>
 

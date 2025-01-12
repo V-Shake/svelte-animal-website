@@ -4,6 +4,7 @@
   import CardOverview from "./pages/CardOverview.svelte";
   import QuartetGameOverview from "./pages/QuartetGameOverview.svelte";
   import QuartetGame from "./pages/QuartetGame.svelte";
+  import Quiz from "./pages/Quiz.svelte";
   import Navbar from "./components/Navbar.svelte";
   import "../public/fonts/stylesheet.css";
 
@@ -12,6 +13,7 @@
     "/cards": CardOverview,
     "/quartet": QuartetGameOverview,
     "/quartet-game": QuartetGame,
+    "/quiz": Quiz,
   };
 </script>
 

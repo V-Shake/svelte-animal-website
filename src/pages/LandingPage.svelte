@@ -28,22 +28,24 @@
   }
 
   onMount(() => {
-    document.addEventListener('wheel', handleScroll);
+    document.addEventListener("wheel", handleScroll);
 
     // Create a GSAP timeline
     const tl = gsap.timeline();
 
     // Animate the letters of "Wildlife" first
-    tl.fromTo(".wildlife span", 
-      { opacity: 0, y: 20 }, 
-      { opacity: 1, y: 0, duration: 1, stagger: 0.1, ease: "power2.out" }
+    tl.fromTo(
+      ".wildlife span",
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 1, stagger: 0.1, ease: "power2.out" },
     );
 
     // Animate the letters of "Exploration" immediately after "Wildlife" animation is finished
-    tl.fromTo(".exploration span", 
-      { opacity: 0, y: 20 }, 
+    tl.fromTo(
+      ".exploration span",
+      { opacity: 0, y: 20 },
       { opacity: 1, y: 0, duration: 1, stagger: 0.1, ease: "power2.out" },
-      "-=0.8" // Overlap the animations by 0.5 seconds
+      "-=0.8", // Overlap the animations by 0.5 seconds
     );
   });
 </script>
@@ -54,21 +56,28 @@
   </div>
   <div id="section-0" class="section">
     <h1 class="left fade-in wildlife">
-      {#each 'Wildlife'.split('') as letter, index}
+      {#each "Wildlife".split("") as letter, index}
         <span style="--index: {index}">{letter}</span>
       {/each}
     </h1>
     <h1 class="right fade-in exploration">
-      {#each 'Exploration'.split('') as letter, index}
+      {#each "Exploration".split("") as letter, index}
         <span style="--index: {index}">{letter}</span>
       {/each}
     </h1>
   </div>
   <div id="section-1" class="section">
-    <h1 class="fade-in">
-      {#each 'Side View'.split('') as letter, index}
-        <span style="--index: {index}">{letter}</span>
-      {/each}
+    <h1 class="fade-in right-text">
+      <div class="line">
+        {#each "32".split("") as letter, index}
+          <span style="--index: {index}">{letter}</span>
+        {/each}
+      </div>
+      <div class="line">
+        {#each "Wildlife".split("") as letter, index}
+          <span style="--index: {index}">{letter}</span>
+        {/each}
+      </div>
     </h1>
   </div>
   <SectionNavigation {activeSection} />
@@ -123,6 +132,23 @@
     top: 55%;
     transform: translateY(-50%);
   }
+  h1.right-text {
+    position: absolute;
+    right: 15rem;
+    top: 40%;
+    transform: translateY(-50%);
+    font-size: 5em;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.2em;
+  }
+
+  h1.right-text .line {
+    display: inline-block;
+    margin-bottom: -0.4em; /* Negative margin reduces space */
+  }
+
   .fade-in span {
     display: inline-block;
   }

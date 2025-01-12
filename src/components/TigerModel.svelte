@@ -33,7 +33,7 @@
     rotateTo(Math.PI / 2); // Rotate to side view
     if (model) {
       gsap.to(model.scale, { x: 2, y: 2, z: 2, duration: 1, ease: "power2.inOut" });
-      gsap.to(model.position, { x: -150, y: -95, duration: 1, ease: "power2.inOut" }); // Move to left and down
+      gsap.to(model.position, { x: -150, y: -93, duration: 1, ease: "power2.inOut" }); // Move to left and down
       gsap.to(spotLight.position, { z: 80, duration: 1, ease: "power2.inOut" }); // Move light position
     }
   }
