@@ -12,7 +12,7 @@
             </div>
             <div class="header">Multiplayer Mode</div>
             <div
-                style="display: flex; justify-content: space-between; width: 100%; padding: 40px 30px; color: var(--card-dark-color);"
+                style="display: flex; justify-content: space-between; width: 100%; padding: 40px 30px; color: var(--dark-color);"
             >
                 <IconUser stroke={1} size={60} />
                 <IconSwords stroke={1} size={60} />
@@ -32,6 +32,7 @@
         justify-content: center;
         align-items: flex-start;
         height: 90%; 
+        color: var(--dark-color);
     }
 
     .rectangle {
@@ -55,6 +56,7 @@
         top: 1.5rem;
         left: 50%;
         transform: translateX(-50%); /* This centers the icon horizontally */
+        color: var(--card-background-color)
     }
 
     .rectangle:hover .icon-lock-container {
@@ -65,25 +67,25 @@
         font-size: 24px;
         font-weight: bold;
         margin-bottom: 10px;
-        color: var(--card-dark-color);
+       
     }
 
     .subtitle {
         font-size: 18px;
         margin-bottom: 20px;
-        color: var(--card-dark-color);
+        
     }
 
     .thick-line {
         width: 100%;
         height: var(--thick-line-strength);
-        background-color: var(--card-dark-color);
+        background-color: var(--dark-color);
         margin-bottom: 20px;
     }
 
     .description {
         font-size: 14px;
         text-align: center;
-        color: var(--card-dark-color);
+        
     }
 </style>

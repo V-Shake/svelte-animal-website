@@ -9,7 +9,7 @@
         <div class="rectangle">
             <div class="header">Duel Mode</div>
             <div
-                style="display: flex; justify-content: space-between; width: 100%; padding: 40px 30px; color: var(--card-dark-color);"
+                style="display: flex; justify-content: space-between; width: 100%; padding: 40px 30px; color: var(--dark-color);"
             >
                 <IconUser stroke={1} size={60} />
                 <IconSwords stroke={1} size={60} />
@@ -29,6 +29,7 @@
         justify-content: center; 
         align-items: flex-end;
         height: 90%;
+        color: var(--card-dark-color);
     }
 
     .rectangle {
@@ -57,13 +58,11 @@
         font-size: 24px;
         font-weight: bold;
         margin-bottom: 10px;
-        color: var(--card-dark-color);
     }
 
     .subtitle {
         font-size: 18px;
         margin-bottom: 20px;
-        color: var(--card-dark-color);
     }
 
     .thick-line {
@@ -76,7 +75,6 @@
     .description {
         font-size: 14px;
         text-align: center;
-        color: var(--card-dark-color);
     }
 
     
