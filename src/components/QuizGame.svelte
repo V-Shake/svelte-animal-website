@@ -6,20 +6,58 @@
   let currentQuestionIndex = 0;
   let selectedAnswer = null;
   let isCorrect = null;
+  let sessionToken = null; // Store the session token
+  let isLoading = true; // Show loading state while fetching questions
 
-  // Fetch questions based on the selected mode
+  // Fetch a new session token
+  async function fetchSessionToken() {
+    try {
+      const response = await fetch("https://opentdb.com/api_token.php?command=request");
+      const data = await response.json();
+      sessionToken = data.token;
+    } catch (error) {
+      console.error("Failed to fetch session token:", error);
+    }
+  }
+
+  // Fetch questions based on the selected mode and session token
   async function fetchQuestions() {
+    if (!sessionToken) {
+      console.error("Session token is missing. Unable to fetch questions.");
+      return;
+    }
+
     try {
       const response = await fetch(
-        `https://opentdb.com/api.php?amount=10&category=27&difficulty=${mode}`
+        `https://opentdb.com/api.php?amount=10&category=27&difficulty=${mode}&token=${sessionToken}`
       );
       const data = await response.json();
+
+      if (data.response_code === 4) {
+        // Token exhausted, reset it
+        console.log("Exhausted all questions. Resetting session token.");
+        await resetSessionToken();
+        await fetchQuestions(); // Retry after resetting the token
+        return;
+      }
+
       questions = data.results.map((q) => ({
         ...q,
         answers: shuffleArray([...q.incorrect_answers, q.correct_answer]),
       }));
+      isLoading = false;
     } catch (error) {
       console.error("Failed to fetch questions:", error);
+    }
+  }
+
+  // Reset the session token
+  async function resetSessionToken() {
+    if (!sessionToken) return;
+    try {
+      await fetch(`https://opentdb.com/api_token.php?command=reset&token=${sessionToken}`);
+    } catch (error) {
+      console.error("Failed to reset session token:", error);
     }
   }
 
@@ -43,13 +81,17 @@
     }
   }
 
-  onMount(() => {
-    fetchQuestions();
+  onMount(async () => {
+    isLoading = true;
+    await fetchSessionToken(); // Retrieve a session token first
+    await fetchQuestions(); // Fetch questions using the session token
   });
 </script>
 
 <div id="quiz-page">
-  {#if questions.length > 0}
+  {#if isLoading}
+    <p>Loading questions...</p>
+  {:else if questions.length > 0}
     <div class="question-container">
       <h2 class="question">
         {@html questions[currentQuestionIndex].question}
@@ -60,7 +102,7 @@
             class="answer-button"
             on:click={() => handleAnswerSelection(answer)}
             class:selected={selectedAnswer === answer}
-            class:correct={isCorrect && answer === questions[currentQuestionIndex].correct_answer}
+            class:correct={isCorrect === false && answer === questions[currentQuestionIndex].correct_answer || isCorrect && answer === questions[currentQuestionIndex].correct_answer}
             class:incorrect={!isCorrect && selectedAnswer === answer && answer !== questions[currentQuestionIndex].correct_answer}
             disabled={selectedAnswer !== null}
           >
@@ -75,7 +117,7 @@
       {/if}
     </div>
   {:else}
-    <p>Loading questions...</p>
+    <p>No questions available. Please try again later.</p>
   {/if}
 </div>
 
