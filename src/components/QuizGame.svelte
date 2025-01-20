@@ -195,6 +195,26 @@
       startTimer(); // Start the timer if enabled
     }
   });
+
+  // Calculate the result message based on the percentage of correct answers
+  function getResultMessage() {
+    const correctAnswers = userAnswers.filter(answer => answer.isCorrect).length;
+    const percentage = (correctAnswers / userAnswers.length) * 100;
+
+    if (percentage === 100) {
+      return `You’re a Wildlife Guru! (${percentage.toFixed(2)}% Correct)`;
+    } else if (percentage >= 80) {
+      return `You’re a Wildlife Expert! (${percentage.toFixed(2)}% Correct)`;
+    } else if (percentage >= 60) {
+      return `You’re a Wildlife Explorer! (${percentage.toFixed(2)}% Correct)`;
+    } else if (percentage >= 40) {
+      return `You’re a Wildlife Adventurer! (${percentage.toFixed(2)}% Correct)`;
+    } else if (percentage >= 20) {
+      return `You’re a Wildlife Wanderer! (${percentage.toFixed(2)}% Correct)`;
+    } else {
+      return `You’re a Wildlife Newbie! (${percentage.toFixed(2)}% Correct)`;
+    }
+  }
 </script>
 
 <div id="quiz-page">
@@ -203,7 +223,7 @@
   {:else if quizCompleted}
     <!-- Overview Section -->
     <div class="overview">
-      <h2>Congrats!</h2>
+      <h2>{getResultMessage()}</h2>
       <table>
         <thead>
           <tr>
@@ -390,7 +410,7 @@
   }
 
   .progress-line.skipped {
-    background-color: rgb(45, 45, 45);
+    background-color: darkgrey;
   }
 
   .timer {
@@ -406,13 +426,13 @@
   }
 
   th, td {
-    border: 1px solid #3d3d3d;
+    border: 1px solid #ccc;
     padding: 0.5rem;
     text-align: left;
   }
 
   th {
-    background-color: #0c0c0c;
+    background-color: #f0f0f0;
   }
 
   td.correct {
