@@ -14,6 +14,8 @@
   let quizCompleted = false; // Flag to show the overview after the last question
   let timer = 30; // Timer countdown in seconds
   let timerInterval;
+  let jokerUsed = false; // Track if the joker has been used
+  let remainingAnswers = []; // Track the remaining answers after using the joker
 
   const dispatch = createEventDispatcher();
 
@@ -131,6 +133,7 @@
       currentQuestionIndex++;
       selectedAnswer = null;
       isCorrect = null;
+      remainingAnswers = questions[currentQuestionIndex].answers;
 
       // Reset timer for the next question
       if (timerEnabled) {
@@ -164,10 +167,29 @@
     }, 1000);
   }
 
+  // Use the 50:50 Joker
+  function useJoker() {
+    if (jokerUsed) return;
+
+    jokerUsed = true;
+    const correctAnswer = questions[currentQuestionIndex].correct_answer;
+    const incorrectAnswers = questions[currentQuestionIndex].answers.filter(answer => answer !== correctAnswer);
+
+    if (incorrectAnswers.length > 1) {
+      // Mark two wrong options as grey and move them to the bottom
+      remainingAnswers = [correctAnswer, incorrectAnswers[0], ...incorrectAnswers.slice(1).map(answer => ({ answer, isGreyedOut: true }))];
+    } else {
+      // Mark one wrong option as grey (for true/false questions)
+      remainingAnswers = [correctAnswer, { answer: incorrectAnswers[0], isGreyedOut: true }];
+    }
+  }
+
   onMount(async () => {
     isLoading = true;
     await fetchSessionToken(); // Retrieve a session token first
     await fetchQuestions(); // Fetch questions using the session token
+
+    remainingAnswers = questions[currentQuestionIndex].answers;
 
     if (timerEnabled) {
       startTimer(); // Start the timer if enabled
@@ -181,21 +203,27 @@
   {:else if quizCompleted}
     <!-- Overview Section -->
     <div class="overview">
-      <h2>Quiz Overview</h2>
-      <ul>
-        {#each userAnswers as answer, index}
-          <li>
-            <p><strong>Question {index + 1}:</strong> {@html answer.question}</p>
-            <p>Your Answer: {@html answer.selectedAnswer}</p>
-            <p>
-              Correct Answer: 
-              <span class={answer.isCorrect ? "correct" : "incorrect"}>
-                {@html answer.correctAnswer}
-              </span>
-            </p>
-          </li>
-        {/each}
-      </ul>
+      <h2>Congrats!</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Number</th>
+            <th>Question</th>
+            <th>Your Answer</th>
+            <th>Correct Answer</th>
+          </tr>
+        </thead>
+        <tbody>
+          {#each userAnswers as answer, index}
+            <tr>
+              <td>{index + 1}</td>
+              <td>{@html answer.question}</td>
+              <td class={answer.isCorrect ? "correct" : "incorrect"}>{@html answer.selectedAnswer}</td>
+              <td>{@html answer.correctAnswer}</td>
+            </tr>
+          {/each}
+        </tbody>
+      </table>
       <button class="play-again-button" on:click={playAgain}>Play Again</button>
     </div>
   {:else if questions.length > 0}
@@ -217,19 +245,25 @@
         {@html questions[currentQuestionIndex].question}
       </h2>
       <div class="answers">
-        {#each questions[currentQuestionIndex].answers as answer}
+        {#each remainingAnswers as answer}
           <button
             class="answer-button"
-            on:click={() => handleAnswerSelection(answer)}
-            class:selected={selectedAnswer === answer}
-            class:correct={selectedAnswer !== null && answer === questions[currentQuestionIndex].correct_answer}
-            class:incorrect={selectedAnswer !== null && selectedAnswer === answer && answer !== questions[currentQuestionIndex].correct_answer}
-            disabled={selectedAnswer !== null}
+            on:click={() => handleAnswerSelection(answer.answer || answer)}
+            class:selected={selectedAnswer === (answer.answer || answer)}
+            class:correct={selectedAnswer !== null && (answer.answer || answer) === questions[currentQuestionIndex].correct_answer}
+            class:incorrect={selectedAnswer !== null && selectedAnswer === (answer.answer || answer) && (answer.answer || answer) !== questions[currentQuestionIndex].correct_answer}
+            disabled={selectedAnswer !== null || answer.isGreyedOut}
+            style={answer.isGreyedOut ? 'background-color: lightgrey;' : ''}
           >
-            {@html answer}
+            {@html answer.answer || answer}
           </button>
         {/each}
       </div>
+      {#if selectedAnswer === null}
+        <button class="joker-button" on:click={useJoker} disabled={jokerUsed}>
+          50:50 Joker
+        </button>
+      {/if}
       {#if selectedAnswer !== null && currentQuestionIndex < questions.length - 1}
         <button class="next-button" on:click={() => nextQuestion(false)}>
           Next Question
@@ -302,7 +336,7 @@
     opacity: 0.6;
   }
 
-  .next-button, .play-again-button {
+  .next-button, .play-again-button, .joker-button {
     margin-top: 1rem;
     padding: 0.5rem 1rem;
     font-size: 1rem;
@@ -314,8 +348,13 @@
     transition: background-color 0.3s ease;
   }
 
-  .next-button:hover, .play-again-button:hover {
+  .next-button:hover, .play-again-button:hover, .joker-button:hover {
     background-color: #0056b3;
+  }
+
+  .joker-button[disabled] {
+    background-color: grey;
+    cursor: not-allowed;
   }
 
   .correct {
@@ -351,12 +390,36 @@
   }
 
   .progress-line.skipped {
-    background-color: darkgrey;
+    background-color: rgb(45, 45, 45);
   }
 
   .timer {
     margin-bottom: 1rem;
     font-size: 1.2rem;
     font-weight: bold;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+  }
+
+  th, td {
+    border: 1px solid #3d3d3d;
+    padding: 0.5rem;
+    text-align: left;
+  }
+
+  th {
+    background-color: #0c0c0c;
+  }
+
+  td.correct {
+    color: green;
+  }
+
+  td.incorrect {
+    color: red;
   }
 </style>
