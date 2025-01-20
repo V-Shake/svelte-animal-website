@@ -32,7 +32,7 @@
   <main class="main-container">
     <div id="quiz-page">
       <div class="selection-container">
-        <h2>Select Quiz Mode and Question Amount</h2>
+        <h2>Quiz</h2>
         <label for="mode">Mode:</label>
         <select id="mode" bind:value={selectedMode}>
           <option value="easy">Easy</option>

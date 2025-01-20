@@ -254,13 +254,13 @@
   
     th,
     td {
-      border: 1px solid #ccc;
+      border: 1px solid  #1e1e1e;
       padding: 0.5rem;
       text-align: left;
     }
   
     th {
-      background-color: #f0f0f0;
+      background-color: var(--wevsite-dark-green-color);
     }
   
     td.correct {
