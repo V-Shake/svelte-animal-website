@@ -1,9 +1,11 @@
 <script>
   import QuizGame from "../components/QuizGame.svelte";
+  import FaceOff from "../components/FaceOff.svelte";
 
   let selectedMode = "easy"; // Default mode
   let questionAmount = "5"; // Default question amount
   let quizStarted = false;
+  let faceOffStarted = false;
   let timerEnabled = false; // Timer toggle state
 
   function handleStart() {
@@ -13,9 +15,17 @@
   function handlePlayAgain() {
     quizStarted = false; // Reset to go back to the selection screen
   }
+
+  function handleFaceOffStart() {
+    faceOffStarted = true; // Start the Animal Face-Off
+  }
+
+  function handleFaceOffPlayAgain() {
+    faceOffStarted = false; // Reset to go back to the selection screen
+  }
 </script>
 
-{#if !quizStarted}
+{#if !quizStarted && !faceOffStarted}
   <main class="main-container">
     <div id="quiz-page">
       <div class="selection-container">
@@ -39,10 +49,16 @@
 
         <button class="start-button" on:click={handleStart}>Start Quiz</button>
       </div>
+      <div class="faceoff-container">
+        <h2>Animal Face-Off</h2>
+        <button class="start-button" on:click={handleFaceOffStart}>Start Face-Off</button>
+      </div>
     </div>
   </main>
-{:else}
+{:else if quizStarted}
   <QuizGame mode={selectedMode} amount={questionAmount} timerEnabled={timerEnabled} on:playAgain={handlePlayAgain} />
+{:else if faceOffStarted}
+  <FaceOff on:playAgain={handleFaceOffPlayAgain} />
 {/if}
 
 <style>
@@ -55,12 +71,14 @@
 
   #quiz-page {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between;
+    align-items: flex-start;
     padding: 1rem;
+    width: 100%;
+    max-width: 1200px;
   }
 
-  .selection-container {
+  .selection-container, .faceoff-container {
     text-align: center;
     border: 2px solid #ccc;
     border-radius: 8px;
