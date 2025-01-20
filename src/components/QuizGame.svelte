@@ -145,9 +145,26 @@
     }
   }
 
-  // Restart the quiz
-  function playAgain() {
-    dispatch("playAgain"); // Emit the playAgain event
+  // Restart the quiz with the same options
+  async function playAgain() {
+    currentQuestionIndex = 0;
+    selectedAnswer = null;
+    isCorrect = null;
+    userAnswers = [];
+    quizCompleted = false;
+    jokerUsed = false;
+    isLoading = true;
+    await fetchQuestions(); // Fetch new questions
+    remainingAnswers = questions[currentQuestionIndex].answers;
+
+    if (timerEnabled) {
+      startTimer(); // Start the timer if enabled
+    }
+  }
+
+  // Navigate to the new game (Quiz.svelte)
+  function newGame() {
+    dispatch("newGame"); // Emit the newGame event
   }
 
   // Helper function to create an array of the desired length
@@ -289,6 +306,7 @@
         </tbody>
       </table>
       <button class="play-again-button" on:click={playAgain}>Play Again</button>
+      <button class="new-game-button" on:click={newGame}>New Game</button>
     </div>
   {:else if questions.length > 0}
     <!-- Progress Bar Section -->
@@ -406,7 +424,7 @@
     opacity: 0.6;
   }
 
-  .next-button, .play-again-button, .joker-button {
+  .next-button, .play-again-button, .new-game-button, .joker-button {
     margin-top: 1rem;
     padding: 0.5rem 1rem;
     font-size: 1rem;
@@ -418,7 +436,7 @@
     transition: background-color 0.3s ease;
   }
 
-  .next-button:hover, .play-again-button:hover, .joker-button:hover {
+  .next-button:hover, .play-again-button:hover, .new-game-button:hover, .joker-button:hover {
     background-color: #0056b3;
   }
 

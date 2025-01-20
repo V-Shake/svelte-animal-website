@@ -15,7 +15,7 @@
     quizStarted = true; // Start the quiz
   }
 
-  function handlePlayAgain() {
+  function handleNewGame() {
     quizStarted = false; // Reset to go back to the selection screen
   }
 
@@ -76,7 +76,7 @@
     </div>
   </main>
 {:else if quizStarted}
-  <QuizGame mode={selectedMode} amount={questionAmount} timerEnabled={timerEnabled} on:playAgain={handlePlayAgain} />
+  <QuizGame mode={selectedMode} amount={questionAmount} timerEnabled={timerEnabled} on:newGame={handleNewGame} />
 {:else if faceOffStarted}
   <FaceOff mode={faceOffMode} amount={faceOffQuestionAmount} timerEnabled={faceOffTimerEnabled} on:playAgain={handleFaceOffPlayAgain} />
 {/if}
