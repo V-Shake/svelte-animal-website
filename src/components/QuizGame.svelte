@@ -2,7 +2,7 @@
   import { createEventDispatcher, onMount } from "svelte";
 
   export let mode = "easy"; // Default to easy mode if no mode is passed
-  export let amount = 10; // Default question amount if no amount is passed
+  export let amount = 5; // Default question amount if no amount is passed
   let questions = [];
   let currentQuestionIndex = 0;
   let selectedAnswer = null;
@@ -26,7 +26,7 @@
   }
 
   // Fetch questions based on the selected mode, amount, and session token
-  async function fetchQuestions() {
+  async function fetchQuestions(retryCount = 0) {
     if (!sessionToken) {
       console.error("Session token is missing. Unable to fetch questions.");
       return;
@@ -36,6 +36,18 @@
       const response = await fetch(
         `https://opentdb.com/api.php?amount=${amount}&category=27&difficulty=${mode}&token=${sessionToken}`
       );
+
+      if (response.status === 429) {
+        if (retryCount < 5) {
+          console.log(`Rate limit exceeded. Retrying in ${retryCount + 1} seconds...`);
+          await new Promise(resolve => setTimeout(resolve, (retryCount + 1) * 1000));
+          await fetchQuestions(retryCount + 1);
+        } else {
+          console.error("Rate limit exceeded. Please try again later.");
+        }
+        return;
+      }
+
       const data = await response.json();
 
       if (data.response_code === 4) {
@@ -46,10 +58,14 @@
         return;
       }
 
-      questions = data.results.map((q) => ({
-        ...q,
-        answers: shuffleArray([...q.incorrect_answers, q.correct_answer]),
-      }));
+      if (data.results) {
+        questions = data.results.map((q) => ({
+          ...q,
+          answers: shuffleArray([...q.incorrect_answers, q.correct_answer]),
+        }));
+      } else {
+        console.error("No questions available.");
+      }
       isLoading = false;
     } catch (error) {
       console.error("Failed to fetch questions:", error);

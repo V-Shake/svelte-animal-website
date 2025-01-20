@@ -2,7 +2,7 @@
   import QuizGame from "../components/QuizGame.svelte";
 
   let selectedMode = "easy"; // Default mode
-  let questionAmount = 10; // Default question amount
+  let questionAmount = "5"; // Default question amount
   let quizStarted = false;
 
   function handleStart() {
@@ -28,10 +28,9 @@
 
         <label for="amount">Question Amount:</label>
         <select id="amount" bind:value={questionAmount}>
+          <option value="5">5</option>
           <option value="10">10</option>
           <option value="15">15</option>
-          <option value="20">20</option>
-          <option value="25">25</option>
         </select>
 
         <button class="start-button" on:click={handleStart}>Start Quiz</button>
