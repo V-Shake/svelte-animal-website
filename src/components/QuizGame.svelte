@@ -3,6 +3,7 @@
 
   export let mode = "easy"; // Default to easy mode if no mode is passed
   export let amount = 5; // Default question amount if no amount is passed
+  export let timerEnabled = false; // Timer toggle state
   let questions = [];
   let currentQuestionIndex = 0;
   let selectedAnswer = null;
@@ -11,6 +12,8 @@
   let isLoading = true; // Show loading state while fetching questions
   let userAnswers = []; // Track user answers for the overview
   let quizCompleted = false; // Flag to show the overview after the last question
+  let timer = 30; // Timer countdown in seconds
+  let timerInterval;
 
   const dispatch = createEventDispatcher();
 
@@ -102,16 +105,39 @@
         isCorrect,
       },
     ];
+
+    // Move to the next question
+    nextQuestion();
   }
 
   // Move to the next question
-  function nextQuestion() {
+  function nextQuestion(skipped = false) {
+    if (skipped) {
+      // Record the skipped question
+      userAnswers = [
+        ...userAnswers,
+        {
+          question: questions[currentQuestionIndex].question,
+          selectedAnswer: "You skipped",
+          correctAnswer: questions[currentQuestionIndex].correct_answer,
+          isCorrect: false,
+        },
+      ];
+    }
+
     if (currentQuestionIndex < questions.length - 1) {
       currentQuestionIndex++;
       selectedAnswer = null;
       isCorrect = null;
+
+      // Reset timer for the next question
+      if (timerEnabled) {
+        clearInterval(timerInterval);
+        startTimer();
+      }
     } else {
       quizCompleted = true; // Show the overview
+      clearInterval(timerInterval); // Stop the timer
     }
   }
 
@@ -125,10 +151,26 @@
     return Array.from({ length });
   }
 
+  // Start the timer countdown
+  function startTimer() {
+    timer = 30;
+    timerInterval = setInterval(() => {
+      timer--;
+      if (timer <= 0) {
+        clearInterval(timerInterval);
+        nextQuestion(true); // Move to the next question and mark it as skipped
+      }
+    }, 1000);
+  }
+
   onMount(async () => {
     isLoading = true;
     await fetchSessionToken(); // Retrieve a session token first
     await fetchQuestions(); // Fetch questions using the session token
+
+    if (timerEnabled) {
+      startTimer(); // Start the timer if enabled
+    }
   });
 </script>
 
@@ -156,6 +198,18 @@
       <button class="play-again-button" on:click={playAgain}>Play Again</button>
     </div>
   {:else if questions.length > 0}
+    <!-- Progress Bar Section -->
+    <div class="progress-bar">
+      {#each createArray(amount) as _, index}
+        <div class="progress-line {userAnswers[index] ? (userAnswers[index].isCorrect ? 'correct' : userAnswers[index].selectedAnswer === 'You skipped' ? 'skipped' : 'incorrect') : ''}"></div>
+      {/each}
+    </div>
+    <!-- Timer Section -->
+    {#if timerEnabled}
+      <div class="timer">
+        <p>Time Remaining: {timer} seconds</p>
+      </div>
+    {/if}
     <!-- Question Section -->
     <div class="question-container">
       <h2 class="question">
@@ -176,7 +230,7 @@
         {/each}
       </div>
       {#if selectedAnswer !== null && currentQuestionIndex < questions.length - 1}
-        <button class="next-button" on:click={nextQuestion}>
+        <button class="next-button" on:click={() => nextQuestion(false)}>
           Next Question
         </button>
       {/if}
@@ -185,12 +239,6 @@
           Finish Quiz
         </button>
       {/if}
-    </div>
-    <!-- Progress Bar Section -->
-    <div class="progress-bar">
-      {#each createArray(amount) as _, index}
-        <div class="progress-line {userAnswers[index] ? (userAnswers[index].isCorrect ? 'correct' : 'incorrect') : ''}"></div>
-      {/each}
     </div>
   {:else}
     <p>No questions available. Please try again later.</p>
@@ -282,7 +330,7 @@
   .progress-bar {
     display: flex;
     gap: 0.5rem;
-    margin-top: 1rem;
+    margin-bottom: 1rem;
     width: 100%;
   }
 
@@ -299,5 +347,15 @@
 
   .progress-line.incorrect {
     background-color: lightcoral;
+  }
+
+  .progress-line.skipped {
+    background-color: darkgrey;
+  }
+
+  .timer {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    font-weight: bold;
   }
 </style>

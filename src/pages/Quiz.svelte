@@ -4,6 +4,7 @@
   let selectedMode = "easy"; // Default mode
   let questionAmount = "5"; // Default question amount
   let quizStarted = false;
+  let timerEnabled = false; // Timer toggle state
 
   function handleStart() {
     quizStarted = true; // Start the quiz
@@ -33,12 +34,15 @@
           <option value="15">15</option>
         </select>
 
+        <label for="timer">Enable Timer:</label>
+        <input type="checkbox" id="timer" bind:checked={timerEnabled} />
+
         <button class="start-button" on:click={handleStart}>Start Quiz</button>
       </div>
     </div>
   </main>
 {:else}
-  <QuizGame mode={selectedMode} amount={questionAmount} on:playAgain={handlePlayAgain} />
+  <QuizGame mode={selectedMode} amount={questionAmount} timerEnabled={timerEnabled} on:playAgain={handlePlayAgain} />
 {/if}
 
 <style>
@@ -69,7 +73,7 @@
     margin-top: 1rem;
   }
 
-  select {
+  select, input[type="checkbox"] {
     width: 100%;
     padding: 0.5rem;
     margin-top: 0.5rem;
