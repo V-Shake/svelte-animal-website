@@ -107,7 +107,9 @@
     ];
 
     // Move to the next question
-    nextQuestion();
+    if (timerEnabled) {
+      clearInterval(timerInterval);
+    }
   }
 
   // Move to the next question
@@ -132,7 +134,6 @@
 
       // Reset timer for the next question
       if (timerEnabled) {
-        clearInterval(timerInterval);
         startTimer();
       }
     } else {
@@ -221,8 +222,8 @@
             class="answer-button"
             on:click={() => handleAnswerSelection(answer)}
             class:selected={selectedAnswer === answer}
-            class:correct={isCorrect === false && answer === questions[currentQuestionIndex].correct_answer || isCorrect && answer === questions[currentQuestionIndex].correct_answer}
-            class:incorrect={!isCorrect && selectedAnswer === answer && answer !== questions[currentQuestionIndex].correct_answer}
+            class:correct={selectedAnswer !== null && answer === questions[currentQuestionIndex].correct_answer}
+            class:incorrect={selectedAnswer !== null && selectedAnswer === answer && answer !== questions[currentQuestionIndex].correct_answer}
             disabled={selectedAnswer !== null}
           >
             {@html answer}
