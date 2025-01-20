@@ -2,11 +2,14 @@
   import QuizGame from "../components/QuizGame.svelte";
   import FaceOff from "../components/FaceOff.svelte";
 
-  let selectedMode = "easy"; // Default mode
-  let questionAmount = "5"; // Default question amount
+  let selectedMode = "easy"; // Default mode for Quiz
+  let faceOffMode = "easy"; // Default mode for Face-Off
+  let questionAmount = "5"; // Default question amount for Quiz
+  let faceOffQuestionAmount = "5"; // Default question amount for Face-Off
   let quizStarted = false;
   let faceOffStarted = false;
-  let timerEnabled = false; // Timer toggle state
+  let timerEnabled = false; // Timer toggle state for Quiz
+  let faceOffTimerEnabled = false; // Timer toggle state for Face-Off
 
   function handleStart() {
     quizStarted = true; // Start the quiz
@@ -51,6 +54,23 @@
       </div>
       <div class="faceoff-container">
         <h2>Animal Face-Off</h2>
+        <label for="faceOffMode">Mode:</label>
+        <select id="faceOffMode" bind:value={faceOffMode}>
+          <option value="easy">Easy</option>
+          <option value="medium">Medium</option>
+          <option value="hard">Hard</option>
+        </select>
+
+        <label for="faceOffAmount">Question Amount:</label>
+        <select id="faceOffAmount" bind:value={faceOffQuestionAmount}>
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="15">15</option>
+        </select>
+
+        <label for="faceOffTimer">Enable Timer:</label>
+        <input type="checkbox" id="faceOffTimer" bind:checked={faceOffTimerEnabled} />
+
         <button class="start-button" on:click={handleFaceOffStart}>Start Face-Off</button>
       </div>
     </div>
@@ -58,7 +78,7 @@
 {:else if quizStarted}
   <QuizGame mode={selectedMode} amount={questionAmount} timerEnabled={timerEnabled} on:playAgain={handlePlayAgain} />
 {:else if faceOffStarted}
-  <FaceOff on:playAgain={handleFaceOffPlayAgain} />
+  <FaceOff mode={faceOffMode} amount={faceOffQuestionAmount} timerEnabled={faceOffTimerEnabled} on:playAgain={handleFaceOffPlayAgain} />
 {/if}
 
 <style>
