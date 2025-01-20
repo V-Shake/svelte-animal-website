@@ -1,13 +1,18 @@
 <script>
-  import { onMount } from "svelte";
+  import { createEventDispatcher, onMount } from "svelte";
 
   export let mode = "easy"; // Default to easy mode if no mode is passed
+  export let amount = 10; // Default question amount if no amount is passed
   let questions = [];
   let currentQuestionIndex = 0;
   let selectedAnswer = null;
   let isCorrect = null;
   let sessionToken = null; // Store the session token
   let isLoading = true; // Show loading state while fetching questions
+  let userAnswers = []; // Track user answers for the overview
+  let quizCompleted = false; // Flag to show the overview after the last question
+
+  const dispatch = createEventDispatcher();
 
   // Fetch a new session token
   async function fetchSessionToken() {
@@ -20,7 +25,7 @@
     }
   }
 
-  // Fetch questions based on the selected mode and session token
+  // Fetch questions based on the selected mode, amount, and session token
   async function fetchQuestions() {
     if (!sessionToken) {
       console.error("Session token is missing. Unable to fetch questions.");
@@ -29,7 +34,7 @@
 
     try {
       const response = await fetch(
-        `https://opentdb.com/api.php?amount=10&category=27&difficulty=${mode}&token=${sessionToken}`
+        `https://opentdb.com/api.php?amount=${amount}&category=27&difficulty=${mode}&token=${sessionToken}`
       );
       const data = await response.json();
 
@@ -70,6 +75,17 @@
   function handleAnswerSelection(answer) {
     selectedAnswer = answer;
     isCorrect = answer === questions[currentQuestionIndex].correct_answer;
+
+    // Record the user's answer and whether it was correct
+    userAnswers = [
+      ...userAnswers,
+      {
+        question: questions[currentQuestionIndex].question,
+        selectedAnswer: answer,
+        correctAnswer: questions[currentQuestionIndex].correct_answer,
+        isCorrect,
+      },
+    ];
   }
 
   // Move to the next question
@@ -78,7 +94,19 @@
       currentQuestionIndex++;
       selectedAnswer = null;
       isCorrect = null;
+    } else {
+      quizCompleted = true; // Show the overview
     }
+  }
+
+  // Restart the quiz
+  function playAgain() {
+    dispatch("playAgain"); // Emit the playAgain event
+  }
+
+  // Helper function to create an array of the desired length
+  function createArray(length) {
+    return Array.from({ length });
   }
 
   onMount(async () => {
@@ -91,7 +119,28 @@
 <div id="quiz-page">
   {#if isLoading}
     <p>Loading questions...</p>
+  {:else if quizCompleted}
+    <!-- Overview Section -->
+    <div class="overview">
+      <h2>Quiz Overview</h2>
+      <ul>
+        {#each userAnswers as answer, index}
+          <li>
+            <p><strong>Question {index + 1}:</strong> {@html answer.question}</p>
+            <p>Your Answer: {@html answer.selectedAnswer}</p>
+            <p>
+              Correct Answer: 
+              <span class={answer.isCorrect ? "correct" : "incorrect"}>
+                {@html answer.correctAnswer}
+              </span>
+            </p>
+          </li>
+        {/each}
+      </ul>
+      <button class="play-again-button" on:click={playAgain}>Play Again</button>
+    </div>
   {:else if questions.length > 0}
+    <!-- Question Section -->
     <div class="question-container">
       <h2 class="question">
         {@html questions[currentQuestionIndex].question}
@@ -110,11 +159,22 @@
           </button>
         {/each}
       </div>
-      {#if selectedAnswer !== null}
+      {#if selectedAnswer !== null && currentQuestionIndex < questions.length - 1}
         <button class="next-button" on:click={nextQuestion}>
           Next Question
         </button>
       {/if}
+      {#if selectedAnswer !== null && currentQuestionIndex === questions.length - 1}
+        <button class="next-button" on:click={() => (quizCompleted = true)}>
+          Finish Quiz
+        </button>
+      {/if}
+    </div>
+    <!-- Progress Bar Section -->
+    <div class="progress-bar">
+      {#each createArray(amount) as _, index}
+        <div class="progress-line {userAnswers[index] ? (userAnswers[index].isCorrect ? 'correct' : 'incorrect') : ''}"></div>
+      {/each}
     </div>
   {:else}
     <p>No questions available. Please try again later.</p>
@@ -129,13 +189,13 @@
     padding: 2rem;
   }
 
-  .question-container {
+  .question-container, .overview {
     text-align: center;
     max-width: 600px;
     margin: auto;
   }
 
-  .question {
+  .question, .overview h2 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
   }
@@ -177,7 +237,7 @@
     opacity: 0.6;
   }
 
-  .next-button {
+  .next-button, .play-again-button {
     margin-top: 1rem;
     padding: 0.5rem 1rem;
     font-size: 1rem;
@@ -189,7 +249,39 @@
     transition: background-color 0.3s ease;
   }
 
-  .next-button:hover {
+  .next-button:hover, .play-again-button:hover {
     background-color: #0056b3;
+  }
+
+  .correct {
+    color: green;
+    font-weight: bold;
+  }
+
+  .incorrect {
+    color: red;
+    font-weight: bold;
+  }
+
+  .progress-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    width: 100%;
+  }
+
+  .progress-line {
+    flex: 1;
+    height: 5px;
+    background-color: grey;
+    border-radius: 4px;
+  }
+
+  .progress-line.correct {
+    background-color: lightgreen;
+  }
+
+  .progress-line.incorrect {
+    background-color: lightcoral;
   }
 </style>

@@ -1,61 +1,94 @@
 <script>
-  import StartButton from "../components/StartButton.svelte";
   import QuizGame from "../components/QuizGame.svelte";
 
-  let selectedMode = null;
+  let selectedMode = "easy"; // Default mode
+  let questionAmount = 10; // Default question amount
+  let quizStarted = false;
 
-  function handleStart(mode) {
-    selectedMode = mode; // Set the mode to start the quiz
+  function handleStart() {
+    quizStarted = true; // Start the quiz
+  }
+
+  function handlePlayAgain() {
+    quizStarted = false; // Reset to go back to the selection screen
   }
 </script>
 
-{#if !selectedMode}
+{#if !quizStarted}
   <main class="main-container">
     <div id="quiz-page">
-      <div class="mode-container">
-        <h2>Easy Mode</h2>
-        <p>Perfect for beginners!</p>
-        <StartButton on:start={() => handleStart("easy")} />
-      </div>
+      <div class="selection-container">
+        <h2>Select Quiz Mode and Question Amount</h2>
+        <label for="mode">Mode:</label>
+        <select id="mode" bind:value={selectedMode}>
+          <option value="easy">Easy</option>
+          <option value="medium">Medium</option>
+          <option value="hard">Hard</option>
+        </select>
 
-      <div class="mode-container">
-        <h2>Medium Mode</h2>
-        <p>Challenge yourself with tougher questions.</p>
-        <StartButton on:start={() => handleStart("medium")} />
-      </div>
+        <label for="amount">Question Amount:</label>
+        <select id="amount" bind:value={questionAmount}>
+          <option value="10">10</option>
+          <option value="15">15</option>
+          <option value="20">20</option>
+          <option value="25">25</option>
+        </select>
 
-      <div class="mode-container">
-        <h2>Hard Mode</h2>
-        <p>Ready for the ultimate test?</p>
-        <StartButton on:start={() => handleStart("hard")} />
+        <button class="start-button" on:click={handleStart}>Start Quiz</button>
       </div>
     </div>
   </main>
 {:else}
-  <QuizGame mode={selectedMode} />
+  <QuizGame mode={selectedMode} amount={questionAmount} on:playAgain={handlePlayAgain} />
 {/if}
 
 <style>
   .main-container {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center; /* Align vertically in the center */
     height: 90vh; /* Full height */
   }
 
   #quiz-page {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     padding: 1rem;
-    gap: 8rem;
   }
-  .mode-container {
+
+  .selection-container {
+    text-align: center;
     border: 2px solid #ccc;
     border-radius: 8px;
-    padding: 1rem;
-    text-align: center;
+    padding: 2rem;
     width: 20rem;
-    height: 15rem;
+  }
+
+  label {
+    display: block;
+    margin-top: 1rem;
+  }
+
+  select {
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .start-button {
+    margin-top: 2rem;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .start-button:hover {
+    background-color: #0056b3;
   }
 </style>
