@@ -1,5 +1,5 @@
 <script>
-  import QuizGame from "../components/QuizGame.svelte";
+import QuizGame from "../components/QuizGame.svelte";
   import FaceOff from "../components/FaceOff.svelte";
 
   let selectedMode = "easy"; // Default mode for Quiz
@@ -10,6 +10,7 @@
   let faceOffStarted = false;
   let timerEnabled = false; // Timer toggle state for Quiz
   let faceOffTimerEnabled = false; // Timer toggle state for Face-Off
+  let questionType = "any"; // Default question type for Quiz
 
   function handleStart() {
     quizStarted = true; // Start the quiz
@@ -47,6 +48,14 @@
           <option value="15">15</option>
         </select>
 
+        <label for="type">Question Type:</label>
+        <select id="type" bind:value={questionType}>
+          <option value="any">Any Type</option>
+          <option value="multiple">Multiple Choice</option>
+          <option value="boolean">True/False</option>
+          <option value="comparison">Comparison</option>
+        </select>
+
         <label for="timer">Enable Timer:</label>
         <input type="checkbox" id="timer" bind:checked={timerEnabled} />
 
@@ -76,7 +85,7 @@
     </div>
   </main>
 {:else if quizStarted}
-  <QuizGame mode={selectedMode} amount={questionAmount} timerEnabled={timerEnabled} on:newGame={handleNewGame} />
+  <QuizGame mode={selectedMode} amount={questionAmount} type={questionType} timerEnabled={timerEnabled} on:newGame={handleNewGame} />
 {:else if faceOffStarted}
   <FaceOff mode={faceOffMode} amount={faceOffQuestionAmount} timerEnabled={faceOffTimerEnabled} on:playAgain={handleFaceOffPlayAgain} />
 {/if}

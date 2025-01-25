@@ -1,8 +1,11 @@
 <script>
   import { createEventDispatcher, onMount } from "svelte";
+  import QuizOverview from "./QuizOverview.svelte";
+  import animalData from "../assets/animaldata.js";
 
   export let mode = "easy"; // Default to easy mode if no mode is passed
   export let amount = 5; // Default question amount if no amount is passed
+  export let type = "any"; // Default question type if no type is passed
   export let timerEnabled = false; // Timer toggle state
   let questions = [];
   let currentQuestionIndex = 0;
@@ -30,16 +33,23 @@
     }
   }
 
-  // Fetch questions based on the selected mode, amount, and session token
+  // Fetch questions based on the selected mode, amount, type, and session token
   async function fetchQuestions(retryCount = 0) {
+    if (type === "comparison") {
+      generateComparisonQuestions();
+      isLoading = false;
+      return;
+    }
+
     if (!sessionToken) {
       console.error("Session token is missing. Unable to fetch questions.");
       return;
     }
 
     try {
+      const typeParam = type === "any" ? "" : `&type=${type}`;
       const response = await fetch(
-        `https://opentdb.com/api.php?amount=${amount}&category=27&difficulty=${mode}&token=${sessionToken}`
+        `https://opentdb.com/api.php?amount=${amount}&category=27&difficulty=${mode}${typeParam}&token=${sessionToken}`
       );
 
       if (response.status === 429) {
@@ -77,14 +87,54 @@
     }
   }
 
-  // Reset the session token
-  async function resetSessionToken() {
-    if (!sessionToken) return;
-    try {
-      await fetch(`https://opentdb.com/api_token.php?command=reset&token=${sessionToken}`);
-    } catch (error) {
-      console.error("Failed to reset session token:", error);
+  // Generate comparison questions
+  function generateComparisonQuestions() {
+    const attributes = [
+      "top_speed",
+      "max_weight",
+      "max_length",
+      "intelligence",
+      "max_age",
+      "deaths",
+      "litter_size",
+    ];
+
+    for (let i = 0; i < amount; i++) {
+      const comparisonAttribute = attributes[Math.floor(Math.random() * attributes.length)];
+      const currentAnimals = getRandomAnimals();
+      const question = `Which one has ${
+        comparisonAttribute === "top_speed"
+          ? "higher top speed"
+          : comparisonAttribute === "max_weight"
+          ? "greater weight"
+          : comparisonAttribute === "max_length"
+          ? "greater length"
+          : comparisonAttribute === "intelligence"
+          ? "higher intelligence"
+          : comparisonAttribute === "max_age"
+          ? "longer lifespan"
+          : comparisonAttribute === "deaths"
+          ? "more deaths caused"
+          : "larger litter size"
+      }?`;
+      const correctAnimal = currentAnimals.reduce((prev, current) =>
+        current[comparisonAttribute] > prev[comparisonAttribute] ? current : prev
+      );
+
+      questions.push({
+        question,
+        answers: currentAnimals,
+        correct_answer: correctAnimal,
+        comparisonAttribute,
+      });
     }
+  }
+
+  // Get random animals based on the selected mode
+  function getRandomAnimals() {
+    const numAnimals = mode === "easy" ? 2 : mode === "medium" ? 3 : 4;
+    const shuffledAnimals = shuffleArray(animalData);
+    return shuffledAnimals.slice(0, numAnimals);
   }
 
   // Shuffle answers for randomness
@@ -192,12 +242,20 @@
     const correctAnswer = questions[currentQuestionIndex].correct_answer;
     const incorrectAnswers = questions[currentQuestionIndex].answers.filter(answer => answer !== correctAnswer);
 
-    if (incorrectAnswers.length > 1) {
-      // Mark two wrong options as grey and move them to the bottom
-      remainingAnswers = [correctAnswer, incorrectAnswers[0], ...incorrectAnswers.slice(1).map(answer => ({ answer, isGreyedOut: true }))];
+    if (type === "comparison") {
+      // For comparison questions, mark two wrong options as grey and move them to the bottom
+      if (incorrectAnswers.length > 1) {
+        remainingAnswers = [correctAnswer, incorrectAnswers[0], ...incorrectAnswers.slice(1).map(answer => ({ ...answer, isGreyedOut: true }))];
+      } else {
+        remainingAnswers = [correctAnswer, { ...incorrectAnswers[0], isGreyedOut: true }];
+      }
     } else {
-      // Mark one wrong option as grey (for true/false questions)
-      remainingAnswers = [correctAnswer, { answer: incorrectAnswers[0], isGreyedOut: true }];
+      // For other types of questions, mark two wrong options as grey
+      if (incorrectAnswers.length > 1) {
+        remainingAnswers = [correctAnswer, incorrectAnswers[0], ...incorrectAnswers.slice(1).map(answer => ({ answer, isGreyedOut: true }))];
+      } else {
+        remainingAnswers = [correctAnswer, { answer: incorrectAnswers[0], isGreyedOut: true }];
+      }
     }
   }
 
@@ -212,53 +270,6 @@
       startTimer(); // Start the timer if enabled
     }
   });
-
-  // Calculate the result message based on the percentage of correct answers
-  function getResultMessage() {
-    const correctAnswers = userAnswers.filter(answer => answer.isCorrect).length;
-    const percentage = (correctAnswers / userAnswers.length) * 100;
-
-    if (percentage === 100) {
-      return `You’re a Wildlife Guru!`;
-    } else if (percentage >= 80) {
-      return `You’re a Wildlife Expert!`;
-    } else if (percentage >= 60) {
-      return `You’re a Wildlife Explorer!`;
-    } else if (percentage >= 40) {
-      return `You’re a Wildlife Adventurer!`;
-    } else if (percentage >= 20) {
-      return `You’re a Wildlife Wanderer!`;
-    } else {
-      return `You’re a Wildlife Newbie!`;
-    }
-  }
-
-  // Get the fun tip based on the percentage of correct answers
-  function getFunTip() {
-    const correctAnswers = userAnswers.filter(answer => answer.isCorrect).length;
-    const percentage = (correctAnswers / userAnswers.length) * 100;
-
-    if (percentage === 100) {
-      return "You’ve earned the crown of an explorer!";
-    } else if (percentage >= 80) {
-      return "Impressive! You’ve shown you have a deep understanding of wildlife.";
-    } else if (percentage >= 60) {
-      return "You’ve got a solid understanding of wildlife, but there’s still more to discover!";
-    } else if (percentage >= 40) {
-      return "Not bad! You’ve got the basics down, but there’s plenty more to uncover.";
-    } else if (percentage >= 20) {
-      return "You’re just starting your wildlife journey. There’s so much to learn, and you’re on the right track!";
-    } else {
-      return "Looks like you’ve just started your wildlife exploration! Don’t worry; every expert was once a beginner.";
-    }
-  }
-
-  // Calculate the percentage of correct answers
-  function getCorrectPercentage() {
-    const correctAnswers = userAnswers.filter(answer => answer.isCorrect).length;
-    const percentage = (correctAnswers / userAnswers.length) * 100;
-    return Math.round(percentage);
-  }
 </script>
 
 <div id="quiz-page">
@@ -266,48 +277,7 @@
     <p>Loading questions...</p>
   {:else if quizCompleted}
     <!-- Overview Section -->
-    <div class="overview">
-      <h2>{getResultMessage()}</h2>
-      <p class="fun-tip">{getFunTip()}</p>
-      <div class="progress-circle">
-        <svg viewBox="0 0 36 36" class="circular-chart">
-          <path class="circle-bg"
-            d="M18 2.0845
-              a 15.9155 15.9155 0 0 1 0 31.831
-              a 15.9155 15.9155 0 0 1 0 -31.831"
-          />
-          <path class="circle"
-            stroke-dasharray="{getCorrectPercentage()}, 100"
-            d="M18 2.0845
-              a 15.9155 15.9155 0 0 1 0 31.831
-              a 15.9155 15.9155 0 0 1 0 -31.831"
-          />
-          <text x="18" y="20.35" class="percentage">{getCorrectPercentage()}%</text>
-        </svg>
-      </div>
-      <table>
-        <thead>
-          <tr>
-            <th>Number</th>
-            <th>Question</th>
-            <th>Your Answer</th>
-            <th>Correct Answer</th>
-          </tr>
-        </thead>
-        <tbody>
-          {#each userAnswers as answer, index}
-            <tr>
-              <td>{index + 1}</td>
-              <td>{@html answer.question}</td>
-              <td class={answer.isCorrect ? "correct" : "incorrect"}>{@html answer.selectedAnswer}</td>
-              <td>{@html answer.correctAnswer}</td>
-            </tr>
-          {/each}
-        </tbody>
-      </table>
-      <button class="play-again-button" on:click={playAgain}>Play Again</button>
-      <button class="new-game-button" on:click={newGame}>New Game</button>
-    </div>
+    <QuizOverview {userAnswers} {playAgain} {newGame} />
   {:else if questions.length > 0}
     <!-- Progress Bar Section -->
     <div class="progress-bar">
@@ -326,21 +296,40 @@
       <h2 class="question">
         {@html questions[currentQuestionIndex].question}
       </h2>
-      <div class="answers">
-        {#each remainingAnswers as answer}
-          <button
-            class="answer-button"
-            on:click={() => handleAnswerSelection(answer.answer || answer)}
-            class:selected={selectedAnswer === (answer.answer || answer)}
-            class:correct={selectedAnswer !== null && (answer.answer || answer) === questions[currentQuestionIndex].correct_answer}
-            class:incorrect={selectedAnswer !== null && selectedAnswer === (answer.answer || answer) && (answer.answer || answer) !== questions[currentQuestionIndex].correct_answer}
-            disabled={selectedAnswer !== null || answer.isGreyedOut}
-            style={answer.isGreyedOut ? 'background-color: lightgrey;' : ''}
-          >
-            {@html answer.answer || answer}
-          </button>
-        {/each}
-      </div>
+      {#if type === "comparison"}
+        <div class="answers">
+          {#each remainingAnswers as animal}
+            <button
+              class="answer-button"
+              on:click={() => handleAnswerSelection(animal)}
+              class:selected={selectedAnswer === animal}
+              class:correct={selectedAnswer !== null && animal === questions[currentQuestionIndex].correct_answer}
+              class:incorrect={selectedAnswer !== null && selectedAnswer === animal && animal !== questions[currentQuestionIndex].correct_answer}
+              disabled={selectedAnswer !== null || animal.isGreyedOut}
+              style={animal.isGreyedOut ? 'background-color: lightgrey;' : ''}
+            >
+              <img src={`/images/${animal.group.toLowerCase()}${animal.group_number}.png`} alt={animal.name} />
+              <p>{animal.name}</p>
+            </button>
+          {/each}
+        </div>
+      {:else}
+        <div class="answers">
+          {#each remainingAnswers as answer}
+            <button
+              class="answer-button"
+              on:click={() => handleAnswerSelection(answer.answer || answer)}
+              class:selected={selectedAnswer === (answer.answer || answer)}
+              class:correct={selectedAnswer !== null && (answer.answer || answer) === questions[currentQuestionIndex].correct_answer}
+              class:incorrect={selectedAnswer !== null && selectedAnswer === (answer.answer || answer) && (answer.answer || answer) !== questions[currentQuestionIndex].correct_answer}
+              disabled={selectedAnswer !== null || answer.isGreyedOut}
+              style={answer.isGreyedOut ? 'background-color: lightgrey;' : ''}
+            >
+              {@html answer.answer || answer}
+            </button>
+          {/each}
+        </div>
+      {/if}
       {#if selectedAnswer === null}
         <button class="joker-button" on:click={useJoker} disabled={jokerUsed}>
           50:50 Joker
@@ -370,20 +359,14 @@
     padding: 2rem;
   }
 
-  .question-container, .overview {
+  .question-container {
     text-align: center;
     max-width: 600px;
     margin: auto;
   }
 
-  .question, .overview h2 {
+  .question{
     font-size: 1.5rem;
-    margin-bottom: 1rem;
-  }
-
-  .fun-tip {
-    font-size: 0.9rem;
-    color: #666;
     margin-bottom: 1rem;
   }
 
@@ -401,6 +384,19 @@
     cursor: pointer;
     background-color: white;
     transition: background-color 0.3s ease;
+  }
+
+  .answer-button img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+  }
+
+  .answer-button p {
+    margin: 0;
+    font-size: 1rem;
   }
 
   .answer-button:hover:not([disabled]) {
@@ -424,7 +420,7 @@
     opacity: 0.6;
   }
 
-  .next-button, .play-again-button, .new-game-button, .joker-button {
+  .next-button, .joker-button {
     margin-top: 1rem;
     padding: 0.5rem 1rem;
     font-size: 1rem;
@@ -436,7 +432,7 @@
     transition: background-color 0.3s ease;
   }
 
-  .next-button:hover, .play-again-button:hover, .new-game-button:hover, .joker-button:hover {
+  .next-button:hover, .joker-button:hover {
     background-color: #0056b3;
   }
 
@@ -487,67 +483,9 @@
     font-weight: bold;
   }
 
-  .progress-circle {
-    margin: 1rem 0;
-  }
-
-  .circular-chart {
-    display: block;
-    margin: 10px auto;
-    max-width: 80%;
-    max-height: 250px;
-  }
-
-  .circle-bg {
-    fill: none;
-    stroke: #eee;
-    stroke-width: 3.8;
-  }
-
-  .circle {
-    fill: none;
-    stroke-width: 2.8;
-    stroke-linecap: round;
-    animation: progress 1s ease-out forwards;
-  }
-
-  .circle {
-    stroke: #4caf50;
-  }
-
-  .percentage {
-    fill: #666;
-    font-size: 0.5em;
-    text-anchor: middle;
-  }
-
   @keyframes progress {
     0% {
       stroke-dasharray: 0 100;
     }
-  }
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 1rem;
-  }
-
-  th, td {
-    border: 1px solid #1e1e1e;
-    padding: 0.5rem;
-    text-align: left;
-  }
-
-  th {
-    background-color: var(--website-dark-green-color);
-  }
-
-  td.correct {
-    color: green;
-  }
-
-  td.incorrect {
-    color: red;
   }
 </style>
