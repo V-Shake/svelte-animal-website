@@ -84,8 +84,12 @@
           <tr>
             <td>{index + 1}</td>
             <td>{@html answer.question}</td>
-            <td class={answer.isCorrect ? "correct" : "incorrect"}>{@html answer.selectedAnswer}</td>
-            <td>{@html answer.correctAnswer}</td>
+            <td class={answer.isCorrect ? "correct" : "incorrect"}>
+              {@html typeof answer.selectedAnswer === 'object' ? answer.selectedAnswer.name : answer.selectedAnswer}
+            </td>
+            <td>
+              {@html typeof answer.correctAnswer === 'object' ? answer.correctAnswer.name : answer.correctAnswer}
+            </td>
           </tr>
         {/each}
       </tbody>

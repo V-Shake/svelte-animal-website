@@ -25,7 +25,9 @@
   // Fetch a new session token
   async function fetchSessionToken() {
     try {
-      const response = await fetch("https://opentdb.com/api_token.php?command=request");
+      const response = await fetch(
+        "https://opentdb.com/api_token.php?command=request",
+      );
       const data = await response.json();
       sessionToken = data.token;
     } catch (error) {
@@ -35,12 +37,6 @@
 
   // Fetch questions based on the selected mode, amount, type, and session token
   async function fetchQuestions(retryCount = 0) {
-    if (type === "comparison") {
-      generateComparisonQuestions();
-      isLoading = false;
-      return;
-    }
-
     if (!sessionToken) {
       console.error("Session token is missing. Unable to fetch questions.");
       return;
@@ -49,13 +45,17 @@
     try {
       const typeParam = type === "any" ? "" : `&type=${type}`;
       const response = await fetch(
-        `https://opentdb.com/api.php?amount=${amount}&category=27&difficulty=${mode}${typeParam}&token=${sessionToken}`
+        `https://opentdb.com/api.php?amount=${amount}&category=27&difficulty=${mode}${typeParam}&token=${sessionToken}`,
       );
 
       if (response.status === 429) {
         if (retryCount < 5) {
-          console.log(`Rate limit exceeded. Retrying in ${retryCount + 1} seconds...`);
-          await new Promise(resolve => setTimeout(resolve, (retryCount + 1) * 1000));
+          console.log(
+            `Rate limit exceeded. Retrying in ${retryCount + 1} seconds...`,
+          );
+          await new Promise((resolve) =>
+            setTimeout(resolve, (retryCount + 1) * 1000),
+          );
           await fetchQuestions(retryCount + 1);
         } else {
           console.error("Rate limit exceeded. Please try again later.");
@@ -81,14 +81,43 @@
       } else {
         console.error("No questions available.");
       }
+
+      if (type === "any") {
+        // Generate at least one comparison question
+        const comparisonQuestions = generateComparisonQuestions(1);
+
+        // Ensure the total amount is correct
+        const remainingQuestions = amount - comparisonQuestions.length;
+
+        // Replace some API questions with the comparison question
+        questions = [
+          ...questions.slice(0, remainingQuestions),
+          ...comparisonQuestions,
+        ];
+
+        // Shuffle to mix comparison and API questions
+        questions = shuffleArray(questions);
+      } else if (type === "comparison") {
+        // Generate only comparison questions
+        questions = generateComparisonQuestions(amount);
+      }
+
       isLoading = false;
     } catch (error) {
       console.error("Failed to fetch questions:", error);
     }
   }
 
+  const comparisonQuestions = generateComparisonQuestions(1);
+  const remainingQuestions = amount - questions.length;
+  if (remainingQuestions > 0) {
+    const extraComparisonQuestions =
+      generateComparisonQuestions(remainingQuestions);
+    questions = [...questions, ...extraComparisonQuestions];
+  }
+
   // Generate comparison questions
-  function generateComparisonQuestions() {
+  function generateComparisonQuestions(count) {
     const attributes = [
       "top_speed",
       "max_weight",
@@ -99,35 +128,53 @@
       "litter_size",
     ];
 
-    for (let i = 0; i < amount; i++) {
-      const comparisonAttribute = attributes[Math.floor(Math.random() * attributes.length)];
+    const comparisonQuestions = [];
+    for (let i = 0; i < count; i++) {
+      const comparisonAttribute =
+        attributes[Math.floor(Math.random() * attributes.length)];
       const currentAnimals = getRandomAnimals();
+
+      // Ensure animals have required properties
+      const validAnimals = currentAnimals.filter(
+        (animal) => animal.group && animal.group_number && animal.name,
+      );
+
+      if (validAnimals.length < currentAnimals.length) {
+        console.warn(
+          "Some animals are missing image properties and were excluded.",
+        );
+      }
+
       const question = `Which one has ${
         comparisonAttribute === "top_speed"
           ? "higher top speed"
           : comparisonAttribute === "max_weight"
-          ? "greater weight"
-          : comparisonAttribute === "max_length"
-          ? "greater length"
-          : comparisonAttribute === "intelligence"
-          ? "higher intelligence"
-          : comparisonAttribute === "max_age"
-          ? "longer lifespan"
-          : comparisonAttribute === "deaths"
-          ? "more deaths caused"
-          : "larger litter size"
+            ? "greater weight"
+            : comparisonAttribute === "max_length"
+              ? "greater length"
+              : comparisonAttribute === "intelligence"
+                ? "higher intelligence"
+                : comparisonAttribute === "max_age"
+                  ? "longer lifespan"
+                  : comparisonAttribute === "deaths"
+                    ? "more deaths caused"
+                    : "larger litter size"
       }?`;
-      const correctAnimal = currentAnimals.reduce((prev, current) =>
-        current[comparisonAttribute] > prev[comparisonAttribute] ? current : prev
+
+      const correctAnimal = validAnimals.reduce((prev, current) =>
+        current[comparisonAttribute] > prev[comparisonAttribute]
+          ? current
+          : prev,
       );
 
-      questions.push({
+      comparisonQuestions.push({
         question,
-        answers: currentAnimals,
+        answers: validAnimals,
         correct_answer: correctAnimal,
         comparisonAttribute,
       });
     }
+    return comparisonQuestions;
   }
 
   // Get random animals based on the selected mode
@@ -137,13 +184,12 @@
     return shuffledAnimals.slice(0, numAnimals);
   }
 
-  // Shuffle answers for randomness
   function shuffleArray(array) {
     return array.sort(() => Math.random() - 0.5);
   }
 
   // Handle answer selection
-  function handleAnswerSelection(answer) {
+    function handleAnswerSelection(answer) {
     selectedAnswer = answer;
     isCorrect = answer === questions[currentQuestionIndex].correct_answer;
 
@@ -157,6 +203,10 @@
         isCorrect,
       },
     ];
+
+    // Debugging: Log the current question and options
+    console.log("Current Question:", questions[currentQuestionIndex]);
+    console.log("Options:", questions[currentQuestionIndex].options);
 
     // Move to the next question
     if (timerEnabled) {
@@ -240,25 +290,45 @@
 
     jokerUsed = true;
     const correctAnswer = questions[currentQuestionIndex].correct_answer;
-    const incorrectAnswers = questions[currentQuestionIndex].answers.filter(answer => answer !== correctAnswer);
+    const incorrectAnswers = questions[currentQuestionIndex].answers.filter(
+      (answer) => answer !== correctAnswer,
+    );
 
     if (type === "comparison") {
       // For comparison questions, mark two wrong options as grey and move them to the bottom
       if (incorrectAnswers.length > 1) {
-        remainingAnswers = [correctAnswer, incorrectAnswers[0], ...incorrectAnswers.slice(1).map(answer => ({ ...answer, isGreyedOut: true }))];
+        remainingAnswers = [
+          correctAnswer,
+          incorrectAnswers[0],
+          ...incorrectAnswers
+            .slice(1)
+            .map((answer) => ({ ...answer, isGreyedOut: true })),
+        ];
       } else {
-        remainingAnswers = [correctAnswer, { ...incorrectAnswers[0], isGreyedOut: true }];
+        remainingAnswers = [
+          correctAnswer,
+          { ...incorrectAnswers[0], isGreyedOut: true },
+        ];
       }
     } else {
       // For other types of questions, mark two wrong options as grey
       if (incorrectAnswers.length > 1) {
-        remainingAnswers = [correctAnswer, incorrectAnswers[0], ...incorrectAnswers.slice(1).map(answer => ({ answer, isGreyedOut: true }))];
+        remainingAnswers = [
+          correctAnswer,
+          incorrectAnswers[0],
+          ...incorrectAnswers
+            .slice(1)
+            .map((answer) => ({ answer, isGreyedOut: true })),
+        ];
       } else {
-        remainingAnswers = [correctAnswer, { answer: incorrectAnswers[0], isGreyedOut: true }];
+        remainingAnswers = [
+          correctAnswer,
+          { answer: incorrectAnswers[0], isGreyedOut: true },
+        ];
       }
     }
   }
-
+  $: console.log('Remaining Answers:', remainingAnswers);
   onMount(async () => {
     isLoading = true;
     await fetchSessionToken(); // Retrieve a session token first
@@ -282,7 +352,15 @@
     <!-- Progress Bar Section -->
     <div class="progress-bar">
       {#each createArray(amount) as _, index}
-        <div class="progress-line {userAnswers[index] ? (userAnswers[index].isCorrect ? 'correct' : userAnswers[index].selectedAnswer === 'You skipped' ? 'skipped' : 'incorrect') : ''}"></div>
+        <div
+          class="progress-line {userAnswers[index]
+            ? userAnswers[index].isCorrect
+              ? 'correct'
+              : userAnswers[index].selectedAnswer === 'You skipped'
+                ? 'skipped'
+                : 'incorrect'
+            : ''}"
+        ></div>
       {/each}
     </div>
     <!-- Timer Section -->
@@ -296,19 +374,25 @@
       <h2 class="question">
         {@html questions[currentQuestionIndex].question}
       </h2>
-      {#if type === "comparison"}
+      {#if type === "comparison" || type === "any type"}
         <div class="answers">
           {#each remainingAnswers as animal}
             <button
               class="answer-button"
               on:click={() => handleAnswerSelection(animal)}
               class:selected={selectedAnswer === animal}
-              class:correct={selectedAnswer !== null && animal === questions[currentQuestionIndex].correct_answer}
-              class:incorrect={selectedAnswer !== null && selectedAnswer === animal && animal !== questions[currentQuestionIndex].correct_answer}
+              class:correct={selectedAnswer !== null &&
+                animal === questions[currentQuestionIndex].correct_answer}
+              class:incorrect={selectedAnswer !== null &&
+                selectedAnswer === animal &&
+                animal !== questions[currentQuestionIndex].correct_answer}
               disabled={selectedAnswer !== null || animal.isGreyedOut}
-              style={animal.isGreyedOut ? 'background-color: lightgrey;' : ''}
+              style={animal.isGreyedOut ? "background-color: lightgrey;" : ""}
             >
-              <img src={`/images/${animal.group.toLowerCase()}${animal.group_number}.png`} alt={animal.name} />
+              <img
+                src={`/images/${animal.group.toLowerCase()}${animal.group_number}.png`}
+                alt={animal.name}
+              />
               <p>{animal.name}</p>
             </button>
           {/each}
@@ -320,10 +404,15 @@
               class="answer-button"
               on:click={() => handleAnswerSelection(answer.answer || answer)}
               class:selected={selectedAnswer === (answer.answer || answer)}
-              class:correct={selectedAnswer !== null && (answer.answer || answer) === questions[currentQuestionIndex].correct_answer}
-              class:incorrect={selectedAnswer !== null && selectedAnswer === (answer.answer || answer) && (answer.answer || answer) !== questions[currentQuestionIndex].correct_answer}
+              class:correct={selectedAnswer !== null &&
+                (answer.answer || answer) ===
+                  questions[currentQuestionIndex].correct_answer}
+              class:incorrect={selectedAnswer !== null &&
+                selectedAnswer === (answer.answer || answer) &&
+                (answer.answer || answer) !==
+                  questions[currentQuestionIndex].correct_answer}
               disabled={selectedAnswer !== null || answer.isGreyedOut}
-              style={answer.isGreyedOut ? 'background-color: lightgrey;' : ''}
+              style={answer.isGreyedOut ? "background-color: lightgrey;" : ""}
             >
               {@html answer.answer || answer}
             </button>
@@ -365,7 +454,7 @@
     margin: auto;
   }
 
-  .question{
+  .question {
     font-size: 1.5rem;
     margin-bottom: 1rem;
   }
@@ -420,7 +509,8 @@
     opacity: 0.6;
   }
 
-  .next-button, .joker-button {
+  .next-button,
+  .joker-button {
     margin-top: 1rem;
     padding: 0.5rem 1rem;
     font-size: 1rem;
@@ -432,7 +522,8 @@
     transition: background-color 0.3s ease;
   }
 
-  .next-button:hover, .joker-button:hover {
+  .next-button:hover,
+  .joker-button:hover {
     background-color: #0056b3;
   }
 
@@ -481,11 +572,5 @@
     margin-bottom: 1rem;
     font-size: 1.2rem;
     font-weight: bold;
-  }
-
-  @keyframes progress {
-    0% {
-      stroke-dasharray: 0 100;
-    }
   }
 </style>
