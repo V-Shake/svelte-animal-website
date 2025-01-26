@@ -4,8 +4,8 @@ import QuizGame from "../components/QuizGame.svelte";
 
   let selectedMode = "easy"; // Default mode for Quiz
   let faceOffMode = "easy"; // Default mode for Face-Off
-  let questionAmount = "5"; // Default question amount for Quiz
-  let faceOffQuestionAmount = "5"; // Default question amount for Face-Off
+  let questionAmount = "8"; // Default question amount for Quiz
+  let faceOffQuestionAmount = "8"; // Default question amount for Face-Off
   let quizStarted = false;
   let faceOffStarted = false;
   let timerEnabled = false; // Timer toggle state for Quiz
@@ -43,9 +43,9 @@ import QuizGame from "../components/QuizGame.svelte";
 
         <label for="amount">Question Amount:</label>
         <select id="amount" bind:value={questionAmount}>
-          <option value="5">5</option>
-          <option value="10">10</option>
-          <option value="15">15</option>
+          <option value="8">8</option>
+          <option value="12">12</option>
+          <option value="16">16</option>
         </select>
 
         <label for="type">Question Type:</label>

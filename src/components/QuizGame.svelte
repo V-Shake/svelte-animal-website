@@ -4,7 +4,7 @@
   import animalData from "../assets/animaldata.js";
 
   export let mode = "easy"; // Default to easy mode if no mode is passed
-  export let amount = 5; // Default question amount if no amount is passed
+  export let amount = 8; // Default question amount if no amount is passed
   export let type = "any"; // Default question type if no type is passed
   export let timerEnabled = false; // Timer toggle state
   let questions = [];
