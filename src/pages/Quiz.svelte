@@ -1,15 +1,11 @@
 <script>
-import QuizGame from "../components/QuizGame.svelte";
-  import FaceOff from "../components/FaceOff.svelte";
+  import QuizGame from "../components/QuizGame.svelte";
+  import { IconPawFilled } from "@tabler/icons-svelte";
 
   let selectedMode = "easy"; // Default mode for Quiz
-  let faceOffMode = "easy"; // Default mode for Face-Off
   let questionAmount = "8"; // Default question amount for Quiz
-  let faceOffQuestionAmount = "8"; // Default question amount for Face-Off
   let quizStarted = false;
-  let faceOffStarted = false;
   let timerEnabled = false; // Timer toggle state for Quiz
-  let faceOffTimerEnabled = false; // Timer toggle state for Face-Off
   let questionType = "any"; // Default question type for Quiz
 
   function handleStart() {
@@ -19,21 +15,42 @@ import QuizGame from "../components/QuizGame.svelte";
   function handleNewGame() {
     quizStarted = false; // Reset to go back to the selection screen
   }
-
-  function handleFaceOffStart() {
-    faceOffStarted = true; // Start the Animal Face-Off
-  }
-
-  function handleFaceOffPlayAgain() {
-    faceOffStarted = false; // Reset to go back to the selection screen
-  }
 </script>
 
-{#if !quizStarted && !faceOffStarted}
-  <main class="main-container">
-    <div id="quiz-page">
+<main class="main-container">
+  <!-- Placeholder for the left container -->
+  <div class="left-container">
+    <div class="rectangle"></div>
+  </div>
+
+  <!-- Centered container for description -->
+  <div class="centered-container">
+    <div class="circle-background"></div>
+    <div class="border-circle-background"></div>
+    <div class="icon-paw-container">
+      <IconPawFilled stroke={1} size={120} />
+    </div>
+    <div class="description-container">
+      <div class="description">
+        <p>Welcome to the Quiz Game!</p>
+      </div>
+      <div class="thick-line"></div>
+      <div class="additional-text">
+        <p>
+          Ready to test your wildlife knowledge? Pick a difficulty—Easy, Medium,
+          or Hard—and explore the animal kingdom with fun facts and surprises.
+          Use the Joker to get hints if you’re stuck! Whether you're a beginner
+          or an expert, there's something for everyone!
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right container for quiz selection -->
+  <div class="right-container">
+    {#if !quizStarted}
       <div class="selection-container">
-        <h2>Quiz</h2>
+        <h2>Select Quiz Settings</h2>
         <label for="mode">Mode:</label>
         <select id="mode" bind:value={selectedMode}>
           <option value="easy">Easy</option>
@@ -61,53 +78,126 @@ import QuizGame from "../components/QuizGame.svelte";
 
         <button class="start-button" on:click={handleStart}>Start Quiz</button>
       </div>
-      <div class="faceoff-container">
-        <h2>Animal Face-Off</h2>
-        <label for="faceOffMode">Mode:</label>
-        <select id="faceOffMode" bind:value={faceOffMode}>
-          <option value="easy">Easy</option>
-          <option value="medium">Medium</option>
-          <option value="hard">Hard</option>
-        </select>
-
-        <label for="faceOffAmount">Question Amount:</label>
-        <select id="faceOffAmount" bind:value={faceOffQuestionAmount}>
-          <option value="5">5</option>
-          <option value="10">10</option>
-          <option value="15">15</option>
-        </select>
-
-        <label for="faceOffTimer">Enable Timer:</label>
-        <input type="checkbox" id="faceOffTimer" bind:checked={faceOffTimerEnabled} />
-
-        <button class="start-button" on:click={handleFaceOffStart}>Start Face-Off</button>
-      </div>
-    </div>
-  </main>
-{:else if quizStarted}
-  <QuizGame mode={selectedMode} amount={questionAmount} type={questionType} timerEnabled={timerEnabled} on:newGame={handleNewGame} />
-{:else if faceOffStarted}
-  <FaceOff mode={faceOffMode} amount={faceOffQuestionAmount} timerEnabled={faceOffTimerEnabled} on:playAgain={handleFaceOffPlayAgain} />
-{/if}
+    {/if}
+    {#if quizStarted}
+      <QuizGame
+        mode={selectedMode}
+        amount={questionAmount}
+        type={questionType}
+        {timerEnabled}
+        on:newGame={handleNewGame}
+      />
+    {/if}
+  </div>
+</main>
 
 <style>
   .main-container {
     display: flex;
-    justify-content: center;
+    justify-content: space-between; /* Distribute the containers evenly */
     align-items: center; /* Align vertically in the center */
     height: 90vh; /* Full height */
+    padding: 0 8rem; /* Add padding on both sides */
   }
 
-  #quiz-page {
+  .left-container {
+    flex: 1;
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 1rem;
-    width: 100%;
-    max-width: 1200px;
+    justify-content: center;
+    align-items: center;
   }
 
-  .selection-container, .faceoff-container {
+  .rectangle {
+    width: 200px;
+    height: 300px;
+    background-color: lightgrey;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+  }
+
+  .centered-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    flex: 1;
+    text-align: center;
+  }
+
+  .circle-background {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 300px;
+    background-color: var(--website-dark-green-color);
+    border-radius: 50%;
+    z-index: -10;
+    backdrop-filter: blur(5px);
+  }
+
+  .border-circle-background {
+    position: absolute;
+    top: 15%;
+    left: 45%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 120px;
+    border: 1px solid var(--website-green-color);
+    opacity: 0.2;
+    border-radius: 50%;
+    z-index: -11;
+  }
+
+  .icon-paw-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    padding: 1rem;
+    color: var(--website-green-color);
+  }
+
+  .description-container {
+    width: 25rem;
+    height: auto;
+    padding: 1rem;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 4px 30px rgba(3, 3, 3, 0.1);
+    backdrop-filter: blur(6.9px);
+    -webkit-backdrop-filter: blur(6.9px);
+    border: 1px solid rgba(27, 27, 27, 0.52);
+    border-radius: 15px;
+  }
+
+  .description {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  .additional-text {
+    font-size: 0.8rem;
+    padding: 0 1rem;
+  }
+
+  .thick-line {
+    width: 90%;
+    height: var(--thick-line-strength);
+    background-color: rgba(255, 255, 255, 0.4);
+    margin: 1rem auto;
+  }
+
+  .right-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .selection-container {
     text-align: center;
     border: 2px solid #ccc;
     border-radius: 8px;
@@ -120,7 +210,8 @@ import QuizGame from "../components/QuizGame.svelte";
     margin-top: 1rem;
   }
 
-  select, input[type="checkbox"] {
+  select,
+  input[type="checkbox"] {
     width: 100%;
     padding: 0.5rem;
     margin-top: 0.5rem;
@@ -131,11 +222,10 @@ import QuizGame from "../components/QuizGame.svelte";
     padding: 0.5rem 1rem;
     font-size: 1rem;
     border: none;
-    border-radius: 4px;
     background-color: #007bff;
     color: white;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    border-radius: 4px;
   }
 
   .start-button:hover {
