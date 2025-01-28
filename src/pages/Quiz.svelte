@@ -18,37 +18,37 @@
 </script>
 
 <main class="main-container">
-  <!-- Placeholder for the left container -->
-  <div class="left-container">
-    <div class="rectangle"></div>
-  </div>
-
-  <!-- Centered container for description -->
-  <div class="centered-container">
-    <div class="circle-background"></div>
-    <div class="border-circle-background"></div>
-    <div class="icon-paw-container">
-      <IconPawFilled stroke={1} size={120} />
+  {#if !quizStarted}
+    <!-- Placeholder for the left container -->
+    <div class="left-container">
+      <div class="rectangle"></div>
     </div>
-    <div class="description-container">
-      <div class="description">
-        <p>Welcome to the Quiz Game!</p>
+
+    <!-- Centered container for description -->
+    <div class="centered-container">
+      <div class="circle-background"></div>
+      <div class="border-circle-background"></div>
+      <div class="icon-paw-container">
+        <IconPawFilled stroke={1} size={120} />
       </div>
-      <div class="thick-line"></div>
-      <div class="additional-text">
-        <p>
-          Ready to test your wildlife knowledge? Pick a difficulty—Easy, Medium,
-          or Hard—and explore the animal kingdom with fun facts and surprises.
-          Use the Joker to get hints if you’re stuck! Whether you're a beginner
-          or an expert, there's something for everyone!
-        </p>
+      <div class="description-container">
+        <div class="description">
+          <p>Welcome to the Quiz Game!</p>
+        </div>
+        <div class="thick-line"></div>
+        <div class="additional-text">
+          <p>
+            Ready to test your wildlife knowledge? Pick a difficulty—Easy, Medium,
+            or Hard—and explore the animal kingdom with fun facts and surprises.
+            Use the Joker to get hints if you’re stuck! Whether you're a beginner
+            or an expert, there's something for everyone!
+          </p>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- Right container for quiz selection -->
-  <div class="right-container">
-    {#if !quizStarted}
+    <!-- Right container for quiz selection -->
+    <div class="right-container">
       <div class="selection-container">
         <h2>Select Quiz Settings</h2>
         <label for="mode">Mode:</label>
@@ -78,8 +78,11 @@
 
         <button class="start-button" on:click={handleStart}>Start Quiz</button>
       </div>
-    {/if}
-    {#if quizStarted}
+    </div>
+  {/if}
+
+  {#if quizStarted}
+    <div class="quiz-game-container">
       <QuizGame
         mode={selectedMode}
         amount={questionAmount}
@@ -87,8 +90,8 @@
         {timerEnabled}
         on:newGame={handleNewGame}
       />
-    {/if}
-  </div>
+    </div>
+  {/if}
 </main>
 
 <style>
@@ -230,5 +233,14 @@
 
   .start-button:hover {
     background-color: #0056b3;
+  }
+
+  .quiz-game-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
   }
 </style>
