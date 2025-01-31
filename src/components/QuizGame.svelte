@@ -30,6 +30,7 @@
       );
       const data = await response.json();
       sessionToken = data.token;
+      console.log("Session token fetched:", sessionToken);
     } catch (error) {
       console.error("Failed to fetch session token:", error);
     }
@@ -64,6 +65,7 @@
       }
 
       const data = await response.json();
+      console.log("Fetched data:", data);
 
       if (data.response_code === 4) {
         // Token exhausted, reset it
@@ -78,6 +80,7 @@
           ...q,
           answers: shuffleArray([...q.incorrect_answers, q.correct_answer]),
         }));
+        console.log("Questions fetched:", questions);
       } else {
         console.error("No questions available.");
       }
@@ -103,17 +106,11 @@
       }
 
       isLoading = false;
+      remainingAnswers = questions[currentQuestionIndex].answers;
+      console.log("Remaining answers:", remainingAnswers);
     } catch (error) {
       console.error("Failed to fetch questions:", error);
     }
-  }
-
-  const comparisonQuestions = generateComparisonQuestions(1);
-  const remainingQuestions = amount - questions.length;
-  if (remainingQuestions > 0) {
-    const extraComparisonQuestions =
-      generateComparisonQuestions(remainingQuestions);
-    questions = [...questions, ...extraComparisonQuestions];
   }
 
   // Generate comparison questions
@@ -189,7 +186,7 @@
   }
 
   // Handle answer selection
-    function handleAnswerSelection(answer) {
+  function handleAnswerSelection(answer) {
     selectedAnswer = answer;
     isCorrect = answer === questions[currentQuestionIndex].correct_answer;
 
@@ -203,10 +200,6 @@
         isCorrect,
       },
     ];
-
-    // Debugging: Log the current question and options
-    console.log("Current Question:", questions[currentQuestionIndex]);
-    console.log("Options:", questions[currentQuestionIndex].options);
 
     // Move to the next question
     if (timerEnabled) {
@@ -291,7 +284,7 @@
     jokerUsed = true;
     const correctAnswer = questions[currentQuestionIndex].correct_answer;
     const incorrectAnswers = questions[currentQuestionIndex].answers.filter(
-      (answer) => answer !== correctAnswer,
+      (answer) => answer !== correctAnswer
     );
 
     if (type === "comparison") {
@@ -323,18 +316,31 @@
       } else {
         remainingAnswers = [
           correctAnswer,
-          { answer: incorrectAnswers[0], isGreyedOut: true },
+          { ...incorrectAnswers[0], isGreyedOut: true },
         ];
       }
     }
+
+    // Ensure the answers are displayed correctly
+    remainingAnswers = remainingAnswers.map((answer) =>
+      typeof answer === "object" ? answer : { answer }
+    );
   }
+
   $: console.log('Remaining Answers:', remainingAnswers);
+
   onMount(async () => {
     isLoading = true;
     await fetchSessionToken(); // Retrieve a session token first
     await fetchQuestions(); // Fetch questions using the session token
 
-    remainingAnswers = questions[currentQuestionIndex].answers;
+    if (questions.length > 0) {
+      remainingAnswers = questions[currentQuestionIndex].answers;
+      isLoading = false;
+    } else {
+      console.error("No questions fetched.");
+      isLoading = false;
+    }
 
     if (timerEnabled) {
       startTimer(); // Start the timer if enabled
@@ -374,7 +380,7 @@
       <h2 class="question">
         {@html questions[currentQuestionIndex].question}
       </h2>
-      {#if type === "comparison" || type === "any type"}
+      {#if questions[currentQuestionIndex].comparisonAttribute}
         <div class="answers">
           {#each remainingAnswers as animal}
             <button
@@ -405,12 +411,10 @@
               on:click={() => handleAnswerSelection(answer.answer || answer)}
               class:selected={selectedAnswer === (answer.answer || answer)}
               class:correct={selectedAnswer !== null &&
-                (answer.answer || answer) ===
-                  questions[currentQuestionIndex].correct_answer}
+                (answer.answer || answer) === questions[currentQuestionIndex].correct_answer}
               class:incorrect={selectedAnswer !== null &&
                 selectedAnswer === (answer.answer || answer) &&
-                (answer.answer || answer) !==
-                  questions[currentQuestionIndex].correct_answer}
+                (answer.answer || answer) !== questions[currentQuestionIndex].correct_answer}
               disabled={selectedAnswer !== null || answer.isGreyedOut}
               style={answer.isGreyedOut ? "background-color: lightgrey;" : ""}
             >
