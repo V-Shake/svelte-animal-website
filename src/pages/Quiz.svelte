@@ -1,6 +1,6 @@
 <script>
   import QuizGame from "../components/QuizGame.svelte";
-  import { IconPawFilled } from "@tabler/icons-svelte";
+  import { IconPawFilled, IconSwords, IconUser, IconLock } from "@tabler/icons-svelte";
 
   let selectedMode = "easy"; // Default mode for Quiz
   let questionAmount = "8"; // Default question amount for Quiz
@@ -21,7 +21,20 @@
   {#if !quizStarted}
     <!-- Placeholder for the left container -->
     <div class="left-container">
-      <div class="rectangle"></div>
+      <div class="rectangle">
+        <div class="icon-lock-container">
+          <IconLock class="icon-lock" stroke={1} size={48} />
+        </div>
+        <div class="header">Multiplayer Mode</div>
+        <div style="display: flex; justify-content: space-between; width: 100%; padding: 40px 30px; color: var(--dark-color);">
+          <IconUser stroke={1} size={60} />
+          <IconSwords stroke={1} size={60} />
+          <IconUser stroke={1} size={60} />
+        </div>
+        <div class="subtitle">play with other players</div>
+        <div class="rectangle-thick-line"></div>
+        <div class="rectangle-description">random match or friend match</div>
+      </div>
     </div>
 
     <!-- Centered container for description -->
@@ -111,11 +124,60 @@
   }
 
   .rectangle {
-    width: 200px;
-    height: 300px;
-    background-color: lightgrey;
-    border: 2px solid #ccc;
-    border-radius: 8px;
+    position: relative;
+    flex-grow: 0;
+    min-width: 320px;
+    min-height: 470px;
+    background-color: var(--website-dark-green-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    box-sizing: border-box;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    color: var(--dark-color); /* Set the font color to var(--dark-color) */
+  }
+
+  .icon-lock-container {
+    position: absolute;
+    top: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--card-background-color);
+  }
+
+  .rectangle:hover .icon-lock-container {
+    color: var(--website-green-color);
+  }
+
+  .header {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .subtitle {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+
+  .rectangle-thick-line {
+    width: 100%;
+    height: var(--thick-line-strength);
+    background-color: var(--dark-color);
+    margin-bottom: 20px;
+  }
+
+  .rectangle-description {
+    font-size: 0.9rem;
+    text-align: center;
+  }
+
+  .description {
+    font-size: 14px;
+    text-align: center;
   }
 
   .centered-container {
