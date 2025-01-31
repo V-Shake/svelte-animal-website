@@ -36,6 +36,19 @@
     }
   }
 
+  // Reset the session token
+  async function resetSessionToken() {
+    try {
+      const response = await fetch(
+        `https://opentdb.com/api_token.php?command=reset&token=${sessionToken}`,
+      );
+      const data = await response.json();
+      console.log("Session token reset:", data);
+    } catch (error) {
+      console.error("Failed to reset session token:", error);
+    }
+  }
+
   // Fetch questions based on the selected mode, amount, type, and session token
   async function fetchQuestions(retryCount = 0) {
     if (!sessionToken) {
