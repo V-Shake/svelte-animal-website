@@ -86,13 +86,19 @@
       }
 
       if (type === "any") {
-        // Generate at least one comparison question
-        const comparisonQuestions = generateComparisonQuestions(1);
+        // Determine the number of comparison questions based on the total amount
+        let comparisonCount = Math.floor(amount / 4);
+        if (amount >= 16) {
+          comparisonCount = Math.floor(amount / 2);
+        }
+
+        // Generate the comparison questions
+        const comparisonQuestions = generateComparisonQuestions(comparisonCount);
 
         // Ensure the total amount is correct
         const remainingQuestions = amount - comparisonQuestions.length;
 
-        // Replace some API questions with the comparison question
+        // Replace some API questions with the comparison questions
         questions = [
           ...questions.slice(0, remainingQuestions),
           ...comparisonQuestions,
@@ -287,7 +293,7 @@
       (answer) => answer !== correctAnswer
     );
 
-    if (type === "comparison") {
+    if (questions[currentQuestionIndex].comparisonAttribute) {
       // For comparison questions, mark two wrong options as grey and move them to the bottom
       if (incorrectAnswers.length > 1) {
         remainingAnswers = [
