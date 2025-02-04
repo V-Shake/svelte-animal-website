@@ -16,7 +16,7 @@
   let isLoading = true; // Show loading state while fetching questions
   let userAnswers = []; // Track user answers for the overview
   let quizCompleted = false; // Flag to show the overview after the last question
-  let timer = 30; // Timer countdown in seconds
+  let timer = 15; // Timer countdown in seconds
   let timerInterval;
   let jokerUsed = false; // Track if the joker has been used
   let remainingAnswers = []; // Track the remaining answers after using the joker
@@ -288,7 +288,7 @@
 
   // Start the timer countdown
   function startTimer() {
-    timer = 30;
+    timer = 15;
     timerInterval = setInterval(() => {
       timer--;
       if (timer <= 0) {
@@ -314,14 +314,16 @@
         remainingAnswers = [
           correctAnswer,
           incorrectAnswers[0],
-          ...incorrectAnswers
-            .slice(1)
-            .map((answer) => ({ ...answer, isGreyedOut: true })),
+          ...incorrectAnswers.slice(1).map((answer) => ({
+            ...answer,
+            isGreyedOut: true,
+            crossedOut: true,
+          })),
         ];
       } else {
         remainingAnswers = [
           correctAnswer,
-          { ...incorrectAnswers[0], isGreyedOut: true },
+          { ...incorrectAnswers[0], isGreyedOut: true, crossedOut: true },
         ];
       }
     } else {
@@ -332,12 +334,12 @@
           incorrectAnswers[0],
           ...incorrectAnswers
             .slice(1)
-            .map((answer) => ({ answer, isGreyedOut: true })),
+            .map((answer) => ({ answer, isGreyedOut: true, crossedOut: true })),
         ];
       } else {
         remainingAnswers = [
           correctAnswer,
-          { ...incorrectAnswers[0], isGreyedOut: true },
+          { ...incorrectAnswers[0], isGreyedOut: true, crossedOut: true },
         ];
       }
     }
@@ -420,8 +422,10 @@
               class:incorrect={selectedAnswer !== null &&
                 selectedAnswer === animal &&
                 animal !== questions[currentQuestionIndex].correct_answer}
+              class:crossedOut={animal.isGreyedOut}
+              class:isGreyedOut={animal.isGreyedOut}
               disabled={selectedAnswer !== null || animal.isGreyedOut}
-              style={animal.isGreyedOut ? "background-color: lightgrey;" : ""}
+              style={animal.isGreyedOut ? "" : ""}
             >
               <img
                 src={`/images/${animal.group.toLowerCase()}${animal.group_number}.png`}
@@ -435,7 +439,9 @@
         <div class="answers">
           {#each remainingAnswers as answer}
             <button
-              class="answer-button"
+              class="answer-button
+              {answer.crossedOut ? 'crossedOut' : ''}
+              {answer.isGreyedOut ? 'isGreyedOut' : ''}"
               on:click={() => handleAnswerSelection(answer.answer || answer)}
               class:selected={selectedAnswer === (answer.answer || answer)}
               class:correct={selectedAnswer !== null &&
@@ -446,7 +452,7 @@
                 (answer.answer || answer) !==
                   questions[currentQuestionIndex].correct_answer}
               disabled={selectedAnswer !== null || answer.isGreyedOut}
-              style={answer.isGreyedOut ? "background-color: lightgrey;" : ""}
+              style={answer.isGreyedOut ? "" : ""}
             >
               <span class="radio-circle"></span>
               <!-- Circle -->
@@ -487,19 +493,19 @@
 
   .question-container {
     text-align: center;
-    max-width: 600px;
+    max-width: 35rem;
     margin: auto;
   }
 
   .question {
     font-size: 1.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 3rem;
   }
 
   .answers {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 1rem;
     align-items: center;
     justify-content: center;
   }
@@ -508,7 +514,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0.5rem 2rem;
+    padding: 0.9rem 2rem;
     font-size: 1rem;
     cursor: pointer;
     background-color: var(--grey-color);
@@ -577,12 +583,6 @@
     cursor: not-allowed;
   }
 
-  .answered .answer-button:not(.selected) {
-    background-color: rgb(34, 34, 34);
-    color: darkgrey;
-    opacity: 0.6;
-  }
-
   .next-button,
   .joker-button {
     margin-top: 1rem;
@@ -614,6 +614,15 @@
     color: white;
   }
 
+  .answer-button.crossedOut {
+    text-decoration: line-through;
+    color: var(--quiz-wrong-color);
+  }
+
+  .answer-button.isGreyedOut {
+    background-color: rgb(20, 20, 20);
+  }
+
   .progress-bar {
     position: absolute;
     top: 3.6rem;
@@ -640,7 +649,7 @@
   }
 
   .progress-line.skipped {
-    background-color: darkgrey;
+    background-color: var(--dark-color);
   }
 
   .timer {
