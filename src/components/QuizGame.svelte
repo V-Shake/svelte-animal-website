@@ -411,35 +411,32 @@
         {@html questions[currentQuestionIndex].question}
       </h2>
       {#if questions[currentQuestionIndex].comparisonAttribute}
-        <div class="answer-buttons-container">
-          {#each remainingAnswers as animal}
-            <button
-              class="answer-button"
-              on:click={() => handleAnswerSelection(animal)}
-              class:selected={selectedAnswer === animal}
-              class:correct={selectedAnswer !== null &&
-                animal === questions[currentQuestionIndex].correct_answer}
-              class:incorrect={selectedAnswer !== null &&
-                selectedAnswer === animal &&
-                animal !== questions[currentQuestionIndex].correct_answer}
-              class:crossedOut={animal.isGreyedOut}
-              class:isGreyedOut={animal.isGreyedOut}
-              disabled={selectedAnswer !== null || animal.isGreyedOut}
-              style={animal.isGreyedOut ? "" : ""}
-            >
-              <div class="answer-content">
-                <img
-                  src={`/images/${animal.group.toLowerCase()}${animal.group_number}.png`}
-                  alt={animal.name}
-                />
-                <div class="text-group">
-                  <span class="radio-circle"></span>
-                  <p>{animal.name}</p>
-                </div>
+      <div class="answer-buttons-container">
+        {#each remainingAnswers as animal}
+          <button
+            class="answer-button"
+            on:click={() => handleAnswerSelection(animal)}
+            class:selected={selectedAnswer === animal}
+            class:correct={selectedAnswer !== null && animal === questions[currentQuestionIndex].correct_answer}
+            class:incorrect={selectedAnswer !== null && selectedAnswer === animal && animal !== questions[currentQuestionIndex].correct_answer}
+            class:crossedOut={animal.isGreyedOut}
+            class:isGreyedOut={animal.isGreyedOut}
+            disabled={selectedAnswer !== null || animal.isGreyedOut}
+          >
+            <div class="answer-content">
+              <img
+                src={`/images/${animal.group.toLowerCase()}${animal.group_number}.png`}
+                alt={animal.name}
+              />
+              <div class="text-group">
+                <span class="radio-circle"></span>
+                <p>{animal.name}</p>
               </div>
-            </button>
-          {/each}
-        </div>
+            </div>
+          </button>
+        {/each}
+      </div>
+      
       {:else}
         <div class="answers">
           {#each remainingAnswers as answer}
@@ -523,8 +520,29 @@
   }
 
   .answer-buttons-container .answer-button {
-    width: 20rem; /* Set width to 20rem */
-    height: 20rem; /* Set height to 20rem */
+    width: 20rem;
+    height: 20rem;
+    display: flex;
+    align-items: center; /* Vertically centers the text */
+    justify-content: center; /* Horizontally centers the text */
+    position: relative; /* For absolute positioning of the radio button */
+    text-align: center;
+  }
+  
+  .text-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    margin-left: -1rem;
+  }
+ 
+  .answer-buttons-container .answer-content {
+    display: flex;
+    flex-direction: column; /* Stack the radio circle and text vertically */
+    align-items: center; /* Center horizontally */
+    justify-content: center; /* Center vertically */
   }
 
   .answer-button {
@@ -544,12 +562,6 @@
     opacity: 1;
     width: 30rem;
     text-align: center;
-  }
-
-  .text-group {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
   }
 
   .answer-button img {
