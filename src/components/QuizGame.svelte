@@ -2,6 +2,7 @@
   import { createEventDispatcher, onMount } from "svelte";
   import QuizOverview from "./QuizOverview.svelte";
   import animalData from "../assets/animaldata.js";
+  import { IconLogout2 } from "@tabler/icons-svelte";
 
   export let mode = "easy"; // Default to easy mode if no mode is passed
   export let amount = 8; // Default question amount if no amount is passed
@@ -106,7 +107,8 @@
         }
 
         // Generate the comparison questions
-        const comparisonQuestions = generateComparisonQuestions(comparisonCount);
+        const comparisonQuestions =
+          generateComparisonQuestions(comparisonCount);
 
         // Ensure the total amount is correct
         const remainingQuestions = amount - comparisonQuestions.length;
@@ -303,7 +305,7 @@
     jokerUsed = true;
     const correctAnswer = questions[currentQuestionIndex].correct_answer;
     const incorrectAnswers = questions[currentQuestionIndex].answers.filter(
-      (answer) => answer !== correctAnswer
+      (answer) => answer !== correctAnswer,
     );
 
     if (questions[currentQuestionIndex].comparisonAttribute) {
@@ -342,11 +344,11 @@
 
     // Ensure the answers are displayed correctly
     remainingAnswers = remainingAnswers.map((answer) =>
-      typeof answer === "object" ? answer : { answer }
+      typeof answer === "object" ? answer : { answer },
     );
   }
 
-  $: console.log('Remaining Answers:', remainingAnswers);
+  $: console.log("Remaining Answers:", remainingAnswers);
 
   onMount(async () => {
     isLoading = true;
@@ -366,6 +368,13 @@
     }
   });
 </script>
+
+{#if !quizCompleted}
+  <div class="quit-button" on:click={newGame}>
+    <IconLogout2 stroke={1} size={24} />
+    <span>quit</span>
+  </div>
+{/if}
 
 <div id="quiz-page">
   {#if isLoading}
@@ -430,10 +439,12 @@
               on:click={() => handleAnswerSelection(answer.answer || answer)}
               class:selected={selectedAnswer === (answer.answer || answer)}
               class:correct={selectedAnswer !== null &&
-                (answer.answer || answer) === questions[currentQuestionIndex].correct_answer}
+                (answer.answer || answer) ===
+                  questions[currentQuestionIndex].correct_answer}
               class:incorrect={selectedAnswer !== null &&
                 selectedAnswer === (answer.answer || answer) &&
-                (answer.answer || answer) !== questions[currentQuestionIndex].correct_answer}
+                (answer.answer || answer) !==
+                  questions[currentQuestionIndex].correct_answer}
               disabled={selectedAnswer !== null || answer.isGreyedOut}
               style={answer.isGreyedOut ? "background-color: lightgrey;" : ""}
             >
@@ -595,5 +606,26 @@
     margin-bottom: 1rem;
     font-size: 1.2rem;
     font-weight: bold;
+  }
+
+  .quit-button {
+    position: absolute;
+    top: 3rem;
+    left: 6.5rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: var(--card-background-color);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    font-size: 0.8rem;
+  }
+
+  .quit-button:hover{
+    color: var(--website-green-color); /* Change background color on hover */
+  }
+
+  .quit-button span{
+    margin-left: 5px;
   }
 </style>

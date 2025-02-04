@@ -29,7 +29,7 @@
 </script>
 
 <main class="main-container">
-  {#if showPlayQuizContainer}
+  {#if showPlayQuizContainer && !quizStarted}
     <div class="back-button" on:click={togglePlayQuizContainer}>
       <IconArrowNarrowLeft stroke={1} size={24} />
       <span>back</span>
@@ -368,20 +368,24 @@
     height: 100%;
   }
 
-  .back-button {
-        display: flex;
-        align-items: center;
-        color: var(--card-background-color);
-        cursor: pointer;
-        transition: all 0.3s ease;
-        margin-bottom: 2rem;
-        text-decoration: none;
-        font-size: 0.8rem;
-    }
+  .back-button{
+    position: absolute;
+    top: 3rem;
+    left: 6.5rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: var(--card-background-color);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    font-size: 0.8rem;
+  }
 
-    .back-button:hover {
-        color: var(
-            --website-green-color
-        ); 
-    }
+  .back-button:hover{
+    color: var(--website-green-color); /* Change background color on hover */
+  }
+
+  .back-button span{
+    margin-left: 5px;
+  }
 </style>

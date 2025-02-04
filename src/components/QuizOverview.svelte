@@ -49,6 +49,7 @@
       const percentage = (correctAnswers / userAnswers.length) * 100;
       return Math.round(percentage);
     }
+    
   </script>
   
   <div class="overview">
@@ -99,6 +100,10 @@
   </div>
   
   <style>
+    .overview {
+      text-align: center;
+    }
+
     .progress-circle {
       margin: 1rem 0;
     }
