@@ -448,7 +448,10 @@
               disabled={selectedAnswer !== null || answer.isGreyedOut}
               style={answer.isGreyedOut ? "background-color: lightgrey;" : ""}
             >
-              {@html answer.answer || answer}
+              <span class="radio-circle"></span>
+              <!-- Circle -->
+              <span class="answer-text">{@html answer.answer || answer}</span>
+              <!-- Answer Text -->
             </button>
           {/each}
         </div>
@@ -497,18 +500,47 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
   }
 
   .answer-button {
-    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 2rem;
     font-size: 1rem;
     cursor: pointer;
     background-color: var(--grey-color);
     color: white;
-    transition: background-color 0.3s ease;
-    border: none; 
+    border: none;
     outline: none;
     border-radius: 10px;
+    transition: all 0.3s ease;
+    opacity: 1;
+    position: relative;
+    width: 30rem;
+    text-align: center;
+  }
+
+  .radio-circle {
+    width: 14px;
+    height: 14px;
+    border: 2px solid white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+  }
+
+  .answer-button.selected .radio-circle {
+    background-color: white; /* Filled when selected */
+  }
+
+  .answer-text {
+    flex-grow: 1; /* Take up available space */
+    text-align: center; /* Center text */
   }
 
   .answer-button img {
@@ -528,18 +560,27 @@
 
   .answer-button.selected {
     background-color: rgb(83, 86, 87);
+    color: white;
   }
 
   .answer-button.correct {
     background-color: var(--quiz-correct-color);
+    color: white;
   }
 
   .answer-button.incorrect {
     background-color: var(--quiz-wrong-color);
+    color: white;
   }
 
   .answer-button[disabled] {
     cursor: not-allowed;
+  }
+
+  .answered .answer-button:not(.selected) {
+    background-color: rgb(34, 34, 34);
+    color: darkgrey;
+    opacity: 0.6;
   }
 
   .next-button,
@@ -621,11 +662,11 @@
     font-size: 0.8rem;
   }
 
-  .quit-button:hover{
+  .quit-button:hover {
     color: var(--website-green-color); /* Change background color on hover */
   }
 
-  .quit-button span{
+  .quit-button span {
     margin-left: 5px;
   }
 </style>
