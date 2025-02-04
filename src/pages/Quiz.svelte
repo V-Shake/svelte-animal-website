@@ -5,6 +5,7 @@
     IconSwords,
     IconUser,
     IconLock,
+    IconArrowNarrowLeft,
   } from "@tabler/icons-svelte";
 
   let selectedMode = "easy"; // Default mode for Quiz
@@ -28,6 +29,13 @@
 </script>
 
 <main class="main-container">
+  {#if showPlayQuizContainer}
+    <div class="back-button" on:click={togglePlayQuizContainer}>
+      <IconArrowNarrowLeft stroke={1} size={24} />
+      <span>back</span>
+    </div>
+  {/if}
+
   {#if !quizStarted}
     {#if !showPlayQuizContainer}
       <!-- Placeholder for the left container -->
@@ -46,7 +54,9 @@
           </div>
           <div class="subtitle">Play with other players</div>
           <div class="rectangle-thick-line"></div>
-          <div class="rectangle-description">Play with friends or random opponents</div>
+          <div class="rectangle-description">
+            Play with friends or random opponents
+          </div>
         </div>
       </div>
 
@@ -82,7 +92,9 @@
           </div>
           <div class="subtitle">Play solo</div>
           <div class="rectangle-thick-line"></div>
-          <div class="rectangle-description">Test your knowledge and learn facts</div>
+          <div class="rectangle-description">
+            Test your knowledge and learn facts
+          </div>
         </div>
       </div>
     {/if}
@@ -117,7 +129,8 @@
           <label for="timer">Enable Timer:</label>
           <input type="checkbox" id="timer" bind:checked={timerEnabled} />
 
-          <button class="start-button" on:click={handleStart}>Start Quiz</button>
+          <button class="start-button" on:click={handleStart}>Start Quiz</button
+          >
         </div>
       </div>
     {/if}
@@ -354,4 +367,21 @@
     width: 100%;
     height: 100%;
   }
+
+  .back-button {
+        display: flex;
+        align-items: center;
+        color: var(--card-background-color);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-bottom: 2rem;
+        text-decoration: none;
+        font-size: 0.8rem;
+    }
+
+    .back-button:hover {
+        color: var(
+            --website-green-color
+        ); 
+    }
 </style>
