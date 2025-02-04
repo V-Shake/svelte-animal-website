@@ -411,7 +411,7 @@
         {@html questions[currentQuestionIndex].question}
       </h2>
       {#if questions[currentQuestionIndex].comparisonAttribute}
-        <div class="answers">
+        <div class="answer-buttons-container">
           {#each remainingAnswers as animal}
             <button
               class="answer-button"
@@ -427,11 +427,16 @@
               disabled={selectedAnswer !== null || animal.isGreyedOut}
               style={animal.isGreyedOut ? "" : ""}
             >
-              <img
-                src={`/images/${animal.group.toLowerCase()}${animal.group_number}.png`}
-                alt={animal.name}
-              />
-              <p>{animal.name}</p>
+              <div class="answer-content">
+                <img
+                  src={`/images/${animal.group.toLowerCase()}${animal.group_number}.png`}
+                  alt={animal.name}
+                />
+                <div class="text-group">
+                  <span class="radio-circle"></span>
+                  <p>{animal.name}</p>
+                </div>
+              </div>
             </button>
           {/each}
         </div>
@@ -510,11 +515,24 @@
     justify-content: center;
   }
 
+  .answer-buttons-container {
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Center the buttons horizontally */
+    align-items: center; /* Center the buttons vertically if needed */
+    gap: 1rem;
+  }
+
+  .answer-buttons-container .answer-button {
+    width: 20rem; /* Set width to 20rem */
+    height: 20rem; /* Set height to 20rem */
+  }
+
   .answer-button {
     display: flex;
-    align-items: center;
+    flex-direction: row; /* Stack content vertically inside the button */
     justify-content: center;
-    padding: 0.9rem 2rem;
+    align-items: center;
+    padding: 1rem;
     font-size: 1rem;
     cursor: pointer;
     background-color: var(--grey-color);
@@ -524,9 +542,21 @@
     border-radius: 10px;
     transition: all 0.3s ease;
     opacity: 1;
-    position: relative;
     width: 30rem;
     text-align: center;
+  }
+
+  .text-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .answer-button img {
+    width: 230px;
+    height: 230px;
+    border-radius: 10px;
+    margin-bottom: 1rem;
   }
 
   .radio-circle {
@@ -549,10 +579,15 @@
     text-align: center; /* Center text */
   }
 
-  .answer-button img {
-    width: 100px;
-    height: 100px;
-    margin-bottom: 0.5rem;
+  .answer-content {
+    display: flex;
+    flex-direction: column; /* Stack the radio circle and text vertically */
+    align-items: center; /* Center horizontally */
+    justify-content: center; /* Center vertically */
+  }
+
+  .answer-button .radio-circle {
+    margin-right: 4px; /* Spacing between radio circle and text */
   }
 
   .answer-button p {
@@ -581,6 +616,11 @@
 
   .answer-button[disabled] {
     cursor: not-allowed;
+  }
+
+  button:disabled {
+    background-color: rgb(20, 20, 20);
+    color: rgb(83, 86, 87);
   }
 
   .next-button,
