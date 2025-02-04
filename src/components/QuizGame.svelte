@@ -502,18 +502,18 @@
   .answer-button {
     padding: 0.5rem 1rem;
     font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
     cursor: pointer;
-    background-color: white;
+    background-color: var(--grey-color);
+    color: white;
     transition: background-color 0.3s ease;
+    border: none; 
+    outline: none;
+    border-radius: 10px;
   }
 
   .answer-button img {
     width: 100px;
     height: 100px;
-    object-fit: cover;
-    border-radius: 8px;
     margin-bottom: 0.5rem;
   }
 
@@ -523,24 +523,23 @@
   }
 
   .answer-button:hover:not([disabled]) {
-    background-color: #f0f0f0;
+    background-color: rgb(49, 49, 49);
   }
 
   .answer-button.selected {
-    background-color: lightblue;
+    background-color: rgb(83, 86, 87);
   }
 
   .answer-button.correct {
-    background-color: lightgreen;
+    background-color: var(--quiz-correct-color);
   }
 
   .answer-button.incorrect {
-    background-color: lightcoral;
+    background-color: var(--quiz-wrong-color);
   }
 
   .answer-button[disabled] {
     cursor: not-allowed;
-    opacity: 0.6;
   }
 
   .next-button,
@@ -567,16 +566,17 @@
   }
 
   .correct {
-    color: green;
-    font-weight: bold;
+    color: white;
   }
 
   .incorrect {
-    color: red;
-    font-weight: bold;
+    color: white;
   }
 
   .progress-bar {
+    position: absolute;
+    top: 3.6rem;
+    padding: 0 16rem;
     display: flex;
     gap: 0.5rem;
     margin-bottom: 1rem;
@@ -586,16 +586,16 @@
   .progress-line {
     flex: 1;
     height: 5px;
-    background-color: grey;
+    background-color: var(--grey-color);
     border-radius: 4px;
   }
 
   .progress-line.correct {
-    background-color: lightgreen;
+    background-color: var(--quiz-correct-color);
   }
 
   .progress-line.incorrect {
-    background-color: lightcoral;
+    background-color: var(--quiz-wrong-color);
   }
 
   .progress-line.skipped {
