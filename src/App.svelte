@@ -3,7 +3,7 @@
   import LandingPage from "./pages/LandingPage.svelte";
   import CardOverview from "./pages/CardOverview.svelte";
   import QuartetGameOverview from "./pages/QuartetGameOverview.svelte";
-  import QuartetGame from "./pages/QuartetGame.svelte";
+  import PlayQuiz from "./pages/PlayQuiz.svelte";
   import Quiz from "./pages/Quiz.svelte";
   import Navbar from "./components/Navbar.svelte";
   import "../public/fonts/stylesheet.css";
@@ -12,7 +12,7 @@
     "/": LandingPage,
     "/cards": CardOverview,
     "/quartet": QuartetGameOverview,
-    "/quartet-game": QuartetGame,
+    "/play-quiz": PlayQuiz,
     "/quiz": Quiz,
   };
 </script>

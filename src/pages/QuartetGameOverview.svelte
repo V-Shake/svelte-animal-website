@@ -35,7 +35,7 @@
         </div>
     </div>
 
-    <a href="#/quartet-game">
+    <a href="#/play-quiz">
         <PlayOptionTwo />
     </a>
 </main>

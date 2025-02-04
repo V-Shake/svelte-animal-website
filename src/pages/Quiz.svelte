@@ -1,12 +1,18 @@
 <script>
   import QuizGame from "../components/QuizGame.svelte";
-  import { IconPawFilled, IconSwords, IconUser, IconLock } from "@tabler/icons-svelte";
+  import {
+    IconPawFilled,
+    IconSwords,
+    IconUser,
+    IconLock,
+  } from "@tabler/icons-svelte";
 
   let selectedMode = "easy"; // Default mode for Quiz
   let questionAmount = "8"; // Default question amount for Quiz
   let quizStarted = false;
   let timerEnabled = false; // Timer toggle state for Quiz
   let questionType = "any"; // Default question type for Quiz
+  let showPlayQuizContainer = false; // Control visibility of play quiz container
 
   function handleStart() {
     quizStarted = true; // Start the quiz
@@ -15,90 +21,113 @@
   function handleNewGame() {
     quizStarted = false; // Reset to go back to the selection screen
   }
+
+  function togglePlayQuizContainer() {
+    showPlayQuizContainer = !showPlayQuizContainer; // Toggle visibility of play quiz container
+  }
 </script>
 
 <main class="main-container">
   {#if !quizStarted}
-    <!-- Placeholder for the left container -->
-    <div class="left-container">
-      <div class="rectangle">
-        <div class="icon-lock-container">
-          <IconLock class="icon-lock" stroke={1} size={48} />
-        </div>
-        <div class="header">Multiplayer Mode</div>
-        <div style="display: flex; justify-content: space-between; width: 100%; padding: 40px 30px; color: var(--dark-color);">
-          <IconUser stroke={1} size={60} />
-          <IconSwords stroke={1} size={60} />
-          <IconUser stroke={1} size={60} />
-        </div>
-        <div class="subtitle">play with other players</div>
-        <div class="rectangle-thick-line"></div>
-        <div class="rectangle-description">random match or friend match</div>
-      </div>
-    </div>
-
-    <!-- Centered container for description -->
-    <div class="centered-container">
-      <div class="circle-background"></div>
-      <div class="border-circle-background"></div>
-      <div class="icon-paw-container">
-        <IconPawFilled stroke={1} size={120} />
-      </div>
-      <div class="description-container">
-        <div class="description">
-          <p>Welcome to the Quiz Game!</p>
-        </div>
-        <div class="thick-line"></div>
-        <div class="additional-text">
-          <p>
-            Ready to test your wildlife knowledge? Pick a difficulty—Easy, Medium,
-            or Hard—and explore the animal kingdom with fun facts and surprises.
-            Use the Joker to get hints if you’re stuck! Whether you're a beginner
-            or an expert, there's something for everyone!
-          </p>
+    {#if !showPlayQuizContainer}
+      <!-- Placeholder for the left container -->
+      <div class="left-container">
+        <div class="rectangle">
+          <div class="icon-lock-container">
+            <IconLock class="icon-lock" stroke={1} size={48} />
+          </div>
+          <div class="header">Multiplayer Mode</div>
+          <div
+            style="display: flex; justify-content: space-between; width: 100%; padding: 40px 30px; color: var(--dark-color);"
+          >
+            <IconUser stroke={1} size={60} />
+            <IconSwords stroke={1} size={60} />
+            <IconUser stroke={1} size={60} />
+          </div>
+          <div class="subtitle">Play with other players</div>
+          <div class="rectangle-thick-line"></div>
+          <div class="rectangle-description">Play with friends or random opponents</div>
         </div>
       </div>
-    </div>
 
-    <!-- Right container for quiz selection -->
-    <div class="right-container">
-      <div class="selection-container">
-        <h2>Select Quiz Settings</h2>
-        <label for="mode">Mode:</label>
-        <select id="mode" bind:value={selectedMode}>
-          <option value="easy">Easy</option>
-          <option value="medium">Medium</option>
-          <option value="hard">Hard</option>
-        </select>
-
-        <label for="amount">Question Amount:</label>
-        <select id="amount" bind:value={questionAmount}>
-          <option value="8">8</option>
-          <option value="12">12</option>
-          <option value="16">16</option>
-        </select>
-
-        <label for="type">Question Type:</label>
-        <select id="type" bind:value={questionType}>
-          <option value="any">Any Type</option>
-          <option value="multiple">Multiple Choice</option>
-          <option value="boolean">True/False</option>
-          <option value="comparison">Comparison</option>
-        </select>
-
-        <label for="timer">Enable Timer:</label>
-        <input type="checkbox" id="timer" bind:checked={timerEnabled} />
-
-        <button class="start-button" on:click={handleStart}>Start Quiz</button>
+      <!-- Centered container for description -->
+      <div class="centered-container">
+        <div class="circle-background"></div>
+        <div class="border-circle-background"></div>
+        <div class="icon-paw-container">
+          <IconPawFilled stroke={1} size={120} />
+        </div>
+        <div class="description-container">
+          <div class="description">
+            <p>Welcome to the Quiz Game!</p>
+          </div>
+          <div class="thick-line"></div>
+          <div class="additional-text">
+            <p>
+              Ready to test your wildlife knowledge? Pick a difficulty—Easy,
+              Medium, or Hard—and explore the animal kingdom with fun facts and
+              surprises. Use the Joker to get hints if you’re stuck! Whether
+              you're a beginner or an expert, there's something for everyone!
+            </p>
+          </div>
+        </div>
       </div>
-    </div>
+
+      <!-- Right container -->
+      <div class="right-container" on:click={togglePlayQuizContainer}>
+        <div class="rectangle right-rectangle">
+          <div class="header">Single Player Mode</div>
+          <div class="icon-user-container">
+            <IconUser stroke={1} size={60} />
+          </div>
+          <div class="subtitle">Play solo</div>
+          <div class="rectangle-thick-line"></div>
+          <div class="rectangle-description">Test your knowledge and learn facts</div>
+        </div>
+      </div>
+    {/if}
+
+    <!-- Play quiz container for quiz selection -->
+    {#if showPlayQuizContainer}
+      <div class="play-quiz-container">
+        <div class="selection-container">
+          <h2>Select Quiz Settings</h2>
+          <label for="mode">Mode:</label>
+          <select id="mode" bind:value={selectedMode}>
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+
+          <label for="amount">Question Amount:</label>
+          <select id="amount" bind:value={questionAmount}>
+            <option value="8">8</option>
+            <option value="12">12</option>
+            <option value="16">16</option>
+          </select>
+
+          <label for="type">Question Type:</label>
+          <select id="type" bind:value={questionType}>
+            <option value="any">Any Type</option>
+            <option value="multiple">Multiple Choice</option>
+            <option value="boolean">True/False</option>
+            <option value="comparison">Comparison</option>
+          </select>
+
+          <label for="timer">Enable Timer:</label>
+          <input type="checkbox" id="timer" bind:checked={timerEnabled} />
+
+          <button class="start-button" on:click={handleStart}>Start Quiz</button>
+        </div>
+      </div>
+    {/if}
   {/if}
 
   {#if quizStarted}
     <div class="quiz-game-container">
       <QuizGame
         mode={selectedMode}
-        amount={questionAmount}
+        amount={parseInt(questionAmount)}
         type={questionType}
         {timerEnabled}
         on:newGame={handleNewGame}
@@ -116,7 +145,8 @@
     padding: 0 8rem; /* Add padding on both sides */
   }
 
-  .left-container {
+  .left-container,
+  .right-container {
     flex: 1;
     display: flex;
     justify-content: center;
@@ -126,8 +156,8 @@
   .rectangle {
     position: relative;
     flex-grow: 0;
-    min-width: 320px;
-    min-height: 470px;
+    width: 320px;
+    height: 470px;
     background-color: var(--website-dark-green-color);
     display: flex;
     flex-direction: column;
@@ -138,6 +168,24 @@
     border-radius: 15px;
     transition: all 0.3s ease;
     color: var(--dark-color); /* Set the font color to var(--dark-color) */
+  }
+
+  .right-rectangle {
+    background-color: var(--website-green-color); /* Change to desired color */
+    cursor: pointer;
+  }
+
+  .right-container:hover .right-rectangle {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 12px rgba(32, 255, 203, 0.1);
+  }
+
+  .icon-user-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 40px 30px;
+    color: var(--dark-color);
   }
 
   .icon-lock-container {
@@ -159,7 +207,7 @@
   }
 
   .subtitle {
-    font-size: 18px;
+    font-size: 1rem;
     margin-bottom: 20px;
   }
 
@@ -188,6 +236,7 @@
     position: relative;
     flex: 1;
     text-align: center;
+    margin: 0 2rem; /* Add margin to create equal gaps */
   }
 
   .circle-background {
@@ -255,7 +304,7 @@
     margin: 1rem auto;
   }
 
-  .right-container {
+  .play-quiz-container {
     flex: 1;
     display: flex;
     justify-content: center;
