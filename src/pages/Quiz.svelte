@@ -103,7 +103,6 @@
     {#if showPlayQuizContainer}
       <div class="play-quiz-container">
         <div class="selection-container">
-          <h2>Select Quiz Settings</h2>
           <label for="mode">Mode:</label>
           <select id="mode" bind:value={selectedMode}>
             <option value="easy">Easy</option>
@@ -326,7 +325,6 @@
 
   .selection-container {
     text-align: center;
-    border: 2px solid #ccc;
     border-radius: 8px;
     padding: 2rem;
     width: 20rem;
