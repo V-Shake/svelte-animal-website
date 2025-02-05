@@ -17,6 +17,7 @@
     "@sveltejs/kit": "^2.15.1",
     "@tabler/icons-svelte": "^3.26.0",
     "@types/three": "^0.171.0",
+    "canvas-confetti": "^1.9.3",
     "fullpage.js": "^4.0.31",
     "gsap": "^3.12.5",
     "svelte-spa-router": "^4.0.1",
