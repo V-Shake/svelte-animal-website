@@ -626,7 +626,7 @@
     margin-bottom: 3px;
     border-radius: 5px;
     position: relative;
-    z-index: 100000;
+    z-index: 1;
     font-size: 15px;
     display: flex;
     align-items: center;

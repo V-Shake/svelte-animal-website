@@ -55,4 +55,18 @@
         width: 100%; /* The length will grow to the full width */
       }
     }
+
+    @media (max-width: 480px) {
+      .navigation {
+      right: 3rem; /* Adjust the right position for smaller screens */
+      }
+
+      .line {
+      width: 15px; /* Adjust the initial width for smaller screens */
+      }
+
+      .line.active {
+      width: 25px; /* Adjust the activated line length for smaller screens */
+      }
+    }
   </style>

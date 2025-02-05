@@ -342,15 +342,18 @@
     font-size: 1rem;
     border: none;
     border-radius: 4px;
-    background-color: #007bff;
-    color: white;
+    background-color: var(--dark-color);
+    color: var(--card-background-color);
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
+    margin: 1rem;
   }
 
   .play-again-button:hover,
   .new-game-button:hover {
-    background-color: #0056b3;
+    background-color: var(--website-dark-green-color);
+    color: var(--website-green-color);
+    transform: translateY(-5px);
   }
 
   .fun-tip {

@@ -34,6 +34,7 @@
       align-items: center;
       justify-content: center;
       scroll-snap-align: start;
+      
     }
   
     div {

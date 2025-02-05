@@ -86,6 +86,7 @@
     </div>
   </div>
   <SectionNavigation {activeSection} />
+
 </div>
 
 <style>
@@ -95,6 +96,7 @@
     overflow: hidden;
     scroll-snap-type: y mandatory; /* Enable scroll snapping */
     position: relative;
+    padding-bottom: 3rem; 
   }
   #model-container {
     position: fixed;
@@ -124,6 +126,8 @@
     z-index: -1;
     display: inline-block;
   }
+
+  
   h1.left {
     position: absolute;
     left: 6.5rem;
@@ -220,4 +224,48 @@
     background-color: var(--button-hover-background-color);
     color: black;
   }
+
+  @media (max-width: 480px) {
+    h1 {
+      font-size: 4em;
+      z-index: 2
+    }
+
+    h1.left {
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 3.5rem;
+      top: 70%;
+    }
+
+    h1.right {
+      right: 2rem;
+      top: 80%;
+    }
+
+    h1.right-text {
+      right: 3rem;
+      top: 70%;
+      font-size: 3em;
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end; /* Align text to the right */
+    }
+
+    .button-container {
+      bottom: 2rem;
+      right: 2rem;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    button {
+      width: 7em;
+      height: 2.5em;
+      font-size: 13px;
+    }
+  }
+
+ 
 </style>

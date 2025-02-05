@@ -52,9 +52,6 @@
         <a href="#/cards" class:active-link={currentRoute === '#/cards'}>Card Gallery</a>
       </li>
       <li>
-        <a href="#/quartet" class:active-link={currentRoute === '#/quartet'}>Quartet Game</a>
-      </li>
-      <li>
         <a href="#/quiz" class:active-link={currentRoute === '#/quiz'}>Quiz</a>
       </li>
     </ul>
