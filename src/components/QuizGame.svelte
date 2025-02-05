@@ -3,6 +3,7 @@
   import QuizOverview from "./QuizOverview.svelte";
   import animalData from "../assets/animaldata.js";
   import { IconLogout2 } from "@tabler/icons-svelte";
+  import { IconJoker } from "@tabler/icons-svelte";
 
   export let mode = "easy"; // Default to easy mode if no mode is passed
   export let amount = 8; // Default question amount if no amount is passed
@@ -289,7 +290,7 @@
   }
 
   // Start the timer countdown
-   function startTimer() {
+  function startTimer() {
     timer = timerDuration;
     timerInterval = setInterval(() => {
       timer--;
@@ -405,7 +406,7 @@
     <!-- Timer Section -->
     {#if timerEnabled}
       <div class="timer">
-        <p>Time Remaining: {timer} seconds</p>
+        <p>{timer} s</p>
       </div>
     {/if}
     <!-- Question Section -->
@@ -414,32 +415,34 @@
         {@html questions[currentQuestionIndex].question}
       </h2>
       {#if questions[currentQuestionIndex].comparisonAttribute}
-      <div class="answer-buttons-container">
-        {#each remainingAnswers as animal}
-          <button
-            class="answer-button"
-            on:click={() => handleAnswerSelection(animal)}
-            class:selected={selectedAnswer === animal}
-            class:correct={selectedAnswer !== null && animal === questions[currentQuestionIndex].correct_answer}
-            class:incorrect={selectedAnswer !== null && selectedAnswer === animal && animal !== questions[currentQuestionIndex].correct_answer}
-            class:crossedOut={animal.isGreyedOut}
-            class:isGreyedOut={animal.isGreyedOut}
-            disabled={selectedAnswer !== null || animal.isGreyedOut}
-          >
-            <div class="answer-content">
-              <img
-                src={`/images/${animal.group.toLowerCase()}${animal.group_number}.png`}
-                alt={animal.name}
-              />
-              <div class="text-group">
-                <span class="radio-circle"></span>
-                <p>{animal.name}</p>
+        <div class="answer-buttons-container">
+          {#each remainingAnswers as animal}
+            <button
+              class="answer-button"
+              on:click={() => handleAnswerSelection(animal)}
+              class:selected={selectedAnswer === animal}
+              class:correct={selectedAnswer !== null &&
+                animal === questions[currentQuestionIndex].correct_answer}
+              class:incorrect={selectedAnswer !== null &&
+                selectedAnswer === animal &&
+                animal !== questions[currentQuestionIndex].correct_answer}
+              class:crossedOut={animal.isGreyedOut}
+              class:isGreyedOut={animal.isGreyedOut}
+              disabled={selectedAnswer !== null || animal.isGreyedOut}
+            >
+              <div class="answer-content">
+                <img
+                  src={`/images/${animal.group.toLowerCase()}${animal.group_number}.png`}
+                  alt={animal.name}
+                />
+                <div class="text-group">
+                  <span class="radio-circle"></span>
+                  <p>{animal.name}</p>
+                </div>
               </div>
-            </div>
-          </button>
-        {/each}
-      </div>
-      
+            </button>
+          {/each}
+        </div>
       {:else}
         <div class="answers">
           {#each remainingAnswers as answer}
@@ -469,9 +472,11 @@
       {/if}
       {#if selectedAnswer === null}
         <button class="joker-button" on:click={useJoker} disabled={jokerUsed}>
-          50:50 Joker
+          <IconJoker size={24} style="margin-right: 0.5rem;" />
+          50:50
         </button>
       {/if}
+
       {#if selectedAnswer !== null && currentQuestionIndex < questions.length - 1}
         <button class="next-button" on:click={() => nextQuestion(false)}>
           Next Question
@@ -531,7 +536,7 @@
     position: relative; /* For absolute positioning of the radio button */
     text-align: center;
   }
-  
+
   .text-group {
     display: flex;
     flex-direction: row;
@@ -540,7 +545,7 @@
     gap: 2rem;
     margin-left: -1rem;
   }
- 
+
   .answer-buttons-container .answer-content {
     display: flex;
     flex-direction: column; /* Stack the radio circle and text vertically */
@@ -638,27 +643,47 @@
     color: rgb(83, 86, 87);
   }
 
-  .next-button,
-  .joker-button {
-    margin-top: 1rem;
+  .next-button {
+    margin-top: 2rem;
     padding: 0.5rem 1rem;
     font-size: 1rem;
     border: none;
     border-radius: 4px;
-    background-color: #007bff;
-    color: white;
+    background-color: var(--card-background-color);
+    color: black;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
   }
 
-  .next-button:hover,
+  .joker-button {
+    align-items: center;
+    margin-top: 2rem;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    background-color: var(--card-dark-color);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-left: 0; /* Align to the left */
+    display: flex; /* Ensure flexbox is used */
+  }
+
+  .next-button:hover {
+    background-color: var(--website-green-color);
+    transform: translateY(-3px);
+  }
+
   .joker-button:hover {
-    background-color: #0056b3;
+    background-color: var(--website-dark-green-color);
+    color: var(--website-green-color);
+    transform: translateY(-3px);
   }
 
   .joker-button[disabled] {
-    background-color: grey;
     cursor: not-allowed;
+    opacity: 0.5;
   }
 
   .correct {
@@ -708,9 +733,18 @@
   }
 
   .timer {
-    margin-bottom: 1rem;
+    position: absolute;
+    top: 1rem;
+    right: 6.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-size: 1.2rem;
     font-weight: bold;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    border: 1px solid var(--website-green-color);
   }
 
   .quit-button {
@@ -733,4 +767,50 @@
   .quit-button span {
     margin-left: 5px;
   }
+
+  @media (max-width: 480px) {
+    #quiz-page {
+      padding: 5rem 1rem;
+    }
+
+    .question-container {
+      width: 100%;
+    }
+
+    
+    .answer-buttons-container {
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .answer-button {
+      width: 100%;
+      font-size: 0.9rem;
+    }
+
+    .answer-button img {
+      width: 100%;
+      height: auto;
+    }
+
+    .progress-bar {
+      padding: 0 2rem;
+    }
+
+    .timer {
+      top: 0;
+      right: 2rem;
+      width: 4rem;
+      height: 4rem;
+      font-size: 1rem;
+    }
+
+    .quit-button {
+      top: 1rem;
+      left: 2rem;
+      font-size: 0.7rem;
+    }
+  }
+
+ 
 </style>

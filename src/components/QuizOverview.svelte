@@ -358,4 +358,37 @@
     color: #666;
     margin-bottom: 1rem;
   }
+
+
+  @media (max-width: 480px) {
+
+    .three-container {
+    flex: 1;
+    margin-top: 15rem;
+  }
+
+    .overview {
+      top: 10rem;
+    }
+
+    .result-container {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.1rem;
+      margin-bottom: 1rem;
+    }
+
+    .progress-circle {
+      margin: 0;
+    }
+    
+  .circular-chart {
+    max-width: 80%;
+    height: 150px;
+    transform-origin: center;
+  }
+
+
+  }
 </style>

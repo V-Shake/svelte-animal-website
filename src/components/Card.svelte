@@ -539,4 +539,10 @@
         color: var(--group-color);
         font-weight: bold;
     }
+
+    @media (max-width: 768px) {
+
+  }
+
+
 </style>

@@ -6,6 +6,11 @@
     IconUser,
     IconLock,
     IconArrowNarrowLeft,
+    IconArrowNarrowRight,
+    IconStars,
+    IconCards,
+    IconBubbleText,
+    IconStopwatch,
   } from "@tabler/icons-svelte";
 
   let selectedMode = "easy"; // Default mode for Quiz
@@ -29,337 +34,377 @@
   }
 </script>
 
-<main class="main-container">
-  {#if showPlayQuizContainer && !quizStarted}
-    <div class="back-button" on:click={togglePlayQuizContainer}>
-      <IconArrowNarrowLeft stroke={1} size={24} />
-      <span>back</span>
-    </div>
-  {/if}
-
-  {#if !quizStarted}
-    {#if !showPlayQuizContainer}
-      <div class="left-container">
-        <div class="rectangle">
-          <div class="icon-lock-container">
-            <IconLock class="icon-lock" stroke={1} size={48} />
-          </div>
-          <div class="header">Multiplayer Mode</div>
-          <div
-            style="display: flex; justify-content: space-between; width: 100%; padding: 40px 30px; color: var(--dark-color);"
-          >
-            <IconUser stroke={1} size={60} />
-            <IconSwords stroke={1} size={60} />
-            <IconUser stroke={1} size={60} />
-          </div>
-          <div class="subtitle">Play with other players</div>
-          <div class="rectangle-thick-line"></div>
-          <div class="rectangle-description">
-            Play with friends or random opponents
-          </div>
-        </div>
-      </div>
-
-      <div class="centered-container">
-        <div class="circle-background"></div>
-        <div class="border-circle-background"></div>
-        <div class="icon-paw-container">
-          <IconPawFilled stroke={1} size={120} />
-        </div>
-        <div class="description-container">
-          <div class="description">
-            <p>Welcome to the Quiz Game!</p>
-          </div>
-          <div class="thick-line"></div>
-          <div class="additional-text">
-            <p>
-              Ready to test your wildlife knowledge? Pick a difficulty—Easy,
-              Medium, or Hard—and explore the animal kingdom with fun facts and
-              surprises. Use the Joker to get hints if you’re stuck! Whether
-              you're a beginner or an expert, there's something for everyone!
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div class="right-container" on:click={togglePlayQuizContainer}>
-        <div class="rectangle right-rectangle">
-          <div class="header">Single Player Mode</div>
-          <div class="icon-user-container">
-            <IconUser stroke={1} size={60} />
-          </div>
-          <div class="subtitle">Play solo</div>
-          <div class="rectangle-thick-line"></div>
-          <div class="rectangle-description">
-            Test your knowledge and learn facts
-          </div>
-        </div>
+<div id="wrapper">
+  <main class="main-container">
+    {#if showPlayQuizContainer && !quizStarted}
+      <div class="back-button" on:click={togglePlayQuizContainer}>
+        <IconArrowNarrowLeft stroke={1} size={24} />
+        <span>back</span>
       </div>
     {/if}
 
-    {#if showPlayQuizContainer}
-      <div class="play-quiz-container">
-        <div class="selection-container">
-          <div class="selection-item">
-            <label for="mode">Mode:</label>
-            <div class="select">
-              <div class="selected">
-                {selectedMode.charAt(0).toUpperCase() + selectedMode.slice(1)}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  height="1em"
-                  viewBox="0 0 512 512"
-                  class="arrow"
-                >
-                  <path
-                    d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"
-                  ></path>
-                </svg>
-              </div>
-              <div class="options">
-                <div>
-                  <input
-                    id="easy"
-                    name="mode"
-                    type="radio"
-                    bind:group={selectedMode}
-                    value="easy"
-                  /><label class="option" for="easy" data-txt="Easy"></label>
-                </div>
-                <div>
-                  <input
-                    id="medium"
-                    name="mode"
-                    type="radio"
-                    bind:group={selectedMode}
-                    value="medium"
-                  /><label class="option" for="medium" data-txt="Medium"
-                  ></label>
-                </div>
-                <div>
-                  <input
-                    id="hard"
-                    name="mode"
-                    type="radio"
-                    bind:group={selectedMode}
-                    value="hard"
-                  /><label class="option" for="hard" data-txt="Hard"></label>
-                </div>
-              </div>
+    {#if !quizStarted}
+      {#if !showPlayQuizContainer}
+        <div class="left-container">
+          <div class="rectangle">
+            <div class="icon-lock-container">
+              <IconLock class="icon-lock" stroke={1} size={48} />
+            </div>
+            <div class="header">Multiplayer Mode</div>
+            <div
+              style="display: flex; justify-content: space-between; width: 100%; padding: 40px 30px; color: var(--dark-color);"
+            >
+              <IconUser stroke={1} size={60} />
+              <IconSwords stroke={1} size={60} />
+              <IconUser stroke={1} size={60} />
+            </div>
+            <div class="subtitle">Play with other players</div>
+            <div class="rectangle-thick-line"></div>
+            <div class="rectangle-description">
+              Play with friends or random opponents
             </div>
           </div>
+        </div>
 
-          <div class="selection-item">
-            <label for="amount">Question Amount</label>
-            <div class="select">
-              <div class="selected">
-                {questionAmount}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  height="1em"
-                  viewBox="0 0 512 512"
-                  class="arrow"
-                >
-                  <path
-                    d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"
-                  ></path>
-                </svg>
-              </div>
-              <div class="options">
-                <div>
-                  <input
-                    id="amount-8"
-                    name="amount"
-                    type="radio"
-                    bind:group={questionAmount}
-                    value="8"
-                  /><label class="option" for="amount-8" data-txt="8"></label>
-                </div>
-                <div>
-                  <input
-                    id="amount-12"
-                    name="amount"
-                    type="radio"
-                    bind:group={questionAmount}
-                    value="12"
-                  /><label class="option" for="amount-12" data-txt="12"></label>
-                </div>
-                <div>
-                  <input
-                    id="amount-16"
-                    name="amount"
-                    type="radio"
-                    bind:group={questionAmount}
-                    value="16"
-                  /><label class="option" for="amount-16" data-txt="16"></label>
-                </div>
-              </div>
+        <div class="centered-container">
+          <div class="circle-background"></div>
+          <div class="border-circle-background"></div>
+          <div class="icon-paw-container">
+            <IconPawFilled stroke={1} size={120} />
+          </div>
+          <div class="description-container">
+            <div class="description">
+              <p>Welcome to the Quiz Game!</p>
+            </div>
+            <div class="thick-line"></div>
+            <div class="additional-text">
+              <p>
+                Ready to test your wildlife knowledge? Pick a difficulty—Easy,
+                Medium, or Hard—and explore the animal kingdom with fun facts
+                and surprises. Use the Joker to get hints if you’re stuck!
+                Whether you're a beginner or an expert, there's something for
+                everyone!
+              </p>
             </div>
           </div>
+        </div>
 
-          <div class="selection-item">
-            <label for="type">Question Type:</label>
-            <div class="select">
-              <div class="selected">
-                {questionType.charAt(0).toUpperCase() +
-                  questionType.slice(1).replace(/_/g, " ")}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  height="1em"
-                  viewBox="0 0 512 512"
-                  class="arrow"
-                >
-                  <path
-                    d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"
-                  ></path>
-                </svg>
-              </div>
-              <div class="options">
-                <div>
-                  <input
-                    id="any"
-                    name="type"
-                    type="radio"
-                    bind:group={questionType}
-                    value="any"
-                  /><label class="option" for="any" data-txt="Any Type"></label>
-                </div>
-                <div>
-                  <input
-                    id="multiple_choice"
-                    name="type"
-                    type="radio"
-                    bind:group={questionType}
-                    value="multiple_choice"
-                  /><label
-                    class="option"
-                    for="multiple_choice"
-                    data-txt="Multiple Choice"
-                  ></label>
-                </div>
-                <div>
-                  <input
-                    id="true_false"
-                    name="type"
-                    type="radio"
-                    bind:group={questionType}
-                    value="true_false"
-                  /><label class="option" for="true_false" data-txt="True/False"
-                  ></label>
-                </div>
-                <div>
-                  <input
-                    id="comparison"
-                    name="type"
-                    type="radio"
-                    bind:group={questionType}
-                    value="comparison"
-                  /><label class="option" for="comparison" data-txt="Comparison"
-                  ></label>
-                </div>
-              </div>
+        <div class="right-container" on:click={togglePlayQuizContainer}>
+          <div class="rectangle right-rectangle">
+            <div class="header">Single Player Mode</div>
+            <div class="icon-user-container">
+              <IconUser stroke={1} size={60} />
+            </div>
+            <div class="subtitle">Play solo</div>
+            <div class="rectangle-thick-line"></div>
+            <div class="rectangle-description">
+              Test your knowledge and learn facts
             </div>
           </div>
+        </div>
+      {/if}
 
-          <div class="selection-item">
-            <div class="timer-container">
-              <label for="timer">Enable Timer:</label>
-              <label class="switch">
-                <input type="checkbox" id="timer" bind:checked={timerEnabled} />
-                <span class="slider">
-                  <svg
-                    class="slider-icon"
-                    viewBox="0 0 32 32"
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                    role="presentation"
-                  >
-                    <path fill="none" d="m4 16.5 8 8 16-16"></path>
-                  </svg>
-                </span>
+      {#if showPlayQuizContainer}
+        <div class="play-quiz-container">
+          <div class="selection-container">
+            <div class="selection-item">
+              <label for="mode">
+                <IconStars class="icon" />
+                Mode
               </label>
+
+              <div class="select">
+                <div class="selected">
+                  {selectedMode.charAt(0).toUpperCase() + selectedMode.slice(1)}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="1em"
+                    viewBox="0 0 512 512"
+                    class="arrow"
+                  >
+                    <path
+                      d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"
+                    ></path>
+                  </svg>
+                </div>
+                <div class="options">
+                  <div>
+                    <input
+                      id="easy"
+                      name="mode"
+                      type="radio"
+                      bind:group={selectedMode}
+                      value="easy"
+                    /><label class="option" for="easy" data-txt="Easy"></label>
+                  </div>
+                  <div>
+                    <input
+                      id="medium"
+                      name="mode"
+                      type="radio"
+                      bind:group={selectedMode}
+                      value="medium"
+                    /><label class="option" for="medium" data-txt="Medium"
+                    ></label>
+                  </div>
+                  <div>
+                    <input
+                      id="hard"
+                      name="mode"
+                      type="radio"
+                      bind:group={selectedMode}
+                      value="hard"
+                    /><label class="option" for="hard" data-txt="Hard"></label>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <div class="select" class:disabled={!timerEnabled}>
-              <div class="selected">
-                {timerDuration}s
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  height="1em"
-                  viewBox="0 0 512 512"
-                  class="arrow"
-                >
-                  <path
-                    d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"
-                  ></path>
-                </svg>
+            <div class="selection-item">
+              <label for="amount"
+                ><IconCards class="icon" /> Question Amount</label
+              >
+              <div class="select">
+                <div class="selected">
+                  {questionAmount}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="1em"
+                    viewBox="0 0 512 512"
+                    class="arrow"
+                  >
+                    <path
+                      d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"
+                    ></path>
+                  </svg>
+                </div>
+                <div class="options">
+                  <div>
+                    <input
+                      id="amount-8"
+                      name="amount"
+                      type="radio"
+                      bind:group={questionAmount}
+                      value="8"
+                    /><label class="option" for="amount-8" data-txt="8"></label>
+                  </div>
+                  <div>
+                    <input
+                      id="amount-12"
+                      name="amount"
+                      type="radio"
+                      bind:group={questionAmount}
+                      value="12"
+                    /><label class="option" for="amount-12" data-txt="12"
+                    ></label>
+                  </div>
+                  <div>
+                    <input
+                      id="amount-16"
+                      name="amount"
+                      type="radio"
+                      bind:group={questionAmount}
+                      value="16"
+                    /><label class="option" for="amount-16" data-txt="16"
+                    ></label>
+                  </div>
+                </div>
               </div>
-              <div class="options">
-                <div>
-                  <input
-                    id="timer-5"
-                    name="timerDuration"
-                    type="radio"
-                    bind:group={timerDuration}
-                    value="5"
-                    disabled={!timerEnabled}
-                  /><label class="option" for="timer-5" data-txt="5s"></label>
+            </div>
+
+            <div class="selection-item">
+              <label for="type"
+                ><IconBubbleText class="icon" /> Question Type</label
+              >
+              <div class="select">
+                <div class="selected">
+                  {questionType.charAt(0).toUpperCase() +
+                    questionType.slice(1).replace(/_/g, " ")}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="1em"
+                    viewBox="0 0 512 512"
+                    class="arrow"
+                  >
+                    <path
+                      d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"
+                    ></path>
+                  </svg>
                 </div>
-                <div>
-                  <input
-                    id="timer-10"
-                    name="timerDuration"
-                    type="radio"
-                    bind:group={timerDuration}
-                    value="10"
-                    disabled={!timerEnabled}
-                  /><label class="option" for="timer-10" data-txt="10s"></label>
+                <div class="options">
+                  <div>
+                    <input
+                      id="any"
+                      name="type"
+                      type="radio"
+                      bind:group={questionType}
+                      value="any"
+                    /><label class="option" for="any" data-txt="Any Type"
+                    ></label>
+                  </div>
+                  <div>
+                    <input
+                      id="multiple_choice"
+                      name="type"
+                      type="radio"
+                      bind:group={questionType}
+                      value="multiple_choice"
+                    /><label
+                      class="option"
+                      for="multiple_choice"
+                      data-txt="Multiple Choice"
+                    ></label>
+                  </div>
+                  <div>
+                    <input
+                      id="true_false"
+                      name="type"
+                      type="radio"
+                      bind:group={questionType}
+                      value="true_false"
+                    /><label
+                      class="option"
+                      for="true_false"
+                      data-txt="True/False"
+                    ></label>
+                  </div>
+                  <div>
+                    <input
+                      id="comparison"
+                      name="type"
+                      type="radio"
+                      bind:group={questionType}
+                      value="comparison"
+                    /><label
+                      class="option"
+                      for="comparison"
+                      data-txt="Comparison"
+                    ></label>
+                  </div>
                 </div>
-                <div>
+              </div>
+            </div>
+
+            <div class="selection-item">
+              <div class="timer-container">
+                <label for="timer"><IconStopwatch class="icon" /> Timer</label>
+                <label class="switch">
                   <input
-                    id="timer-15"
-                    name="timerDuration"
-                    type="radio"
-                    bind:group={timerDuration}
-                    value="15"
-                    disabled={!timerEnabled}
-                  /><label class="option" for="timer-15" data-txt="15s"></label>
+                    type="checkbox"
+                    id="timer"
+                    bind:checked={timerEnabled}
+                  />
+                  <span class="slider">
+                    <svg
+                      class="slider-icon"
+                      viewBox="0 0 32 32"
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden="true"
+                      role="presentation"
+                    >
+                      <path fill="none" d="m4 16.5 8 8 16-16"></path>
+                    </svg>
+                  </span>
+                </label>
+              </div>
+
+              <div class="select" class:disabled={!timerEnabled}>
+                <div class="selected">
+                  {timerDuration}s
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="1em"
+                    viewBox="0 0 512 512"
+                    class="arrow"
+                  >
+                    <path
+                      d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"
+                    ></path>
+                  </svg>
                 </div>
-                <div>
-                  <input
-                    id="timer-20"
-                    name="timerDuration"
-                    type="radio"
-                    bind:group={timerDuration}
-                    value="20"
-                    disabled={!timerEnabled}
-                  /><label class="option" for="timer-20" data-txt="20s"></label>
+                <div class="options">
+                  <div>
+                    <input
+                      id="timer-5"
+                      name="timerDuration"
+                      type="radio"
+                      bind:group={timerDuration}
+                      value="5"
+                      disabled={!timerEnabled}
+                    /><label class="option" for="timer-5" data-txt="5s"></label>
+                  </div>
+                  <div>
+                    <input
+                      id="timer-10"
+                      name="timerDuration"
+                      type="radio"
+                      bind:group={timerDuration}
+                      value="10"
+                      disabled={!timerEnabled}
+                    /><label class="option" for="timer-10" data-txt="10s"
+                    ></label>
+                  </div>
+                  <div>
+                    <input
+                      id="timer-15"
+                      name="timerDuration"
+                      type="radio"
+                      bind:group={timerDuration}
+                      value="15"
+                      disabled={!timerEnabled}
+                    /><label class="option" for="timer-15" data-txt="15s"
+                    ></label>
+                  </div>
+                  <div>
+                    <input
+                      id="timer-20"
+                      name="timerDuration"
+                      type="radio"
+                      bind:group={timerDuration}
+                      value="20"
+                      disabled={!timerEnabled}
+                    /><label class="option" for="timer-20" data-txt="20s"
+                    ></label>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <button class="start-button" on:click={handleStart}>Start Quiz</button>
+          <button class="start-button" on:click={handleStart}>
+            Start Quiz
+            <span class="arrow-icon">
+              <IconArrowNarrowRight />
+            </span>
+          </button>
+        </div>
+      {/if}
+    {/if}
+
+    {#if quizStarted}
+      <div class="quiz-game-container">
+        <QuizGame
+          mode={selectedMode}
+          amount={parseInt(questionAmount)}
+          type={questionType}
+          {timerEnabled}
+          {timerDuration}
+          on:newGame={handleNewGame}
+        />
       </div>
     {/if}
-  {/if}
-
-  {#if quizStarted}
-    <div class="quiz-game-container">
-      <QuizGame
-        mode={selectedMode}
-        amount={parseInt(questionAmount)}
-        type={questionType}
-        {timerEnabled}
-        {timerDuration}
-        on:newGame={handleNewGame}
-      />
-    </div>
-  {/if}
-</main>
+  </main>
+</div>
 
 <style>
+  #wrapper {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    margin: auto;
+  }
+
+
   .main-container {
     display: flex;
     justify-content: space-between; /* Distribute the containers evenly */
@@ -531,8 +576,15 @@
     flex: 1;
     display: flex;
     justify-content: center;
-    align-items: start;
-    gap: 4rem;
+    align-items: center;
+    gap: 3rem;
+    font-size: 0.8rem;
+    flex-direction: column;
+  }
+
+  .icon {
+    margin-right: 0.5em;
+    vertical-align: middle;
   }
 
   .selection-container {
@@ -542,11 +594,16 @@
     text-align: center;
     border-radius: 8px;
     padding: 1rem;
+    grid-auto-flow: row;
+    gap: 4rem;
   }
 
   label {
-    display: block;
-    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    font-size: 16px; /* Adjust to match your design */
+    gap: 0.6rem; /* Ensures spacing between icon and text */
+    margin-bottom: 1rem; /* Adds space between the label and the select */
   }
 
   .select {
@@ -556,6 +613,11 @@
     transition: 300ms;
     color: white;
     overflow: hidden;
+  }
+
+  .select.disabled {
+    pointer-events: none;
+    opacity: 0.3;
   }
 
   .selected {
@@ -578,7 +640,7 @@
     transform: rotate(-90deg);
     width: 25px;
     fill: white;
-    z-index: 100000;
+    z-index: 9;
     transition: 300ms;
   }
 
@@ -592,6 +654,7 @@
     top: -100px;
     opacity: 0;
     transition: 300ms;
+    z-index: 10;
   }
 
   .select:hover > .options {
@@ -655,18 +718,57 @@
   }
 
   .start-button {
-    margin-top: 2rem;
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 9em;
+    height: 3em;
+    border-radius: 30em;
+    font-size: 15px;
+    font-family: inherit;
     border: none;
-    background-color: #007bff;
-    color: white;
+    position: relative;
+    overflow: hidden;
+    box-shadow:
+      6px 6px 12px #0a0a0a,
+      -6px -6px 12px #171717;
     cursor: pointer;
-    border-radius: 4px;
+    margin-top: -10rem;
+    z-index: 1;
   }
 
-  .start-button:hover {
-    background-color: #0056b3;
+  button::before {
+    content: "";
+    width: 0;
+    height: 3em;
+    border-radius: 30em;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: linear-gradient(to right, #0fd8a6 0%, #c3f947 100%);
+    transition: all 0.5s ease;
+    display: block;
+    z-index: -1;
+  }
+
+  button:hover::before {
+    width: 9em;
+  }
+
+  .arrow-icon {
+    transition: transform 0.3s ease;
+    display: inline-block; /* Ensures the arrow is treated as an inline element */
+    margin-left: 0.3em; /* Optional: adjust for spacing between text and icon */
+  }
+
+  .start-button:hover .arrow-icon {
+    transform: translateX(5px); /* This moves the arrow */
+  }
+
+  .start-button span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .quiz-game-container {
@@ -702,8 +804,7 @@
   .timer-container {
     display: flex;
     align-items: flex-start;
-
-    gap: 10px; /* Adjust the gap between the label and the switch */
+    gap: 2rem; /* Adjust the gap between the label and the switch */
   }
 
   /* The switch - the box around the slider */
@@ -730,8 +831,8 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #b0b0b0;
-    border: 1px solid #b0b0b0;
+    background-color: var(--grey-color);
+    border: 1px solid rgb(104, 104, 104);
     transition: 0.4s;
     border-radius: 32px;
     outline: none;
@@ -740,10 +841,9 @@
   .slider:before {
     position: absolute;
     content: "";
-    height: 1.7rem;
-    width: 1.7rem;
+    height: 1.6rem;
+    width: 1.6rem;
     border-radius: 50%;
-    outline: 2px solid #b0b0b0;
     left: -1px;
     bottom: -1px;
     background-color: #fff;
@@ -766,7 +866,7 @@
   }
 
   input:checked + .slider {
-    background-color: #222222;
+    background-color: var(--website-dark-green-color);
   }
 
   input:checked + .slider .slider-icon {
@@ -776,6 +876,59 @@
 
   input:checked + .slider:before {
     transform: translateX(1.5em);
-    outline-color: #181818;
+    background-color: var(--website-green-color);
   }
+
+
+  @media (max-width: 480px) {
+    .main-container {
+      flex-direction: column;
+      padding: 0 2rem;
+      top:2rem;
+    }
+
+    .left-container,
+    .right-container {
+      width: 100%;
+      margin-bottom: 2rem;
+    }
+
+    .centered-container {
+      margin: 2rem 0;
+    }
+
+    .play-quiz-container {
+      padding: 4rem;
+
+    }
+
+    label {
+      font-size: 0.9rem;
+    }
+
+    .selection-container {
+      grid-template-columns: 1fr;
+    }
+
+    .timer-container {
+      margin-top: -2rem;
+    }
+
+    .description-container {
+      width: 100%;
+      padding: 1rem;
+    }
+
+    .start-button {
+      width: 100%;
+      margin-top: -2rem;
+    }
+
+    .back-button {
+      top: 0;
+      left: 2rem;
+    } 
+
+  }
+
 </style>

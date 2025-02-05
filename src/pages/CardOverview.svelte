@@ -59,8 +59,8 @@
 
 <style>
     #wrapper {
-        min-width: 100vh;
-        min-height: 100vh;
+        width: 100%;
+        height: 100%;
         box-sizing: border-box;
         margin: auto;
     }
@@ -79,6 +79,35 @@
         flex-wrap: wrap;
         gap: 1em;
         width: 100%;
+    }
+
+
+    @media (max-width: 1024px) {
+        #cards-container {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    @media (max-width: 768px) {
+        main {
+            padding: 1em;
+        }
+        #cards-container {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5em;
+        }
+    }
+
+    @media (max-width: 480px) {
+        main {
+            padding: 0.5em;
+        }
+        #cards-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.25em;
+        }
     }
 
     /* 

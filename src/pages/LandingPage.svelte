@@ -79,6 +79,11 @@
         {/each}
       </div>
     </h1>
+
+    <div class="button-container">
+      <button on:click={() => (window.location.hash = "#/cards")}>See Cards</button>
+      <button on:click={() => (window.location.hash = "#/quiz")}>Play Quiz</button>
+    </div>
   </div>
   <SectionNavigation {activeSection} />
 </div>
@@ -160,5 +165,59 @@
     to {
       opacity: 1;
     }
+  }
+
+  button {
+    display: inline-flex; /* Changed to inline-flex for horizontal alignment */
+    align-items: center;
+    justify-content: center;
+    width: 9em;
+    height: 3em;
+    border-radius: 30em;
+    font-size: 15px;
+    font-family: inherit;
+    border: none;
+    margin: 0 1rem; /* Add margin for spacing between buttons */
+    overflow: hidden;
+    position: relative;
+    box-shadow:
+      6px 6px 12px #0a0a0a,
+      -6px -6px 12px #131313;
+    cursor: pointer;
+    z-index: 1;
+    background: transparent; /* Ensure the button is unfilled initially */
+    color: white; /* Text color */
+  }
+
+  /* Container for buttons to align them horizontally */
+  .button-container {
+    position: absolute;
+    bottom: 6rem; /* Position from the bottom */
+    right: 11rem; /* Position from the right */
+    display: flex;
+    gap: 1rem; /* Space between buttons */
+  }
+
+  button::before {
+    content: '';
+  width: 0;
+  height: 3em;
+  border-radius: 30em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: linear-gradient(to right, #0fd8a6 0%, #c3f947 100%);
+  transition: all 0.5s ease;
+  display: block;
+  z-index: -1;
+  }
+
+  button:hover::before {
+    width: 100%;
+  }
+
+  button:hover {
+    background-color: var(--button-hover-background-color);
+    color: black;
   }
 </style>
