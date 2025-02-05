@@ -231,11 +231,12 @@
   .overview {
     padding: 20px;
     margin: 30rem auto 0;
-    max-width: 800px;
+    max-width: 1000px;
   }
 
   .three-container {
     flex: 1;
+    margin-top: -5rem;
   }
 
   .hidden-content {
@@ -248,7 +249,6 @@
     align-items: center; /* Align items vertically */
     gap: 2rem; /* Add space between the circle and text */
     justify-content: center; /* Center the whole container */
-    margin: 1rem 0;
   }
 
   .result-text {
@@ -307,25 +307,31 @@
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 1rem;
+    font-size: 0.8rem;
+    font-weight: 100;
+    color: rgb(202, 202, 202);
   }
 
   th,
   td {
-    border: 1px solid #ccc;
+    border: 1px solid rgb(28, 28, 28);
     padding: 0.5rem;
     text-align: left;
   }
 
   th {
-    background-color: #f0f0f0;
+    background-color: var(--dark-color);
+    padding: 1rem 0.5rem;
+    color: var(--card-background-color);
+   font-weight: 100;
   }
 
   td.correct {
-    color: green;
+    color: var(--quiz-correct-color);
   }
 
   td.incorrect {
-    color: red;
+    color: var(--quiz-wrong-color);
   }
 
   .play-again-button,
