@@ -8,6 +8,7 @@
   export let amount = 8; // Default question amount if no amount is passed
   export let type = "any"; // Default question type if no type is passed
   export let timerEnabled = false; // Timer toggle state
+  export let timerDuration = 15;
   let questions = [];
   let currentQuestionIndex = 0;
   let selectedAnswer = null;
@@ -16,8 +17,9 @@
   let isLoading = true; // Show loading state while fetching questions
   let userAnswers = []; // Track user answers for the overview
   let quizCompleted = false; // Flag to show the overview after the last question
-  let timer = 15; // Timer countdown in seconds
+  // let timer = 15; // Timer countdown in seconds
   let timerInterval;
+  let timer = timerDuration;
   let jokerUsed = false; // Track if the joker has been used
   let remainingAnswers = []; // Track the remaining answers after using the joker
 
@@ -287,13 +289,14 @@
   }
 
   // Start the timer countdown
-  function startTimer() {
-    timer = 15;
+   function startTimer() {
+    timer = timerDuration;
     timerInterval = setInterval(() => {
       timer--;
       if (timer <= 0) {
         clearInterval(timerInterval);
-        nextQuestion(true); // Move to the next question and mark it as skipped
+        nextQuestion(true);
+        // Handle timer end (e.g., move to the next question)
       }
     }, 1000);
   }

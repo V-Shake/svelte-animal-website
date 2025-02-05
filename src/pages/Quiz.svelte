@@ -12,6 +12,7 @@
   let questionAmount = "8"; // Default question amount for Quiz
   let quizStarted = false;
   let timerEnabled = false; // Timer toggle state for Quiz
+  let timerDuration = "15";
   let questionType = "any"; // Default question type for Quiz
   let showPlayQuizContainer = false; // Control visibility of play quiz container
 
@@ -104,6 +105,16 @@
             <div class="select">
               <div class="selected">
                 {selectedMode.charAt(0).toUpperCase() + selectedMode.slice(1)}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="1em"
+                  viewBox="0 0 512 512"
+                  class="arrow"
+                >
+                  <path
+                    d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"
+                  ></path>
+                </svg>
               </div>
               <div class="options">
                 <div>
@@ -122,7 +133,8 @@
                     type="radio"
                     bind:group={selectedMode}
                     value="medium"
-                  /><label class="option" for="medium" data-txt="Medium"></label>
+                  /><label class="option" for="medium" data-txt="Medium"
+                  ></label>
                 </div>
                 <div>
                   <input
@@ -142,6 +154,16 @@
             <div class="select">
               <div class="selected">
                 {questionAmount}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="1em"
+                  viewBox="0 0 512 512"
+                  class="arrow"
+                >
+                  <path
+                    d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"
+                  ></path>
+                </svg>
               </div>
               <div class="options">
                 <div>
@@ -181,6 +203,16 @@
               <div class="selected">
                 {questionType.charAt(0).toUpperCase() +
                   questionType.slice(1).replace(/_/g, " ")}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="1em"
+                  viewBox="0 0 512 512"
+                  class="arrow"
+                >
+                  <path
+                    d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"
+                  ></path>
+                </svg>
               </div>
               <div class="options">
                 <div>
@@ -229,15 +261,87 @@
             </div>
           </div>
 
-            <label for="timer">Enable Timer:</label>
-            <input type="checkbox" id="timer" bind:checked={timerEnabled} />
+          <div class="selection-item">
+            <div class="timer-container">
+              <label for="timer">Enable Timer:</label>
+              <label class="switch">
+                <input type="checkbox" id="timer" bind:checked={timerEnabled} />
+                <span class="slider">
+                  <svg
+                    class="slider-icon"
+                    viewBox="0 0 32 32"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                    role="presentation"
+                  >
+                    <path fill="none" d="m4 16.5 8 8 16-16"></path>
+                  </svg>
+                </span>
+              </label>
+            </div>
 
+            <div class="select" class:disabled={!timerEnabled}>
+              <div class="selected">
+                {timerDuration}s
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="1em"
+                  viewBox="0 0 512 512"
+                  class="arrow"
+                >
+                  <path
+                    d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"
+                  ></path>
+                </svg>
+              </div>
+              <div class="options">
+                <div>
+                  <input
+                    id="timer-5"
+                    name="timerDuration"
+                    type="radio"
+                    bind:group={timerDuration}
+                    value="5"
+                    disabled={!timerEnabled}
+                  /><label class="option" for="timer-5" data-txt="5s"></label>
+                </div>
+                <div>
+                  <input
+                    id="timer-10"
+                    name="timerDuration"
+                    type="radio"
+                    bind:group={timerDuration}
+                    value="10"
+                    disabled={!timerEnabled}
+                  /><label class="option" for="timer-10" data-txt="10s"></label>
+                </div>
+                <div>
+                  <input
+                    id="timer-15"
+                    name="timerDuration"
+                    type="radio"
+                    bind:group={timerDuration}
+                    value="15"
+                    disabled={!timerEnabled}
+                  /><label class="option" for="timer-15" data-txt="15s"></label>
+                </div>
+                <div>
+                  <input
+                    id="timer-20"
+                    name="timerDuration"
+                    type="radio"
+                    bind:group={timerDuration}
+                    value="20"
+                    disabled={!timerEnabled}
+                  /><label class="option" for="timer-20" data-txt="20s"></label>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
-            <button class="start-button" on:click={handleStart}
-              >Start Quiz</button>
-        </div>
-      
+        <button class="start-button" on:click={handleStart}>Start Quiz</button>
+      </div>
     {/if}
   {/if}
 
@@ -248,6 +352,7 @@
         amount={parseInt(questionAmount)}
         type={questionType}
         {timerEnabled}
+        {timerDuration}
         on:newGame={handleNewGame}
       />
     </div>
@@ -426,14 +531,14 @@
     flex: 1;
     display: flex;
     justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    align-items: start;
+    gap: 4rem;
   }
 
   .selection-container {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
+    gap: 2rem;
     text-align: center;
     border-radius: 8px;
     padding: 1rem;
@@ -455,7 +560,7 @@
 
   .selected {
     background-color: #2a2f3b;
-    padding: 5px;
+    padding: 0.5rem 1rem;
     margin-bottom: 3px;
     border-radius: 5px;
     position: relative;
@@ -592,5 +697,85 @@
 
   .back-button span {
     margin-left: 5px;
+  }
+
+  .timer-container {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 10px; /* Adjust the gap between the label and the switch */
+  }
+
+  /* The switch - the box around the slider */
+  .switch {
+    font-size: 0.8rem;
+    position: relative;
+    display: inline-block;
+    width: 3.5em;
+    height: 2em;
+  }
+
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #b0b0b0;
+    border: 1px solid #b0b0b0;
+    transition: 0.4s;
+    border-radius: 32px;
+    outline: none;
+  }
+
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 1.7rem;
+    width: 1.7rem;
+    border-radius: 50%;
+    outline: 2px solid #b0b0b0;
+    left: -1px;
+    bottom: -1px;
+    background-color: #fff;
+    transition: transform 0.25s ease-in-out 0s;
+  }
+
+  .slider-icon {
+    opacity: 0;
+    height: 12px;
+    width: 12px;
+    stroke-width: 8;
+    position: absolute;
+    z-index: 999;
+    stroke: #222222;
+    right: 70%;
+    top: 20%;
+    transition:
+      right ease-in-out 0.3s,
+      opacity ease-in-out 0.15s;
+  }
+
+  input:checked + .slider {
+    background-color: #222222;
+  }
+
+  input:checked + .slider .slider-icon {
+    opacity: 1;
+    right: 15%;
+  }
+
+  input:checked + .slider:before {
+    transform: translateX(1.5em);
+    outline-color: #181818;
   }
 </style>
