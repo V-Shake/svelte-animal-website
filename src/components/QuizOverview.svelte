@@ -236,7 +236,7 @@
 
   .three-container {
     flex: 1;
-    margin-top: -5rem;
+    margin-top: -8rem;
   }
 
   .hidden-content {
@@ -249,6 +249,7 @@
     align-items: center; /* Align items vertically */
     gap: 2rem; /* Add space between the circle and text */
     justify-content: center; /* Center the whole container */
+    margin-bottom: -1rem;
   }
 
   .result-text {
