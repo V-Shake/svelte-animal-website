@@ -38,7 +38,6 @@
 
   {#if !quizStarted}
     {#if !showPlayQuizContainer}
-      <!-- Placeholder for the left container -->
       <div class="left-container">
         <div class="rectangle">
           <div class="icon-lock-container">
@@ -60,7 +59,6 @@
         </div>
       </div>
 
-      <!-- Centered container for description -->
       <div class="centered-container">
         <div class="circle-background"></div>
         <div class="border-circle-background"></div>
@@ -83,7 +81,6 @@
         </div>
       </div>
 
-      <!-- Right container -->
       <div class="right-container" on:click={togglePlayQuizContainer}>
         <div class="rectangle right-rectangle">
           <div class="header">Single Player Mode</div>
@@ -99,39 +96,148 @@
       </div>
     {/if}
 
-    <!-- Play quiz container for quiz selection -->
     {#if showPlayQuizContainer}
       <div class="play-quiz-container">
         <div class="selection-container">
-          <label for="mode">Mode:</label>
-          <select id="mode" bind:value={selectedMode}>
-            <option value="easy">Easy</option>
-            <option value="medium">Medium</option>
-            <option value="hard">Hard</option>
-          </select>
+          <div class="selection-item">
+            <label for="mode">Mode:</label>
+            <div class="select">
+              <div class="selected">
+                {selectedMode.charAt(0).toUpperCase() + selectedMode.slice(1)}
+              </div>
+              <div class="options">
+                <div>
+                  <input
+                    id="easy"
+                    name="mode"
+                    type="radio"
+                    bind:group={selectedMode}
+                    value="easy"
+                  /><label class="option" for="easy" data-txt="Easy"></label>
+                </div>
+                <div>
+                  <input
+                    id="medium"
+                    name="mode"
+                    type="radio"
+                    bind:group={selectedMode}
+                    value="medium"
+                  /><label class="option" for="medium" data-txt="Medium"></label>
+                </div>
+                <div>
+                  <input
+                    id="hard"
+                    name="mode"
+                    type="radio"
+                    bind:group={selectedMode}
+                    value="hard"
+                  /><label class="option" for="hard" data-txt="Hard"></label>
+                </div>
+              </div>
+            </div>
+          </div>
 
-          <label for="amount">Question Amount:</label>
-          <select id="amount" bind:value={questionAmount}>
-            <option value="8">8</option>
-            <option value="12">12</option>
-            <option value="16">16</option>
-          </select>
+          <div class="selection-item">
+            <label for="amount">Question Amount</label>
+            <div class="select">
+              <div class="selected">
+                {questionAmount}
+              </div>
+              <div class="options">
+                <div>
+                  <input
+                    id="amount-8"
+                    name="amount"
+                    type="radio"
+                    bind:group={questionAmount}
+                    value="8"
+                  /><label class="option" for="amount-8" data-txt="8"></label>
+                </div>
+                <div>
+                  <input
+                    id="amount-12"
+                    name="amount"
+                    type="radio"
+                    bind:group={questionAmount}
+                    value="12"
+                  /><label class="option" for="amount-12" data-txt="12"></label>
+                </div>
+                <div>
+                  <input
+                    id="amount-16"
+                    name="amount"
+                    type="radio"
+                    bind:group={questionAmount}
+                    value="16"
+                  /><label class="option" for="amount-16" data-txt="16"></label>
+                </div>
+              </div>
+            </div>
+          </div>
 
-          <label for="type">Question Type:</label>
-          <select id="type" bind:value={questionType}>
-            <option value="any">Any Type</option>
-            <option value="multiple">Multiple Choice</option>
-            <option value="boolean">True/False</option>
-            <option value="comparison">Comparison</option>
-          </select>
+          <div class="selection-item">
+            <label for="type">Question Type:</label>
+            <div class="select">
+              <div class="selected">
+                {questionType.charAt(0).toUpperCase() +
+                  questionType.slice(1).replace(/_/g, " ")}
+              </div>
+              <div class="options">
+                <div>
+                  <input
+                    id="any"
+                    name="type"
+                    type="radio"
+                    bind:group={questionType}
+                    value="any"
+                  /><label class="option" for="any" data-txt="Any Type"></label>
+                </div>
+                <div>
+                  <input
+                    id="multiple_choice"
+                    name="type"
+                    type="radio"
+                    bind:group={questionType}
+                    value="multiple_choice"
+                  /><label
+                    class="option"
+                    for="multiple_choice"
+                    data-txt="Multiple Choice"
+                  ></label>
+                </div>
+                <div>
+                  <input
+                    id="true_false"
+                    name="type"
+                    type="radio"
+                    bind:group={questionType}
+                    value="true_false"
+                  /><label class="option" for="true_false" data-txt="True/False"
+                  ></label>
+                </div>
+                <div>
+                  <input
+                    id="comparison"
+                    name="type"
+                    type="radio"
+                    bind:group={questionType}
+                    value="comparison"
+                  /><label class="option" for="comparison" data-txt="Comparison"
+                  ></label>
+                </div>
+              </div>
+            </div>
+          </div>
 
-          <label for="timer">Enable Timer:</label>
-          <input type="checkbox" id="timer" bind:checked={timerEnabled} />
+            <label for="timer">Enable Timer:</label>
+            <input type="checkbox" id="timer" bind:checked={timerEnabled} />
 
-          <button class="start-button" on:click={handleStart}>Start Quiz</button
-          >
         </div>
-      </div>
+
+            <button class="start-button" on:click={handleStart}
+              >Start Quiz</button>
+        </div>
+      
     {/if}
   {/if}
 
@@ -321,25 +427,126 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
   }
 
   .selection-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
     text-align: center;
     border-radius: 8px;
-    padding: 2rem;
-    width: 20rem;
+    padding: 1rem;
   }
 
   label {
     display: block;
-    margin-top: 1rem;
+    margin-bottom: 1rem;
   }
 
-  select,
-  input[type="checkbox"] {
-    width: 100%;
-    padding: 0.5rem;
-    margin-top: 0.5rem;
+  .select {
+    width: fit-content;
+    cursor: pointer;
+    position: relative;
+    transition: 300ms;
+    color: white;
+    overflow: hidden;
+  }
+
+  .selected {
+    background-color: #2a2f3b;
+    padding: 5px;
+    margin-bottom: 3px;
+    border-radius: 5px;
+    position: relative;
+    z-index: 100000;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .arrow {
+    position: relative;
+    right: 0px;
+    height: 10px;
+    transform: rotate(-90deg);
+    width: 25px;
+    fill: white;
+    z-index: 100000;
+    transition: 300ms;
+  }
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: #2a2f3b;
+    position: relative;
+    top: -100px;
+    opacity: 0;
+    transition: 300ms;
+  }
+
+  .select:hover > .options {
+    opacity: 1;
+    top: 0;
+  }
+
+  .select:hover > .selected .arrow {
+    transform: rotate(0deg);
+  }
+
+  .option {
+    border-radius: 5px;
+    padding: 5px;
+    transition: 300ms;
+    background-color: #2a2f3b;
+    width: 150px;
+    font-size: 15px;
+  }
+
+  .options input[type="radio"] {
+    display: none;
+  }
+
+  .options label::before {
+    content: attr(data-txt);
+  }
+
+  /* Remove the hide logic for selected options */
+  .options input[type="radio"]:checked + label {
+    background-color: #323741; /* Give the selected option a distinct color */
+    color: white;
+  }
+
+  /* Option hover effect */
+  .option:hover {
+    background-color: #323741;
+  }
+
+  /* Make sure all options are visible, even after selection */
+  .options label {
+    display: inline-block;
+    padding: 5px;
+  }
+
+  .options input[type="radio"]#all:checked + label {
+    display: none;
+  }
+
+  .select:has(.options input[type="radio"]#all:checked) .selected::before {
+    content: attr(data-default);
+  }
+  .select:has(.options input[type="radio"]#option-1:checked) .selected::before {
+    content: attr(data-one);
+  }
+  .select:has(.options input[type="radio"]#option-2:checked) .selected::before {
+    content: attr(data-two);
+  }
+  .select:has(.options input[type="radio"]#option-3:checked) .selected::before {
+    content: attr(data-three);
   }
 
   .start-button {
@@ -366,7 +573,7 @@
     height: 100%;
   }
 
-  .back-button{
+  .back-button {
     position: absolute;
     top: 3rem;
     left: 6.5rem;
@@ -379,11 +586,11 @@
     font-size: 0.8rem;
   }
 
-  .back-button:hover{
+  .back-button:hover {
     color: var(--website-green-color); /* Change background color on hover */
   }
 
-  .back-button span{
+  .back-button span {
     margin-left: 5px;
   }
 </style>
