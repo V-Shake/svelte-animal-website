@@ -1,47 +1,50 @@
-# Svelte + Vite
+# Wildlife Exploration
 
-This template should help get you started developing with Svelte in Vite.
+## Projektübersicht
 
-## Recommended IDE Setup
+Das Wildlife Quiz & Exploration kombiniert spielerisches Lernen mit interaktiven Elementen, um Nutzer:innen die Welt der Wildtiere näherzubringen. Das Projekt umfasst eine beeindruckende 3D-animierte Landingpage, eine interaktive Tierkarten-Galerie sowie eine vielseitige Quiz-Seite, die mit einer API verknüpft ist. Ergänzt wird das Erlebnis durch spannende Vergleichsaufgaben, eine Joker-Funktion und dynamische Animationen.
 
-[VS Code](https://code.visualstudio.com/) + [Svelte](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode).
+## Features & Highlights
+**Landingpage – Interaktiver 3D-Tiger**
 
-## Need an official Svelte framework?
+- 3D-Tiger-Modell mit Three.js
+- Hover-Effekt: Bewegt der/die Nutzer:in den Cursor, wird ein Spotlight aktiviert – verstärkt den Explorations-Vibe
+- Scroll-Interaktion: Beim Scrollen dreht sich der Tiger um 90 Grad, wodurch ein immersiver Übergang zur nächsten Sektion entsteht
+- One-Pager Integration: Die Landingpage ist mit Fullpage.js für eine nahtlose Navigation umgesetzt
 
-Check out [SvelteKit](https://github.com/sveltejs/kit#readme), which is also powered by Vite. Deploy anywhere with its serverless-first approach and adapt to various platforms, with out of the box support for TypeScript, SCSS, and Less, and easily-added support for mdsvex, GraphQL, PostCSS, Tailwind CSS, and more.
+## Card Gallery – Die Tierkarten-Sammlung
 
-## Technical considerations
+- Karten umdrehbar – Auf der Rückseite warten spannende Fun Facts zu jedem Tier
+- Filter- & Sortierfunktion: Tiere nach Eigenschaften oder Tierarten gruppieren
+- Illustrationen mit KI generiert – Alle Bilder wurden mithilfe von Stable Diffusion erstellt
 
-**Why use this over SvelteKit?**
+## Quiz-Seite – Teste dein Wissen!
 
-- It brings its own routing solution which might not be preferable for some users.
-- It is first and foremost a framework that just happens to use Vite under the hood, not a Vite app.
+- API-basiertes Quiz (OpenTDB)
+- Flexible Einstellungen
+- 50:50-Joker: Reduziert falsche Antworten um 50 %
 
-This template contains as little as possible to get started with Vite + Svelte, while taking into account the developer experience with regards to HMR and intellisense. It demonstrates capabilities on par with the other `create-vite` templates and is a good starting point for beginners dipping their toes into a Vite + Svelte project.
+## Vergleichs-Quiz – Wer ist der Stärkste?
+- Eigenentwickelter Fragetyp: Nutzer:innen vergleichen Tierdaten aus der Card Gallery
+- Beispiel: Welches dieser Tiere ist am schwersten?
+- Besondere Herausforderung: Die Kombination von externen API-Fragen mit den eigenen Daten
 
-Should you later need the extended capabilities and extensibility provided by SvelteKit, the template has been structured similarly to SvelteKit so that it is easy to migrate.
 
-**Why `global.d.ts` instead of `compilerOptions.types` inside `jsconfig.json` or `tsconfig.json`?**
+## Herausforderungen & Lösungsansätze
+**Integration der externen API mit eigenen Daten**
+Die Integration externer API-Fragen mit eigenen, selbst entwickelten Quiz-Daten (z.B. Tiervergleichs-Quiz) stellte eine technische Herausforderung dar.
 
-Setting `compilerOptions.types` shuts out all other types not explicitly listed in the configuration. Using triple-slash references keeps the default TypeScript setting of accepting type information from the entire workspace, while also adding `svelte` and `vite/client` type information.
+**Optimierung des 3D-Modells & Beleuchtung**
+Das Licht im 3D-Modell war anfangs zu dunkel oder falsch positioniert. Zudem lief die Animation ruckelig. Die Lösung bestand darin, manuelles Testen und Anpassen der X-, Y- und Z-Koordinaten durchzuführen, um die beste Lichtwirkung zu erzielen. 
 
-**Why include `.vscode/extensions.json`?**
+**Optimierung der 3D-Modell-Animation**
+Zu Beginn hatte die 3D-Modell-Animation Performance-Probleme und lief ruckelig. Durch den Einsatz der GSAP-Bibliothek konnte die Animation deutlich flüssiger und smoother gestaltet werden.
 
-Other templates indirectly recommend extensions via the README, but this file allows VS Code to prompt the user to install the recommended extension upon opening the project.
 
-**Why enable `checkJs` in the JS template?**
+## Geplante Erweiterungen und Verbesserungen
+- Strukturierung des Codes: Eine klarere und strukturiertere Programmierung könnte die Wartbarkeit und Erweiterbarkeit des Projekts verbessern.
+- Responsives Design: Die mobile Ansicht könnte noch optimiert werden, um Layouts auf verschiedenen Geräten besser anzupassen.
+- Der Footer wurde nicht implementiert, da er in beiden Fullpage-Sektionen nicht gut ausgesehen hätte. Eine angepasste Lösung wäre erforderlich, um den Footer nur auf der letzten Sektion korrekt darzustellen.
+- Eine ChatGPT-Integration zur dynamischen Generierung von Quizfragen und zur Erweiterung der Aufgabentypen könnte das Spielerlebnis noch spannender gestalten.
+- Interaktive Fortschrittsanzeige: Auf der Seite zur Schwierigkeits- und Fragenauswahl war geplant, ein 3D-Modell eines Weges zu integrieren, bei dem eine vorwärtsbewegende Kamera den Eindruck eines unendlichen Pfades vermittelt. Dies soll die Exploration weiter unterstreichen. Unterhalb des 3D-Modells könnte ein Progress Bar erscheinen mit der Anzeige: "You have explored [number]". Dieser Fortschritt basiert auf der Anzahl der richtig beantworteten Fragen oder der Anzahl der bereits beantworteten Fragen im Quiz.
 
-It is likely that most cases of changing variable types in runtime are likely to be accidental, rather than deliberate. This provides advanced typechecking out of the box. Should you like to take advantage of the dynamically-typed nature of JavaScript, it is trivial to change the configuration.
-
-**Why is HMR not preserving my local component state?**
-
-HMR state preservation comes with a number of gotchas! It has been disabled by default in both `svelte-hmr` and `@sveltejs/vite-plugin-svelte` due to its often surprising behavior. You can read the details [here](https://github.com/sveltejs/svelte-hmr/tree/master/packages/svelte-hmr#preservation-of-local-state).
-
-If you have state that's important to retain within a component, consider creating an external store which would not be replaced by HMR.
-
-```js
-// store.js
-// An extremely simple external store
-import { writable } from 'svelte/store'
-export default writable(0)
-```
