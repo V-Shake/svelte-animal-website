@@ -2,7 +2,7 @@
 
 ## Projektübersicht
 
-Das Wildlife Quiz & Exploration kombiniert spielerisches Lernen mit interaktiven Elementen, um Nutzer:innen die Welt der Wildtiere näherzubringen. Das Projekt umfasst eine beeindruckende 3D-animierte Landingpage, eine interaktive Tierkarten-Galerie sowie eine vielseitige Quiz-Seite, die mit einer API verknüpft ist. Ergänzt wird das Erlebnis durch spannende Vergleichsaufgaben, eine Joker-Funktion und dynamische Animationen.
+Das Wildlife Quiz & Exploration verbindet spielerisches Lernen mit interaktiven Elementen, um die Welt der Wildtiere zu entdecken. Mit einer 3D-animierten Landingpage, einer interaktiven Tierkarten-Galerie und einer vielseitigen Quiz-Seite, die mit einer API verbunden ist, bietet das Projekt ein spannendes Erlebnis. Die interaktive Webseite wurde mit Svelte programmiert und bietet dynamische Animationen sowie Funktionen wie eine Joker-Funktion und Vergleichsaufgaben.
 
 ## Features & Highlights
 **Landingpage – Interaktiver 3D-Tiger**
@@ -32,12 +32,15 @@ Das Wildlife Quiz & Exploration kombiniert spielerisches Lernen mit interaktiven
 
 ## Herausforderungen & Lösungsansätze
 **Integration der externen API mit eigenen Daten**
+
 Die Integration externer API-Fragen mit eigenen, selbst entwickelten Quiz-Daten (z.B. Tiervergleichs-Quiz) stellte eine technische Herausforderung dar.
 
 **Optimierung des 3D-Modells & Beleuchtung**
+
 Das Licht im 3D-Modell war anfangs zu dunkel oder falsch positioniert. Zudem lief die Animation ruckelig. Die Lösung bestand darin, manuelles Testen und Anpassen der X-, Y- und Z-Koordinaten durchzuführen, um die beste Lichtwirkung zu erzielen. 
 
 **Optimierung der 3D-Modell-Animation**
+
 Zu Beginn hatte die 3D-Modell-Animation Performance-Probleme und lief ruckelig. Durch den Einsatz der GSAP-Bibliothek konnte die Animation deutlich flüssiger und smoother gestaltet werden.
 
 
