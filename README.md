@@ -51,3 +51,15 @@ Das Wildlife Quiz & Exploration verbindet spielerisches Lernen mit interaktiven 
 - Eine ChatGPT-Integration zur dynamischen Generierung von Quizfragen und zur Erweiterung der Aufgabentypen könnte das Spielerlebnis noch spannender gestalten.
 - Interaktive Fortschrittsanzeige: Auf der Seite zur Schwierigkeits- und Fragenauswahl war geplant, ein 3D-Modell eines Weges zu integrieren, bei dem eine vorwärtsbewegende Kamera den Eindruck eines unendlichen Pfades vermittelt. Dies soll die Exploration weiter unterstreichen. Unterhalb des 3D-Modells könnte ein Progress Bar erscheinen mit der Anzeige: "You have explored [number]". Dieser Fortschritt basiert auf der Anzahl der richtig beantworteten Fragen oder der Anzahl der bereits beantworteten Fragen im Quiz.
 
+
+## Quellen & Assets
+
+**3D-Modelle:**
+
+- Das 3D-Modell des Weißen Tigers wurde von MotionStreamStudios erstellt und ist auf Sketchfab verfügbar: [White Tiger (RIGGED ANIMATED)](https://skfb.ly/oIUBX).
+- Das 3D-Modell der **King's Crown** wurde von Michelle P.H. und ist auf Sketchfab verfügbar: [King's Crown](https://skfb.ly/oDvAZ).
+
+**Quiz-Daten:**
+
+- Die Fragen im Quiz wurden mithilfe der [OpenTDB API](https://opentdb.com/api_config.php) abgerufen.
+
