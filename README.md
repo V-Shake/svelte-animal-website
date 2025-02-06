@@ -33,15 +33,15 @@ Das Wildlife Quiz & Exploration verbindet spielerisches Lernen mit interaktiven 
 ## Herausforderungen & Lösungsansätze
 **Integration der externen API mit eigenen Daten**
 
-Die Integration externer API-Fragen mit eigenen, selbst entwickelten Quiz-Daten (z.B. Tiervergleichs-Quiz) stellte eine technische Herausforderung dar.
+- Die Integration externer API-Fragen mit eigenen, selbst entwickelten Quiz-Daten (z.B. Tiervergleichs-Quiz) stellte eine technische Herausforderung dar.
 
 **Optimierung des 3D-Modells & Beleuchtung**
 
-Das Licht im 3D-Modell war anfangs zu dunkel oder falsch positioniert. Zudem lief die Animation ruckelig. Die Lösung bestand darin, manuelles Testen und Anpassen der X-, Y- und Z-Koordinaten durchzuführen, um die beste Lichtwirkung zu erzielen. 
+- Das Licht im 3D-Modell war anfangs zu dunkel oder falsch positioniert. Zudem lief die Animation ruckelig. Die Lösung bestand darin, manuelles Testen und Anpassen der X-, Y- und Z-Koordinaten durchzuführen, um die beste Lichtwirkung zu erzielen. 
 
 **Optimierung der 3D-Modell-Animation**
 
-Zu Beginn hatte die 3D-Modell-Animation Performance-Probleme und lief ruckelig. Durch den Einsatz der GSAP-Bibliothek konnte die Animation deutlich flüssiger und smoother gestaltet werden.
+- Zu Beginn hatte die 3D-Modell-Animation Performance-Probleme und lief ruckelig. Durch den Einsatz der GSAP-Bibliothek konnte die Animation deutlich flüssiger und smoother gestaltet werden.
 
 
 ## Geplante Erweiterungen und Verbesserungen
